@@ -1,0 +1,29 @@
+aid: groww
+name: Groww
+description: 'Groww is a company surfaced as a portfolio company of iconiq-capital, ribbit-capital, y-combinator
+  and added to the API Evangelist network as a stub for enrichment. Sector: fintech. This profile is a
+  lead awaiting the enrichment pipeline.'
+url: https://raw.githubusercontent.com/api-evangelist/groww/refs/heads/main/apis.yml
+x-type: company
+x-source: vc-portfolio
+x-backed-by:
+- iconiq-capital
+- ribbit-capital
+- y-combinator
+x-tier: stub
+x-tier-reason: portfolio-lead
+specificationVersion: '0.20'
+created: '2026-07-17'
+modified: '2026-07-17'
+tags:
+- Company
+- Fintech
+apis: []
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+- FN: APIs.json
+  email: info@apis.io
+common:
+- type: Website
+  url: https://groww.in/
