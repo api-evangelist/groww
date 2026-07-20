@@ -1,0 +1,37 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/groww-trade-api-openapi.yml
+summary:
+  types:
+  - apiKey
+  - http
+  - oauth2
+  api_key_in:
+  - header
+  oauth2_flows:
+  - authorizationCode
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: 'Daily access token (or API key on the token endpoint) sent as `Authorization:
+    Bearer {ACCESS_TOKEN}`.'
+  sources:
+  - openapi/groww-trade-api-openapi.yml
+- name: apiVersion
+  type: apiKey
+  in: header
+  parameter: X-API-VERSION
+  description: API version header, currently `1.0`.
+  sources:
+  - openapi/groww-trade-api-openapi.yml
+- name: oauth2
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://groww.in/oauth/authorize
+    tokenUrl: https://api.groww.in/oauth2/v1/token
+    scopes: 0
+  description: OAuth2 authorization-code flow advertised at https://api.groww.in/.well-known/oauth-authorization-server
+  sources:
+  - openapi/groww-trade-api-openapi.yml
