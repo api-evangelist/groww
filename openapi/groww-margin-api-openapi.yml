@@ -1,0 +1,200 @@
+openapi: 3.1.0
+info:
+  title: Groww Trading Authentication Margin API
+  description: The Groww Trading API is the official programmatic interface to the Groww investing and trading platform, enabling algorithmic trading, order management, portfolio and position tracking, margin calculation, live market data (LTP, quote, OHLC, option chain, greeks) and historical candle data across the CASH (equity) and FNO (derivatives) segments on Indian exchanges. Requests are authenticated with a daily access token (or an OAuth2 / API-key + secret / TOTP flow) and versioned with the X-API-VERSION header.
+  version: '1.0'
+  contact:
+    name: Groww Trading API Support
+    url: https://groww.in/trade-api/docs
+  termsOfService: https://groww.in/terms-and-conditions
+  x-api-evangelist-source: https://groww.in/trade-api/docs/curl
+servers:
+- url: https://api.groww.in
+  description: Groww Trading API production host
+security:
+- bearerAuth: []
+  apiVersion: []
+tags:
+- name: Margin
+  description: Available margin and per-order margin requirements.
+paths:
+  /v1/margins/detail/user:
+    get:
+      operationId: getUserMargin
+      summary: Get available user margin
+      tags:
+      - Margin
+      responses:
+        '200':
+          description: Available margin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserMarginResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v1/margins/detail/orders:
+    post:
+      operationId: getOrderMargin
+      summary: Get required margin for an order
+      tags:
+      - Margin
+      parameters:
+      - name: segment
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/Segment'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderMarginRequest'
+      responses:
+        '200':
+          description: Required margin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderMarginResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+components:
+  schemas:
+    Exchange:
+      type: string
+      enum:
+      - NSE
+      - BSE
+    Segment:
+      type: string
+      enum:
+      - CASH
+      - FNO
+      description: Trading segment. MCX (commodities) is not supported.
+    OrderMarginRequest:
+      type: object
+      required:
+      - trading_symbol
+      - transaction_type
+      - quantity
+      - order_type
+      - product
+      - exchange
+      properties:
+        trading_symbol:
+          type: string
+        transaction_type:
+          $ref: '#/components/schemas/TransactionType'
+        quantity:
+          type: integer
+        price:
+          type: number
+        order_type:
+          $ref: '#/components/schemas/OrderType'
+        product:
+          $ref: '#/components/schemas/Product'
+        exchange:
+          $ref: '#/components/schemas/Exchange'
+    ErrorEnvelope:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - SUCCESS
+          - FAILURE
+        payload:
+          type: object
+          nullable: true
+        error:
+          $ref: '#/components/schemas/Error'
+    TransactionType:
+      type: string
+      enum:
+      - BUY
+      - SELL
+    OrderType:
+      type: string
+      enum:
+      - MARKET
+      - LIMIT
+      - SL
+      - SL_M
+    OrderMarginResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        payload:
+          type: object
+          properties:
+            total_requirement:
+              type: number
+            span_margin_required:
+              type: number
+            exposure_margin_required:
+              type: number
+    Product:
+      type: string
+      enum:
+      - CNC
+      - MIS
+      - NRML
+    UserMarginResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        payload:
+          type: object
+          properties:
+            clear_cash:
+              type: number
+            net_margin_used:
+              type: number
+            collateral_available:
+              type: number
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Groww error code (e.g. GA004).
+        message:
+          type: string
+        metadata:
+          type: object
+          nullable: true
+  responses:
+    Unauthorized:
+      description: User not authorised to perform this operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Daily access token (or API key on the token endpoint) sent as `Authorization: Bearer {ACCESS_TOKEN}`.'
+    apiVersion:
+      type: apiKey
+      in: header
+      name: X-API-VERSION
+      description: API version header, currently `1.0`.
+    oauth2:
+      type: oauth2
+      description: OAuth2 authorization-code flow advertised at https://api.groww.in/.well-known/oauth-authorization-server
+      flows:
+        authorizationCode:
+          authorizationUrl: https://groww.in/oauth/authorize
+          tokenUrl: https://api.groww.in/oauth2/v1/token
+          scopes: {}

@@ -1,0 +1,240 @@
+openapi: 3.1.0
+info:
+  title: Groww Trading Authentication Portfolio API
+  description: The Groww Trading API is the official programmatic interface to the Groww investing and trading platform, enabling algorithmic trading, order management, portfolio and position tracking, margin calculation, live market data (LTP, quote, OHLC, option chain, greeks) and historical candle data across the CASH (equity) and FNO (derivatives) segments on Indian exchanges. Requests are authenticated with a daily access token (or an OAuth2 / API-key + secret / TOTP flow) and versioned with the X-API-VERSION header.
+  version: '1.0'
+  contact:
+    name: Groww Trading API Support
+    url: https://groww.in/trade-api/docs
+  termsOfService: https://groww.in/terms-and-conditions
+  x-api-evangelist-source: https://groww.in/trade-api/docs/curl
+servers:
+- url: https://api.groww.in
+  description: Groww Trading API production host
+security:
+- bearerAuth: []
+  apiVersion: []
+tags:
+- name: Portfolio
+  description: Holdings and positions.
+paths:
+  /v1/holdings/user:
+    get:
+      operationId: getHoldings
+      summary: Get holdings
+      description: Retrieve the demat holdings for the authenticated user.
+      tags:
+      - Portfolio
+      responses:
+        '200':
+          description: User holdings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HoldingsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v1/positions/user:
+    get:
+      operationId: getPositions
+      summary: Get positions for user
+      description: Retrieve all open positions for the authenticated user.
+      tags:
+      - Portfolio
+      responses:
+        '200':
+          description: User positions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PositionsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v1/positions/trading-symbol:
+    get:
+      operationId: getPositionByTradingSymbol
+      summary: Get position for a trading symbol
+      tags:
+      - Portfolio
+      parameters:
+      - name: trading_symbol
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: segment
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/Segment'
+      responses:
+        '200':
+          description: Position for the trading symbol
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PositionsResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    Exchange:
+      type: string
+      enum:
+      - NSE
+      - BSE
+    Holding:
+      type: object
+      properties:
+        isin:
+          type: string
+        trading_symbol:
+          type: string
+        quantity:
+          type: integer
+        average_price:
+          type: number
+        pledge_quantity:
+          type: integer
+        demat_locked_quantity:
+          type: integer
+        groww_locked_quantity:
+          type: integer
+        repledge_quantity:
+          type: integer
+        t1_quantity:
+          type: integer
+        demat_free_quantity:
+          type: integer
+        corporate_action_additional_quantity:
+          type: integer
+        active_demat_transfer_quantity:
+          type: integer
+    Segment:
+      type: string
+      enum:
+      - CASH
+      - FNO
+      description: Trading segment. MCX (commodities) is not supported.
+    HoldingsResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        payload:
+          type: object
+          properties:
+            holdings:
+              type: array
+              items:
+                $ref: '#/components/schemas/Holding'
+    Position:
+      type: object
+      properties:
+        trading_symbol:
+          type: string
+        credit_quantity:
+          type: integer
+        credit_price:
+          type: number
+        debit_quantity:
+          type: integer
+        debit_price:
+          type: number
+        carry_forward_credit_quantity:
+          type: integer
+        carry_forward_credit_price:
+          type: number
+        carry_forward_debit_quantity:
+          type: integer
+        carry_forward_debit_price:
+          type: number
+        exchange:
+          $ref: '#/components/schemas/Exchange'
+        symbol_isin:
+          type: string
+        quantity:
+          type: integer
+        product:
+          $ref: '#/components/schemas/Product'
+        net_carry_forward_quantity:
+          type: integer
+        net_price:
+          type: number
+        net_carry_forward_price:
+          type: number
+        realised_pnl:
+          type: number
+    ErrorEnvelope:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - SUCCESS
+          - FAILURE
+        payload:
+          type: object
+          nullable: true
+        error:
+          $ref: '#/components/schemas/Error'
+    Product:
+      type: string
+      enum:
+      - CNC
+      - MIS
+      - NRML
+    PositionsResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        payload:
+          type: object
+          properties:
+            positions:
+              type: array
+              items:
+                $ref: '#/components/schemas/Position'
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Groww error code (e.g. GA004).
+        message:
+          type: string
+        metadata:
+          type: object
+          nullable: true
+  responses:
+    NotFound:
+      description: Requested entity does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    Unauthorized:
+      description: User not authorised to perform this operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Daily access token (or API key on the token endpoint) sent as `Authorization: Bearer {ACCESS_TOKEN}`.'
+    apiVersion:
+      type: apiKey
+      in: header
+      name: X-API-VERSION
+      description: API version header, currently `1.0`.
+    oauth2:
+      type: oauth2
+      description: OAuth2 authorization-code flow advertised at https://api.groww.in/.well-known/oauth-authorization-server
+      flows:
+        authorizationCode:
+          authorizationUrl: https://groww.in/oauth/authorize
+          tokenUrl: https://api.groww.in/oauth2/v1/token
+          scopes: {}

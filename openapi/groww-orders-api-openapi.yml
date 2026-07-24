@@ -1,0 +1,493 @@
+openapi: 3.1.0
+info:
+  title: Groww Trading Authentication Orders API
+  description: The Groww Trading API is the official programmatic interface to the Groww investing and trading platform, enabling algorithmic trading, order management, portfolio and position tracking, margin calculation, live market data (LTP, quote, OHLC, option chain, greeks) and historical candle data across the CASH (equity) and FNO (derivatives) segments on Indian exchanges. Requests are authenticated with a daily access token (or an OAuth2 / API-key + secret / TOTP flow) and versioned with the X-API-VERSION header.
+  version: '1.0'
+  contact:
+    name: Groww Trading API Support
+    url: https://groww.in/trade-api/docs
+  termsOfService: https://groww.in/terms-and-conditions
+  x-api-evangelist-source: https://groww.in/trade-api/docs/curl
+servers:
+- url: https://api.groww.in
+  description: Groww Trading API production host
+security:
+- bearerAuth: []
+  apiVersion: []
+tags:
+- name: Orders
+  description: Place, modify, cancel and track orders and trades.
+paths:
+  /v1/order/create:
+    post:
+      operationId: createOrder
+      summary: Place a new order
+      description: Place a new buy or sell order in the CASH or FNO segment.
+      tags:
+      - Orders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlaceOrderRequest'
+      responses:
+        '200':
+          description: Order placed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlaceOrderResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v1/order/modify:
+    post:
+      operationId: modifyOrder
+      summary: Modify an order
+      description: Modify quantity, price, trigger price or order type of a pending or open order.
+      tags:
+      - Orders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyOrderRequest'
+      responses:
+        '200':
+          description: Order modified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModifyOrderResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /v1/order/cancel:
+    post:
+      operationId: cancelOrder
+      summary: Cancel an order
+      description: Cancel a pending or open order.
+      tags:
+      - Orders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CancelOrderRequest'
+      responses:
+        '200':
+          description: Order cancelled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelOrderResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /v1/order/list:
+    get:
+      operationId: listOrders
+      summary: List today's orders
+      description: Retrieve the order history for the current trading day.
+      tags:
+      - Orders
+      parameters:
+      - name: segment
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/Segment'
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: List of orders
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v1/order/detail/{groww_order_id}:
+    get:
+      operationId: getOrderDetail
+      summary: Get order detail
+      description: Retrieve full details for an order by its Groww order id.
+      tags:
+      - Orders
+      parameters:
+      - $ref: '#/components/parameters/GrowwOrderId'
+      - name: segment
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/Segment'
+      responses:
+        '200':
+          description: Order detail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderDetailResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /v1/order/status/{groww_order_id}:
+    get:
+      operationId: getOrderStatus
+      summary: Get order status by Groww order id
+      tags:
+      - Orders
+      parameters:
+      - $ref: '#/components/parameters/GrowwOrderId'
+      - name: segment
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/Segment'
+      responses:
+        '200':
+          description: Order status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderStatusResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /v1/order/status/reference/{order_reference_id}:
+    get:
+      operationId: getOrderStatusByReference
+      summary: Get order status by client reference id
+      tags:
+      - Orders
+      parameters:
+      - name: order_reference_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: segment
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/Segment'
+      responses:
+        '200':
+          description: Order status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderStatusResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /v1/order/trades/{groww_order_id}:
+    get:
+      operationId: getOrderTrades
+      summary: Get trades for an order
+      tags:
+      - Orders
+      parameters:
+      - $ref: '#/components/parameters/GrowwOrderId'
+      - name: segment
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/Segment'
+      responses:
+        '200':
+          description: Trades for the order
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TradeListResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    OrderListResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        payload:
+          type: object
+          properties:
+            order_list:
+              type: array
+              items:
+                $ref: '#/components/schemas/Order'
+    PlaceOrderResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        groww_order_id:
+          type: string
+        order_status:
+          type: string
+        order_reference_id:
+          type: string
+        remark:
+          type: string
+    Exchange:
+      type: string
+      enum:
+      - NSE
+      - BSE
+    ErrorEnvelope:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - SUCCESS
+          - FAILURE
+        payload:
+          type: object
+          nullable: true
+        error:
+          $ref: '#/components/schemas/Error'
+    Validity:
+      type: string
+      enum:
+      - DAY
+      - IOC
+    Product:
+      type: string
+      enum:
+      - CNC
+      - MIS
+      - NRML
+    ModifyOrderRequest:
+      type: object
+      required:
+      - groww_order_id
+      - segment
+      properties:
+        groww_order_id:
+          type: string
+        quantity:
+          type: integer
+        price:
+          type: number
+        trigger_price:
+          type: number
+        order_type:
+          $ref: '#/components/schemas/OrderType'
+        segment:
+          $ref: '#/components/schemas/Segment'
+    PlaceOrderRequest:
+      type: object
+      required:
+      - trading_symbol
+      - quantity
+      - exchange
+      - segment
+      - product
+      - order_type
+      - transaction_type
+      properties:
+        trading_symbol:
+          type: string
+        quantity:
+          type: integer
+        price:
+          type: number
+        trigger_price:
+          type: number
+        validity:
+          $ref: '#/components/schemas/Validity'
+        exchange:
+          $ref: '#/components/schemas/Exchange'
+        segment:
+          $ref: '#/components/schemas/Segment'
+        product:
+          $ref: '#/components/schemas/Product'
+        order_type:
+          $ref: '#/components/schemas/OrderType'
+        transaction_type:
+          $ref: '#/components/schemas/TransactionType'
+        order_reference_id:
+          type: string
+          description: Client-supplied idempotency/reference id for the order.
+    OrderStatusResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        payload:
+          type: object
+          properties:
+            groww_order_id:
+              type: string
+            order_status:
+              type: string
+            order_reference_id:
+              type: string
+    CancelOrderRequest:
+      type: object
+      required:
+      - groww_order_id
+      - segment
+      properties:
+        groww_order_id:
+          type: string
+        segment:
+          $ref: '#/components/schemas/Segment'
+    Segment:
+      type: string
+      enum:
+      - CASH
+      - FNO
+      description: Trading segment. MCX (commodities) is not supported.
+    TradeListResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        payload:
+          type: object
+          properties:
+            trade_list:
+              type: array
+              items:
+                type: object
+                properties:
+                  trade_id:
+                    type: string
+                  groww_order_id:
+                    type: string
+                  quantity:
+                    type: integer
+                  price:
+                    type: number
+    TransactionType:
+      type: string
+      enum:
+      - BUY
+      - SELL
+    Order:
+      type: object
+      properties:
+        groww_order_id:
+          type: string
+        order_reference_id:
+          type: string
+        trading_symbol:
+          type: string
+        quantity:
+          type: integer
+        price:
+          type: number
+        trigger_price:
+          type: number
+        order_status:
+          type: string
+        transaction_type:
+          $ref: '#/components/schemas/TransactionType'
+        order_type:
+          $ref: '#/components/schemas/OrderType'
+        segment:
+          $ref: '#/components/schemas/Segment'
+        exchange:
+          $ref: '#/components/schemas/Exchange'
+        product:
+          $ref: '#/components/schemas/Product'
+    OrderType:
+      type: string
+      enum:
+      - MARKET
+      - LIMIT
+      - SL
+      - SL_M
+    ModifyOrderResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        groww_order_id:
+          type: string
+        order_status:
+          type: string
+    OrderDetailResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        payload:
+          $ref: '#/components/schemas/Order'
+    CancelOrderResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        groww_order_id:
+          type: string
+        order_status:
+          type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Groww error code (e.g. GA004).
+        message:
+          type: string
+        metadata:
+          type: object
+          nullable: true
+  parameters:
+    GrowwOrderId:
+      name: groww_order_id
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: User not authorised to perform this operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    NotFound:
+      description: Requested entity does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Daily access token (or API key on the token endpoint) sent as `Authorization: Bearer {ACCESS_TOKEN}`.'
+    apiVersion:
+      type: apiKey
+      in: header
+      name: X-API-VERSION
+      description: API version header, currently `1.0`.
+    oauth2:
+      type: oauth2
+      description: OAuth2 authorization-code flow advertised at https://api.groww.in/.well-known/oauth-authorization-server
+      flows:
+        authorizationCode:
+          authorizationUrl: https://groww.in/oauth/authorize
+          tokenUrl: https://api.groww.in/oauth2/v1/token
+          scopes: {}

@@ -1,0 +1,300 @@
+openapi: 3.1.0
+info:
+  title: Groww Trading Authentication Live Data API
+  description: The Groww Trading API is the official programmatic interface to the Groww investing and trading platform, enabling algorithmic trading, order management, portfolio and position tracking, margin calculation, live market data (LTP, quote, OHLC, option chain, greeks) and historical candle data across the CASH (equity) and FNO (derivatives) segments on Indian exchanges. Requests are authenticated with a daily access token (or an OAuth2 / API-key + secret / TOTP flow) and versioned with the X-API-VERSION header.
+  version: '1.0'
+  contact:
+    name: Groww Trading API Support
+    url: https://groww.in/trade-api/docs
+  termsOfService: https://groww.in/terms-and-conditions
+  x-api-evangelist-source: https://groww.in/trade-api/docs/curl
+servers:
+- url: https://api.groww.in
+  description: Groww Trading API production host
+security:
+- bearerAuth: []
+  apiVersion: []
+tags:
+- name: Live Data
+  description: Real-time LTP, quote, OHLC, option chain and greeks.
+paths:
+  /v1/live-data/quote:
+    get:
+      operationId: getQuote
+      summary: Get full market quote
+      tags:
+      - Live Data
+      parameters:
+      - name: exchange
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/Exchange'
+      - name: segment
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/Segment'
+      - name: trading_symbol
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Full quote
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /v1/live-data/ltp:
+    get:
+      operationId: getLtp
+      summary: Get last traded price
+      tags:
+      - Live Data
+      parameters:
+      - name: segment
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/Segment'
+      - name: exchange_symbols
+        in: query
+        required: true
+        description: Comma-separated list of EXCHANGE_SYMBOL tokens.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: LTP map
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PriceMapResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /v1/live-data/ohlc:
+    get:
+      operationId: getOhlc
+      summary: Get OHLC
+      tags:
+      - Live Data
+      parameters:
+      - name: segment
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/Segment'
+      - name: exchange_symbols
+        in: query
+        required: true
+        description: Comma-separated list of EXCHANGE_SYMBOL tokens.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OHLC map
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OhlcResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /v1/option-chain/exchange/{exchange}/underlying/{underlying}:
+    get:
+      operationId: getOptionChain
+      summary: Get option chain
+      tags:
+      - Live Data
+      parameters:
+      - name: exchange
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/Exchange'
+      - name: underlying
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: expiry_date
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: Option chain
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnvelopeObject'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /v1/live-data/greeks/exchange/{exchange}/underlying/{underlying}/trading_symbol/{trading_symbol}/expiry/{expiry}:
+    get:
+      operationId: getGreeks
+      summary: Get option greeks
+      tags:
+      - Live Data
+      parameters:
+      - name: exchange
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/Exchange'
+      - name: underlying
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: trading_symbol
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: expiry
+        in: path
+        required: true
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: Option greeks
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnvelopeObject'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    Segment:
+      type: string
+      enum:
+      - CASH
+      - FNO
+      description: Trading segment. MCX (commodities) is not supported.
+    Exchange:
+      type: string
+      enum:
+      - NSE
+      - BSE
+    OhlcResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        payload:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              open:
+                type: number
+              high:
+                type: number
+              low:
+                type: number
+              close:
+                type: number
+    ErrorEnvelope:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - SUCCESS
+          - FAILURE
+        payload:
+          type: object
+          nullable: true
+        error:
+          $ref: '#/components/schemas/Error'
+    EnvelopeObject:
+      type: object
+      properties:
+        status:
+          type: string
+        payload:
+          type: object
+    PriceMapResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        payload:
+          type: object
+          additionalProperties:
+            type: number
+    QuoteResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        payload:
+          type: object
+          properties:
+            last_price:
+              type: number
+            volume:
+              type: integer
+            open:
+              type: number
+            high:
+              type: number
+            low:
+              type: number
+            close:
+              type: number
+            bid_quantity:
+              type: integer
+            offer_quantity:
+              type: integer
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Groww error code (e.g. GA004).
+        message:
+          type: string
+        metadata:
+          type: object
+          nullable: true
+  responses:
+    NotFound:
+      description: Requested entity does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Daily access token (or API key on the token endpoint) sent as `Authorization: Bearer {ACCESS_TOKEN}`.'
+    apiVersion:
+      type: apiKey
+      in: header
+      name: X-API-VERSION
+      description: API version header, currently `1.0`.
+    oauth2:
+      type: oauth2
+      description: OAuth2 authorization-code flow advertised at https://api.groww.in/.well-known/oauth-authorization-server
+      flows:
+        authorizationCode:
+          authorizationUrl: https://groww.in/oauth/authorize
+          tokenUrl: https://api.groww.in/oauth2/v1/token
+          scopes: {}

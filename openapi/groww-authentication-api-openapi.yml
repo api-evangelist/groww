@@ -1,0 +1,140 @@
+openapi: 3.1.0
+info:
+  title: Groww Trading Authentication API
+  description: The Groww Trading API is the official programmatic interface to the Groww investing and trading platform, enabling algorithmic trading, order management, portfolio and position tracking, margin calculation, live market data (LTP, quote, OHLC, option chain, greeks) and historical candle data across the CASH (equity) and FNO (derivatives) segments on Indian exchanges. Requests are authenticated with a daily access token (or an OAuth2 / API-key + secret / TOTP flow) and versioned with the X-API-VERSION header.
+  version: '1.0'
+  contact:
+    name: Groww Trading API Support
+    url: https://groww.in/trade-api/docs
+  termsOfService: https://groww.in/terms-and-conditions
+  x-api-evangelist-source: https://groww.in/trade-api/docs/curl
+servers:
+- url: https://api.groww.in
+  description: Groww Trading API production host
+security:
+- bearerAuth: []
+  apiVersion: []
+tags:
+- name: Authentication
+  description: Access-token generation for API key + secret and TOTP flows.
+paths:
+  /v1/token/api/access:
+    post:
+      operationId: createAccessToken
+      summary: Generate an access token
+      description: Exchange an API key (sent as the bearer credential) plus either an approval checksum or a TOTP code for a short-lived access token used on all subsequent requests. Access tokens expire daily at 06:00 AM IST.
+      tags:
+      - Authentication
+      security:
+      - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccessTokenRequest'
+      responses:
+        '200':
+          description: Access token issued
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessTokenResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    Unauthorized:
+      description: User not authorised to perform this operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+  schemas:
+    ErrorEnvelope:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - SUCCESS
+          - FAILURE
+        payload:
+          type: object
+          nullable: true
+        error:
+          $ref: '#/components/schemas/Error'
+    AccessTokenRequest:
+      type: object
+      required:
+      - key_type
+      properties:
+        key_type:
+          type: string
+          enum:
+          - approval
+          - totp
+        checksum:
+          type: string
+          description: SHA256(secret + timestamp), required for approval flow.
+        timestamp:
+          type: string
+          description: Epoch seconds (10 digits), required for approval flow.
+        totp:
+          type: string
+          description: TOTP code, required for totp flow.
+    AccessTokenResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        payload:
+          type: object
+          properties:
+            token:
+              type: string
+            tokenRefId:
+              type: string
+            sessionName:
+              type: string
+            expiry:
+              type: string
+            isActive:
+              type: boolean
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Groww error code (e.g. GA004).
+        message:
+          type: string
+        metadata:
+          type: object
+          nullable: true
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Daily access token (or API key on the token endpoint) sent as `Authorization: Bearer {ACCESS_TOKEN}`.'
+    apiVersion:
+      type: apiKey
+      in: header
+      name: X-API-VERSION
+      description: API version header, currently `1.0`.
+    oauth2:
+      type: oauth2
+      description: OAuth2 authorization-code flow advertised at https://api.groww.in/.well-known/oauth-authorization-server
+      flows:
+        authorizationCode:
+          authorizationUrl: https://groww.in/oauth/authorize
+          tokenUrl: https://api.groww.in/oauth2/v1/token
+          scopes: {}

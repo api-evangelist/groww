@@ -1,0 +1,144 @@
+openapi: 3.1.0
+info:
+  title: Groww Trading Authentication Historical Data API
+  description: The Groww Trading API is the official programmatic interface to the Groww investing and trading platform, enabling algorithmic trading, order management, portfolio and position tracking, margin calculation, live market data (LTP, quote, OHLC, option chain, greeks) and historical candle data across the CASH (equity) and FNO (derivatives) segments on Indian exchanges. Requests are authenticated with a daily access token (or an OAuth2 / API-key + secret / TOTP flow) and versioned with the X-API-VERSION header.
+  version: '1.0'
+  contact:
+    name: Groww Trading API Support
+    url: https://groww.in/trade-api/docs
+  termsOfService: https://groww.in/terms-and-conditions
+  x-api-evangelist-source: https://groww.in/trade-api/docs/curl
+servers:
+- url: https://api.groww.in
+  description: Groww Trading API production host
+security:
+- bearerAuth: []
+  apiVersion: []
+tags:
+- name: Historical Data
+  description: Historical candle data.
+paths:
+  /v1/historical/candle/range:
+    get:
+      operationId: getHistoricalCandles
+      summary: Get historical candle data
+      deprecated: true
+      description: Retrieve historical OHLC candles for a symbol over a time range. Deprecated in favour of the backtesting historical candle endpoint.
+      tags:
+      - Historical Data
+      parameters:
+      - name: exchange
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/Exchange'
+      - name: segment
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/Segment'
+      - name: trading_symbol
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: start_time
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: end_time
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: interval_in_minutes
+        in: query
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Historical candles
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CandleResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+components:
+  schemas:
+    Segment:
+      type: string
+      enum:
+      - CASH
+      - FNO
+      description: Trading segment. MCX (commodities) is not supported.
+    Exchange:
+      type: string
+      enum:
+      - NSE
+      - BSE
+    ErrorEnvelope:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - SUCCESS
+          - FAILURE
+        payload:
+          type: object
+          nullable: true
+        error:
+          $ref: '#/components/schemas/Error'
+    CandleResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        payload:
+          type: object
+          properties:
+            candles:
+              type: array
+              items:
+                type: array
+                items:
+                  type: number
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Groww error code (e.g. GA004).
+        message:
+          type: string
+        metadata:
+          type: object
+          nullable: true
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Daily access token (or API key on the token endpoint) sent as `Authorization: Bearer {ACCESS_TOKEN}`.'
+    apiVersion:
+      type: apiKey
+      in: header
+      name: X-API-VERSION
+      description: API version header, currently `1.0`.
+    oauth2:
+      type: oauth2
+      description: OAuth2 authorization-code flow advertised at https://api.groww.in/.well-known/oauth-authorization-server
+      flows:
+        authorizationCode:
+          authorizationUrl: https://groww.in/oauth/authorize
+          tokenUrl: https://api.groww.in/oauth2/v1/token
+          scopes: {}
