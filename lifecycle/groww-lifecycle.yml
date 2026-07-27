@@ -1,0 +1,24 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/groww-trade-api-openapi.yml + https://groww.in/trade-api/docs/curl
+description: >-
+  Versioning and lifecycle posture for the Groww Trading API. Versioning is
+  header-based (X-API-VERSION). No public status page or formal deprecation
+  policy page was found; one operation is marked deprecated in the docs.
+versioning:
+  scheme: header
+  header: X-API-VERSION
+  current: '1.0'
+  docs: https://groww.in/trade-api/docs/curl
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: >-
+    The historical candle range endpoint is documented as deprecated in favour
+    of the backtesting historical candle endpoint; no formal sunset policy is
+    published.
+sla:
+  url: null
+status_page: null
+deprecated_operations:
+  - openapi/groww-trade-api-openapi.yml#getHistoricalCandles

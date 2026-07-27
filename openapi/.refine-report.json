@@ -1,0 +1,24 @@
+{
+  "provider": "groww",
+  "sources": [
+    "groww-authentication-api-openapi.yml",
+    "groww-historical-data-api-openapi.yml",
+    "groww-live-data-api-openapi.yml",
+    "groww-margin-api-openapi.yml",
+    "groww-orders-api-openapi.yml",
+    "groww-portfolio-api-openapi.yml"
+  ],
+  "outputs": [
+    "groww-authentication-api-openapi.yml",
+    "groww-historical-data-api-openapi.yml",
+    "groww-live-data-api-openapi.yml",
+    "groww-margin-api-openapi.yml",
+    "groww-orders-api-openapi.yml",
+    "groww-portfolio-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

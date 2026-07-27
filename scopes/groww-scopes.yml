@@ -1,0 +1,12 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/groww-trade-api-openapi.yml
+schemes:
+- name: oauth2
+  source: openapi/groww-trade-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://groww.in/oauth/authorize
+    tokenUrl: https://api.groww.in/oauth2/v1/token
+  description: OAuth2 authorization-code flow advertised at https://api.groww.in/.well-known/oauth-authorization-server
+scopes: []

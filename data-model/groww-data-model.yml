@@ -1,0 +1,25 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/groww-trade-api-openapi.yml
+docs: https://groww.in/trade-api/docs/curl
+description: >-
+  Entity-relationship graph derived from the Groww Trading API OpenAPI schemas
+  and id-reference fields. The trading domain centers on Orders, which produce
+  Trades and affect Positions; Holdings and Margin roll up per user.
+notation: >-
+  relationships use has_one / has_many / belongs_to with the reference field
+  name; direction is from the entity that owns the reference.
+entities:
+  - {name: Order, key: groww_order_id, domain: orders, description: A buy/sell order in CASH or FNO.}
+  - {name: Trade, key: trade_id, domain: orders, description: An execution (fill) against an order.}
+  - {name: Position, key: trading_symbol, domain: portfolio, description: Net open quantity in an instrument.}
+  - {name: Holding, key: isin, domain: portfolio, description: Demat holding of an equity instrument.}
+  - {name: Margin, key: user, domain: margin, description: Available and required margin for the account.}
+  - {name: Instrument, key: trading_symbol, domain: reference, description: A tradable symbol on an exchange/segment.}
+relationships:
+  - {from: Order, to: Trade, type: has_many, via: groww_order_id}
+  - {from: Trade, to: Order, type: belongs_to, via: groww_order_id}
+  - {from: Order, to: Instrument, type: belongs_to, via: trading_symbol}
+  - {from: Position, to: Instrument, type: belongs_to, via: trading_symbol}
+  - {from: Holding, to: Instrument, type: belongs_to, via: isin}
+  - {from: Order, to: Position, type: has_one, via: trading_symbol}

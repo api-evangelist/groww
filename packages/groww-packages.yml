@@ -1,0 +1,17 @@
+generated: '2026-07-19'
+method: searched
+source: https://pypi.org/project/growwapi/
+packages:
+  - language: python
+    registry: pypi
+    name: growwapi
+    version: 1.5.0
+    url: https://pypi.org/project/growwapi/
+    install: pip install growwapi
+    official: true
+    author: Groww
+    summary: >-
+      The foundational SDK for accessing Groww APIs and listening to live data
+      streams. Provides the core functionality to interact with Groww's trading
+      platform (orders, portfolio, live data, historical data).
+    docs: https://groww.in/trade-api/docs/python-sdk

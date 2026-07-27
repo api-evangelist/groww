@@ -1,0 +1,28 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+provider: Groww
+providerId: groww
+generated: '2026-07-19'
+method: searched
+created: '2026-07-19'
+modified: '2026-07-19'
+tags:
+  - Pricing
+  - Trading
+description: >-
+  Groww Trading API subscription pricing as published on the trade-api landing
+  page. A single paid subscription unlocks the Orders, Live Data and Margin APIs
+  plus up to 3 months of historical data.
+sources:
+  - https://groww.in/trade-api
+plans:
+  - name: Trading API (Early Bird)
+    price: 499
+    currency: INR
+    interval: month
+    note: "₹499 + taxes per month (Early Bird offer)."
+    features:
+      - Orders API
+      - Live Data API
+      - Margin API
+      - Up to 3 months historical data

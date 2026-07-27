@@ -1,0 +1,23 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Groww Trading API
+  version: 1.0.0
+extends: openapi/groww-trade-api-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-enriched: '2026-07-19'
+      x-api-evangelist-provider: groww
+      x-idempotency:
+        supported: true
+        mechanism: order_reference_id
+        conflict_error: GA007
+      x-rate-limits: rate-limits/groww-rate-limits.yml
+  - target: $.paths['/v1/order/create'].post
+    update:
+      x-idempotent: true
+      x-idempotency-field: order_reference_id
+  - target: $.paths['/v1/historical/candle/range'].get
+    update:
+      x-deprecation-note: >-
+        Deprecated in favour of the backtesting historical candle endpoint.

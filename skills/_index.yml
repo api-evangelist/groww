@@ -1,0 +1,16 @@
+generated: '2026-07-19'
+method: generated
+source: openapi/groww-trade-api-openapi.yml
+skills:
+  - file: groww-place-and-track-order.md
+    name: Place and track a Groww order
+    api: openapi/groww-trade-api-openapi.yml
+    operations: [createAccessToken, getOrderMargin, createOrder, getOrderStatus, getOrderTrades, cancelOrder]
+  - file: groww-portfolio-snapshot.md
+    name: Pull a Groww portfolio snapshot
+    api: openapi/groww-trade-api-openapi.yml
+    operations: [createAccessToken, getHoldings, getPositions, getUserMargin]
+  - file: groww-market-data.md
+    name: Fetch Groww live and historical market data
+    api: openapi/groww-trade-api-openapi.yml
+    operations: [createAccessToken, getLtp, getQuote, getOhlc, getOptionChain, getGreeks, getHistoricalCandles]

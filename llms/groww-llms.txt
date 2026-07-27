@@ -1,0 +1,26 @@
+# Groww Trading API
+
+> Groww is an Indian fintech (backed by Iconiq Capital, Ribbit Capital and Y Combinator) offering investing and trading in stocks, F&O, mutual funds and more. The Groww Trading API is the official programmatic interface for algorithmic trading: order management, portfolio and positions, margin, live market data (LTP, quote, OHLC, option chain, greeks) and historical candles across the CASH (equity) and FNO (derivatives) segments. Base URL https://api.groww.in, versioned via the X-API-VERSION header, authenticated with a daily Bearer access token (API key + secret, TOTP, or OAuth2 authorization_code).
+
+## APIs
+- [Groww Trading API OpenAPI](openapi/groww-trade-api-openapi.yml): 20 operations across Orders, Portfolio, Margin, Live Data and Historical Data.
+
+## Docs
+- [Trading API overview](https://groww.in/trade-api): product overview and pricing.
+- [Documentation](https://groww.in/trade-api/docs): developer documentation portal.
+- [cURL reference](https://groww.in/trade-api/docs/curl): endpoints, auth, error codes, rate limits.
+- [Python SDK](https://groww.in/trade-api/docs/python-sdk): growwapi package reference.
+- [API keys](https://groww.in/trade-api/api-keys): generate and manage API keys.
+
+## Specs & artifacts
+- [Authentication](authentication/groww-authentication.yml): bearer + oauth2 + apiKey schemes.
+- [Conventions](conventions/groww-conventions.yml): idempotency (order_reference_id), versioning, error envelope, rate limits.
+- [Error catalog](errors/groww-problem-types.yml): GA000–GA007 error codes.
+- [Rate limits](rate-limits/groww-rate-limits.yml): per-category request ceilings.
+- [Lifecycle](lifecycle/groww-lifecycle.yml): header versioning, deprecated ops.
+- [Data model](data-model/groww-data-model.yml): Order / Trade / Position / Holding graph.
+- [Conformance](conformance/groww-conformance.yml): OAuth2 / RFC 8414 / PKCE.
+- [Well-known](well-known/groww-well-known.yml): OAuth authorization-server metadata.
+
+## Packages
+- [growwapi (PyPI)](https://pypi.org/project/growwapi/): official Python SDK, `pip install growwapi`.

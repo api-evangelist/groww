@@ -1,0 +1,830 @@
+openapi: 3.1.0
+info:
+  title: Groww Trading API
+  description: >-
+    The Groww Trading API is the official programmatic interface to the Groww
+    investing and trading platform, enabling algorithmic trading, order
+    management, portfolio and position tracking, margin calculation, live market
+    data (LTP, quote, OHLC, option chain, greeks) and historical candle data
+    across the CASH (equity) and FNO (derivatives) segments on Indian exchanges.
+    Requests are authenticated with a daily access token (or an OAuth2 /
+    API-key + secret / TOTP flow) and versioned with the X-API-VERSION header.
+  version: '1.0'
+  contact:
+    name: Groww Trading API Support
+    url: https://groww.in/trade-api/docs
+  termsOfService: https://groww.in/terms-and-conditions
+  x-api-evangelist-source: https://groww.in/trade-api/docs/curl
+servers:
+  - url: https://api.groww.in
+    description: Groww Trading API production host
+tags:
+  - name: Authentication
+    description: Access-token generation for API key + secret and TOTP flows.
+  - name: Orders
+    description: Place, modify, cancel and track orders and trades.
+  - name: Portfolio
+    description: Holdings and positions.
+  - name: Margin
+    description: Available margin and per-order margin requirements.
+  - name: Live Data
+    description: Real-time LTP, quote, OHLC, option chain and greeks.
+  - name: Historical Data
+    description: Historical candle data.
+security:
+  - bearerAuth: []
+    apiVersion: []
+paths:
+  /v1/token/api/access:
+    post:
+      operationId: createAccessToken
+      summary: Generate an access token
+      description: >-
+        Exchange an API key (sent as the bearer credential) plus either an
+        approval checksum or a TOTP code for a short-lived access token used on
+        all subsequent requests. Access tokens expire daily at 06:00 AM IST.
+      tags: [Authentication]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccessTokenRequest'
+      responses:
+        '200':
+          description: Access token issued
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessTokenResponse'
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /v1/order/create:
+    post:
+      operationId: createOrder
+      summary: Place a new order
+      description: Place a new buy or sell order in the CASH or FNO segment.
+      tags: [Orders]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlaceOrderRequest'
+      responses:
+        '200':
+          description: Order placed
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PlaceOrderResponse' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /v1/order/modify:
+    post:
+      operationId: modifyOrder
+      summary: Modify an order
+      description: Modify quantity, price, trigger price or order type of a pending or open order.
+      tags: [Orders]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ModifyOrderRequest' }
+      responses:
+        '200':
+          description: Order modified
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ModifyOrderResponse' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '404': { $ref: '#/components/responses/NotFound' }
+  /v1/order/cancel:
+    post:
+      operationId: cancelOrder
+      summary: Cancel an order
+      description: Cancel a pending or open order.
+      tags: [Orders]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CancelOrderRequest' }
+      responses:
+        '200':
+          description: Order cancelled
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/CancelOrderResponse' }
+        '404': { $ref: '#/components/responses/NotFound' }
+  /v1/order/list:
+    get:
+      operationId: listOrders
+      summary: List today's orders
+      description: Retrieve the order history for the current trading day.
+      tags: [Orders]
+      parameters:
+        - name: segment
+          in: query
+          required: false
+          schema: { $ref: '#/components/schemas/Segment' }
+        - name: page
+          in: query
+          required: false
+          schema: { type: integer }
+        - name: page_size
+          in: query
+          required: false
+          schema: { type: integer }
+      responses:
+        '200':
+          description: List of orders
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/OrderListResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /v1/order/detail/{groww_order_id}:
+    get:
+      operationId: getOrderDetail
+      summary: Get order detail
+      description: Retrieve full details for an order by its Groww order id.
+      tags: [Orders]
+      parameters:
+        - $ref: '#/components/parameters/GrowwOrderId'
+        - name: segment
+          in: query
+          required: false
+          schema: { $ref: '#/components/schemas/Segment' }
+      responses:
+        '200':
+          description: Order detail
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/OrderDetailResponse' }
+        '404': { $ref: '#/components/responses/NotFound' }
+  /v1/order/status/{groww_order_id}:
+    get:
+      operationId: getOrderStatus
+      summary: Get order status by Groww order id
+      tags: [Orders]
+      parameters:
+        - $ref: '#/components/parameters/GrowwOrderId'
+        - name: segment
+          in: query
+          required: false
+          schema: { $ref: '#/components/schemas/Segment' }
+      responses:
+        '200':
+          description: Order status
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/OrderStatusResponse' }
+        '404': { $ref: '#/components/responses/NotFound' }
+  /v1/order/status/reference/{order_reference_id}:
+    get:
+      operationId: getOrderStatusByReference
+      summary: Get order status by client reference id
+      tags: [Orders]
+      parameters:
+        - name: order_reference_id
+          in: path
+          required: true
+          schema: { type: string }
+        - name: segment
+          in: query
+          required: false
+          schema: { $ref: '#/components/schemas/Segment' }
+      responses:
+        '200':
+          description: Order status
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/OrderStatusResponse' }
+        '404': { $ref: '#/components/responses/NotFound' }
+  /v1/order/trades/{groww_order_id}:
+    get:
+      operationId: getOrderTrades
+      summary: Get trades for an order
+      tags: [Orders]
+      parameters:
+        - $ref: '#/components/parameters/GrowwOrderId'
+        - name: segment
+          in: query
+          required: false
+          schema: { $ref: '#/components/schemas/Segment' }
+      responses:
+        '200':
+          description: Trades for the order
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TradeListResponse' }
+        '404': { $ref: '#/components/responses/NotFound' }
+  /v1/holdings/user:
+    get:
+      operationId: getHoldings
+      summary: Get holdings
+      description: Retrieve the demat holdings for the authenticated user.
+      tags: [Portfolio]
+      responses:
+        '200':
+          description: User holdings
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/HoldingsResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /v1/positions/user:
+    get:
+      operationId: getPositions
+      summary: Get positions for user
+      description: Retrieve all open positions for the authenticated user.
+      tags: [Portfolio]
+      responses:
+        '200':
+          description: User positions
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PositionsResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /v1/positions/trading-symbol:
+    get:
+      operationId: getPositionByTradingSymbol
+      summary: Get position for a trading symbol
+      tags: [Portfolio]
+      parameters:
+        - name: trading_symbol
+          in: query
+          required: true
+          schema: { type: string }
+        - name: segment
+          in: query
+          required: false
+          schema: { $ref: '#/components/schemas/Segment' }
+      responses:
+        '200':
+          description: Position for the trading symbol
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PositionsResponse' }
+        '404': { $ref: '#/components/responses/NotFound' }
+  /v1/margins/detail/user:
+    get:
+      operationId: getUserMargin
+      summary: Get available user margin
+      tags: [Margin]
+      responses:
+        '200':
+          description: Available margin
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/UserMarginResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /v1/margins/detail/orders:
+    post:
+      operationId: getOrderMargin
+      summary: Get required margin for an order
+      tags: [Margin]
+      parameters:
+        - name: segment
+          in: query
+          required: true
+          schema: { $ref: '#/components/schemas/Segment' }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/OrderMarginRequest' }
+      responses:
+        '200':
+          description: Required margin
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/OrderMarginResponse' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+  /v1/live-data/quote:
+    get:
+      operationId: getQuote
+      summary: Get full market quote
+      tags: [Live Data]
+      parameters:
+        - name: exchange
+          in: query
+          required: true
+          schema: { $ref: '#/components/schemas/Exchange' }
+        - name: segment
+          in: query
+          required: true
+          schema: { $ref: '#/components/schemas/Segment' }
+        - name: trading_symbol
+          in: query
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Full quote
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/QuoteResponse' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+  /v1/live-data/ltp:
+    get:
+      operationId: getLtp
+      summary: Get last traded price
+      tags: [Live Data]
+      parameters:
+        - name: segment
+          in: query
+          required: true
+          schema: { $ref: '#/components/schemas/Segment' }
+        - name: exchange_symbols
+          in: query
+          required: true
+          description: Comma-separated list of EXCHANGE_SYMBOL tokens.
+          schema: { type: string }
+      responses:
+        '200':
+          description: LTP map
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PriceMapResponse' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+  /v1/live-data/ohlc:
+    get:
+      operationId: getOhlc
+      summary: Get OHLC
+      tags: [Live Data]
+      parameters:
+        - name: segment
+          in: query
+          required: true
+          schema: { $ref: '#/components/schemas/Segment' }
+        - name: exchange_symbols
+          in: query
+          required: true
+          description: Comma-separated list of EXCHANGE_SYMBOL tokens.
+          schema: { type: string }
+      responses:
+        '200':
+          description: OHLC map
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/OhlcResponse' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+  /v1/option-chain/exchange/{exchange}/underlying/{underlying}:
+    get:
+      operationId: getOptionChain
+      summary: Get option chain
+      tags: [Live Data]
+      parameters:
+        - name: exchange
+          in: path
+          required: true
+          schema: { $ref: '#/components/schemas/Exchange' }
+        - name: underlying
+          in: path
+          required: true
+          schema: { type: string }
+        - name: expiry_date
+          in: query
+          required: false
+          schema: { type: string, format: date }
+      responses:
+        '200':
+          description: Option chain
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/EnvelopeObject' }
+        '404': { $ref: '#/components/responses/NotFound' }
+  /v1/live-data/greeks/exchange/{exchange}/underlying/{underlying}/trading_symbol/{trading_symbol}/expiry/{expiry}:
+    get:
+      operationId: getGreeks
+      summary: Get option greeks
+      tags: [Live Data]
+      parameters:
+        - name: exchange
+          in: path
+          required: true
+          schema: { $ref: '#/components/schemas/Exchange' }
+        - name: underlying
+          in: path
+          required: true
+          schema: { type: string }
+        - name: trading_symbol
+          in: path
+          required: true
+          schema: { type: string }
+        - name: expiry
+          in: path
+          required: true
+          schema: { type: string, format: date }
+      responses:
+        '200':
+          description: Option greeks
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/EnvelopeObject' }
+        '404': { $ref: '#/components/responses/NotFound' }
+  /v1/historical/candle/range:
+    get:
+      operationId: getHistoricalCandles
+      summary: Get historical candle data
+      deprecated: true
+      description: >-
+        Retrieve historical OHLC candles for a symbol over a time range.
+        Deprecated in favour of the backtesting historical candle endpoint.
+      tags: [Historical Data]
+      parameters:
+        - name: exchange
+          in: query
+          required: true
+          schema: { $ref: '#/components/schemas/Exchange' }
+        - name: segment
+          in: query
+          required: true
+          schema: { $ref: '#/components/schemas/Segment' }
+        - name: trading_symbol
+          in: query
+          required: true
+          schema: { type: string }
+        - name: start_time
+          in: query
+          required: true
+          schema: { type: string }
+        - name: end_time
+          in: query
+          required: true
+          schema: { type: string }
+        - name: interval_in_minutes
+          in: query
+          required: false
+          schema: { type: integer }
+      responses:
+        '200':
+          description: Historical candles
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/CandleResponse' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        Daily access token (or API key on the token endpoint) sent as
+        `Authorization: Bearer {ACCESS_TOKEN}`.
+    apiVersion:
+      type: apiKey
+      in: header
+      name: X-API-VERSION
+      description: API version header, currently `1.0`.
+    oauth2:
+      type: oauth2
+      description: >-
+        OAuth2 authorization-code flow advertised at
+        https://api.groww.in/.well-known/oauth-authorization-server
+      flows:
+        authorizationCode:
+          authorizationUrl: https://groww.in/oauth/authorize
+          tokenUrl: https://api.groww.in/oauth2/v1/token
+          scopes: {}
+  parameters:
+    GrowwOrderId:
+      name: groww_order_id
+      in: path
+      required: true
+      schema: { type: string }
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ErrorEnvelope' }
+    Unauthorized:
+      description: User not authorised to perform this operation
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ErrorEnvelope' }
+    NotFound:
+      description: Requested entity does not exist
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ErrorEnvelope' }
+  schemas:
+    Segment:
+      type: string
+      enum: [CASH, FNO]
+      description: Trading segment. MCX (commodities) is not supported.
+    Exchange:
+      type: string
+      enum: [NSE, BSE]
+    TransactionType:
+      type: string
+      enum: [BUY, SELL]
+    OrderType:
+      type: string
+      enum: [MARKET, LIMIT, SL, SL_M]
+    Product:
+      type: string
+      enum: [CNC, MIS, NRML]
+    Validity:
+      type: string
+      enum: [DAY, IOC]
+    ErrorEnvelope:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [SUCCESS, FAILURE]
+        payload:
+          type: object
+          nullable: true
+        error:
+          $ref: '#/components/schemas/Error'
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Groww error code (e.g. GA004).
+        message:
+          type: string
+        metadata:
+          type: object
+          nullable: true
+    EnvelopeObject:
+      type: object
+      properties:
+        status: { type: string }
+        payload: { type: object }
+    AccessTokenRequest:
+      type: object
+      required: [key_type]
+      properties:
+        key_type:
+          type: string
+          enum: [approval, totp]
+        checksum:
+          type: string
+          description: SHA256(secret + timestamp), required for approval flow.
+        timestamp:
+          type: string
+          description: Epoch seconds (10 digits), required for approval flow.
+        totp:
+          type: string
+          description: TOTP code, required for totp flow.
+    AccessTokenResponse:
+      type: object
+      properties:
+        status: { type: string }
+        payload:
+          type: object
+          properties:
+            token: { type: string }
+            tokenRefId: { type: string }
+            sessionName: { type: string }
+            expiry: { type: string }
+            isActive: { type: boolean }
+    PlaceOrderRequest:
+      type: object
+      required: [trading_symbol, quantity, exchange, segment, product, order_type, transaction_type]
+      properties:
+        trading_symbol: { type: string }
+        quantity: { type: integer }
+        price: { type: number }
+        trigger_price: { type: number }
+        validity: { $ref: '#/components/schemas/Validity' }
+        exchange: { $ref: '#/components/schemas/Exchange' }
+        segment: { $ref: '#/components/schemas/Segment' }
+        product: { $ref: '#/components/schemas/Product' }
+        order_type: { $ref: '#/components/schemas/OrderType' }
+        transaction_type: { $ref: '#/components/schemas/TransactionType' }
+        order_reference_id:
+          type: string
+          description: Client-supplied idempotency/reference id for the order.
+    PlaceOrderResponse:
+      type: object
+      properties:
+        status: { type: string }
+        groww_order_id: { type: string }
+        order_status: { type: string }
+        order_reference_id: { type: string }
+        remark: { type: string }
+    ModifyOrderRequest:
+      type: object
+      required: [groww_order_id, segment]
+      properties:
+        groww_order_id: { type: string }
+        quantity: { type: integer }
+        price: { type: number }
+        trigger_price: { type: number }
+        order_type: { $ref: '#/components/schemas/OrderType' }
+        segment: { $ref: '#/components/schemas/Segment' }
+    ModifyOrderResponse:
+      type: object
+      properties:
+        status: { type: string }
+        groww_order_id: { type: string }
+        order_status: { type: string }
+    CancelOrderRequest:
+      type: object
+      required: [groww_order_id, segment]
+      properties:
+        groww_order_id: { type: string }
+        segment: { $ref: '#/components/schemas/Segment' }
+    CancelOrderResponse:
+      type: object
+      properties:
+        status: { type: string }
+        groww_order_id: { type: string }
+        order_status: { type: string }
+    OrderStatusResponse:
+      type: object
+      properties:
+        status: { type: string }
+        payload:
+          type: object
+          properties:
+            groww_order_id: { type: string }
+            order_status: { type: string }
+            order_reference_id: { type: string }
+    OrderDetailResponse:
+      type: object
+      properties:
+        status: { type: string }
+        payload:
+          $ref: '#/components/schemas/Order'
+    OrderListResponse:
+      type: object
+      properties:
+        status: { type: string }
+        payload:
+          type: object
+          properties:
+            order_list:
+              type: array
+              items: { $ref: '#/components/schemas/Order' }
+    Order:
+      type: object
+      properties:
+        groww_order_id: { type: string }
+        order_reference_id: { type: string }
+        trading_symbol: { type: string }
+        quantity: { type: integer }
+        price: { type: number }
+        trigger_price: { type: number }
+        order_status: { type: string }
+        transaction_type: { $ref: '#/components/schemas/TransactionType' }
+        order_type: { $ref: '#/components/schemas/OrderType' }
+        segment: { $ref: '#/components/schemas/Segment' }
+        exchange: { $ref: '#/components/schemas/Exchange' }
+        product: { $ref: '#/components/schemas/Product' }
+    TradeListResponse:
+      type: object
+      properties:
+        status: { type: string }
+        payload:
+          type: object
+          properties:
+            trade_list:
+              type: array
+              items:
+                type: object
+                properties:
+                  trade_id: { type: string }
+                  groww_order_id: { type: string }
+                  quantity: { type: integer }
+                  price: { type: number }
+    HoldingsResponse:
+      type: object
+      properties:
+        status: { type: string }
+        payload:
+          type: object
+          properties:
+            holdings:
+              type: array
+              items: { $ref: '#/components/schemas/Holding' }
+    Holding:
+      type: object
+      properties:
+        isin: { type: string }
+        trading_symbol: { type: string }
+        quantity: { type: integer }
+        average_price: { type: number }
+        pledge_quantity: { type: integer }
+        demat_locked_quantity: { type: integer }
+        groww_locked_quantity: { type: integer }
+        repledge_quantity: { type: integer }
+        t1_quantity: { type: integer }
+        demat_free_quantity: { type: integer }
+        corporate_action_additional_quantity: { type: integer }
+        active_demat_transfer_quantity: { type: integer }
+    PositionsResponse:
+      type: object
+      properties:
+        status: { type: string }
+        payload:
+          type: object
+          properties:
+            positions:
+              type: array
+              items: { $ref: '#/components/schemas/Position' }
+    Position:
+      type: object
+      properties:
+        trading_symbol: { type: string }
+        credit_quantity: { type: integer }
+        credit_price: { type: number }
+        debit_quantity: { type: integer }
+        debit_price: { type: number }
+        carry_forward_credit_quantity: { type: integer }
+        carry_forward_credit_price: { type: number }
+        carry_forward_debit_quantity: { type: integer }
+        carry_forward_debit_price: { type: number }
+        exchange: { $ref: '#/components/schemas/Exchange' }
+        symbol_isin: { type: string }
+        quantity: { type: integer }
+        product: { $ref: '#/components/schemas/Product' }
+        net_carry_forward_quantity: { type: integer }
+        net_price: { type: number }
+        net_carry_forward_price: { type: number }
+        realised_pnl: { type: number }
+    UserMarginResponse:
+      type: object
+      properties:
+        status: { type: string }
+        payload:
+          type: object
+          properties:
+            clear_cash: { type: number }
+            net_margin_used: { type: number }
+            collateral_available: { type: number }
+    OrderMarginRequest:
+      type: object
+      required: [trading_symbol, transaction_type, quantity, order_type, product, exchange]
+      properties:
+        trading_symbol: { type: string }
+        transaction_type: { $ref: '#/components/schemas/TransactionType' }
+        quantity: { type: integer }
+        price: { type: number }
+        order_type: { $ref: '#/components/schemas/OrderType' }
+        product: { $ref: '#/components/schemas/Product' }
+        exchange: { $ref: '#/components/schemas/Exchange' }
+    OrderMarginResponse:
+      type: object
+      properties:
+        status: { type: string }
+        payload:
+          type: object
+          properties:
+            total_requirement: { type: number }
+            span_margin_required: { type: number }
+            exposure_margin_required: { type: number }
+    QuoteResponse:
+      type: object
+      properties:
+        status: { type: string }
+        payload:
+          type: object
+          properties:
+            last_price: { type: number }
+            volume: { type: integer }
+            open: { type: number }
+            high: { type: number }
+            low: { type: number }
+            close: { type: number }
+            bid_quantity: { type: integer }
+            offer_quantity: { type: integer }
+    PriceMapResponse:
+      type: object
+      properties:
+        status: { type: string }
+        payload:
+          type: object
+          additionalProperties: { type: number }
+    OhlcResponse:
+      type: object
+      properties:
+        status: { type: string }
+        payload:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              open: { type: number }
+              high: { type: number }
+              low: { type: number }
+              close: { type: number }
+    CandleResponse:
+      type: object
+      properties:
+        status: { type: string }
+        payload:
+          type: object
+          properties:
+            candles:
+              type: array
+              items:
+                type: array
+                items: { type: number }

@@ -1,0 +1,56 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+provider: Groww
+providerId: groww
+generated: '2026-07-19'
+method: searched
+created: '2026-07-19'
+modified: '2026-07-19'
+tags:
+  - Rate Limiting
+  - Trading
+description: >-
+  Groww Trading API rate limits published in the cURL documentation, enforced
+  per request category (Orders, Live Data, Non Trading) with separate
+  per-second and per-minute ceilings. Live feed allows up to 1000 concurrent
+  subscriptions.
+sources:
+  - https://groww.in/trade-api/docs/curl
+responseCodes:
+  throttled: 429
+limits:
+  - name: Orders (create/modify/cancel)
+    scope: account
+    metric: requests_per_second
+    limit: 10
+    timeFrame: second
+  - name: Orders (create/modify/cancel)
+    scope: account
+    metric: requests_per_minute
+    limit: 250
+    timeFrame: minute
+  - name: Live Data (quote/ltp/ohlc)
+    scope: account
+    metric: requests_per_second
+    limit: 10
+    timeFrame: second
+  - name: Live Data (quote/ltp/ohlc)
+    scope: account
+    metric: requests_per_minute
+    limit: 300
+    timeFrame: minute
+  - name: Non Trading (status/list/positions/holdings/margin)
+    scope: account
+    metric: requests_per_second
+    limit: 20
+    timeFrame: second
+  - name: Non Trading (status/list/positions/holdings/margin)
+    scope: account
+    metric: requests_per_minute
+    limit: 500
+    timeFrame: minute
+  - name: Live feed subscriptions
+    scope: account
+    metric: concurrent_subscriptions
+    limit: 1000
+    timeFrame: concurrent

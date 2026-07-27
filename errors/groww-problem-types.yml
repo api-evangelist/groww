@@ -1,0 +1,43 @@
+generated: '2026-07-19'
+method: searched
+source: https://groww.in/trade-api/docs/curl
+format: custom-envelope
+description: >-
+  Groww Trading API error catalog. Errors are returned in the standard response
+  envelope with status FAILURE and an error object { code, message, metadata }.
+  Error codes are prefixed GA. Titles and remediation captured from the cURL
+  error reference.
+envelope:
+  status: FAILURE
+  error_object: '{ code, message, metadata }'
+problems:
+  - code: GA000
+    title: Internal error occurred
+    http_status: 500
+    remediation: Retry after a short delay; contact support if it persists.
+  - code: GA001
+    title: Bad request
+    http_status: 400
+    remediation: Validate request parameters and body against the documented schema.
+  - code: GA003
+    title: Unable to serve request currently
+    http_status: 503
+    remediation: Service is temporarily unavailable; retry with backoff.
+  - code: GA004
+    title: Requested entity does not exist
+    http_status: 404
+    remediation: Verify the groww_order_id / trading_symbol / reference id exists.
+  - code: GA005
+    title: User not authorised to perform this operation
+    http_status: 401
+    remediation: Check the access token is valid and the account has API access enabled.
+  - code: GA006
+    title: Cannot process this request
+    http_status: 422
+    remediation: The request cannot be fulfilled in the current account/market state.
+  - code: GA007
+    title: Duplicate order reference id
+    http_status: 409
+    remediation: >-
+      order_reference_id was already used; generate a new unique reference id.
+      This is the idempotency guard against duplicate order submission.

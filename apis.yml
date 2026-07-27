@@ -1,8 +1,17 @@
 aid: groww
 name: Groww
-description: 'Groww is a company surfaced as a portfolio company of iconiq-capital, ribbit-capital, y-combinator
-  and added to the API Evangelist network as a stub for enrichment. Sector: fintech. This profile is a
-  lead awaiting the enrichment pipeline.'
+description: >-
+  Groww is an Indian fintech company offering investing and trading in stocks,
+  futures & options, mutual funds, ETFs, IPOs and more through its consumer app
+  and web platform. Backed by Iconiq Capital, Ribbit Capital and Y Combinator,
+  Groww also operates the Groww Trading API — an official programmatic interface
+  for algorithmic trading that covers order management (place/modify/cancel),
+  portfolio holdings and positions, margin calculation, live market data (LTP,
+  full quote, OHLC, option chain and greeks) and historical candle data across
+  the CASH (equity) and FNO (derivatives) segments on Indian exchanges. Requests
+  hit https://api.groww.in, are versioned with the X-API-VERSION header, and are
+  authenticated with a daily Bearer access token generated via an API key +
+  secret checksum, a TOTP flow, or an OAuth2 authorization-code flow.
 url: https://raw.githubusercontent.com/api-evangelist/groww/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -12,18 +21,187 @@ x-backed-by:
 - y-combinator
 x-tier: stub
 x-tier-reason: portfolio-lead
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-19'
 tags:
 - Company
 - Fintech
-apis: []
+- Trading
+- Investing
+- Stock Broking
+- Market Data
+- Algorithmic Trading
+- India
+image: https://groww.in/favicon.ico
+apis:
+- aid: groww:groww-authentication-api
+  name: Groww Authentication API
+  description: Access-token generation for API key + secret and TOTP flows.
+  humanURL: https://groww.in/trade-api
+  baseURL: https://api.groww.in
+  tags:
+  - Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/groww-authentication-api-openapi.yml
+  - type: Documentation
+    url: https://groww.in/trade-api/docs
+  - type: APIReference
+    url: https://groww.in/trade-api/docs/curl
+- aid: groww:groww-historical-data-api
+  name: Groww Historical Data API
+  description: Historical candle data.
+  humanURL: https://groww.in/trade-api
+  baseURL: https://api.groww.in
+  tags:
+  - Historical Data
+  properties:
+  - type: OpenAPI
+    url: openapi/groww-historical-data-api-openapi.yml
+  - type: Documentation
+    url: https://groww.in/trade-api/docs
+  - type: APIReference
+    url: https://groww.in/trade-api/docs/curl
+- aid: groww:groww-live-data-api
+  name: Groww Live Data API
+  description: Real-time LTP, quote, OHLC, option chain and greeks.
+  humanURL: https://groww.in/trade-api
+  baseURL: https://api.groww.in
+  tags:
+  - Live Data
+  properties:
+  - type: OpenAPI
+    url: openapi/groww-live-data-api-openapi.yml
+  - type: Documentation
+    url: https://groww.in/trade-api/docs
+  - type: APIReference
+    url: https://groww.in/trade-api/docs/curl
+- aid: groww:groww-margin-api
+  name: Groww Margin API
+  description: Available margin and per-order margin requirements.
+  humanURL: https://groww.in/trade-api
+  baseURL: https://api.groww.in
+  tags:
+  - Margin
+  properties:
+  - type: OpenAPI
+    url: openapi/groww-margin-api-openapi.yml
+  - type: Documentation
+    url: https://groww.in/trade-api/docs
+  - type: APIReference
+    url: https://groww.in/trade-api/docs/curl
+- aid: groww:groww-orders-api
+  name: Groww Orders API
+  description: Place, modify, cancel and track orders and trades.
+  humanURL: https://groww.in/trade-api
+  baseURL: https://api.groww.in
+  tags:
+  - Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/groww-orders-api-openapi.yml
+  - type: Documentation
+    url: https://groww.in/trade-api/docs
+  - type: APIReference
+    url: https://groww.in/trade-api/docs/curl
+- aid: groww:groww-portfolio-api
+  name: Groww Portfolio API
+  description: Holdings and positions.
+  humanURL: https://groww.in/trade-api
+  baseURL: https://api.groww.in
+  tags:
+  - Portfolio
+  properties:
+  - type: OpenAPI
+    url: openapi/groww-portfolio-api-openapi.yml
+  - type: Documentation
+    url: https://groww.in/trade-api/docs
+  - type: APIReference
+    url: https://groww.in/trade-api/docs/curl
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DeveloperPortal
+  url: https://groww.in/trade-api
+- type: Documentation
+  url: https://groww.in/trade-api/docs
+- type: APIReference
+  url: https://groww.in/trade-api/docs/curl
+- type: GettingStarted
+  url: https://groww.in/trade-api/docs/python-sdk
+- type: Pricing
+  url: https://groww.in/trade-api
+- type: SignUp
+  url: https://groww.in/trade-api/api-keys
+- type: TermsOfService
+  url: https://groww.in/terms-and-conditions
+- type: PrivacyPolicy
+  url: https://groww.in/privacy-policy
+- type: Support
+  url: https://groww.in/help
+- type: Blog
+  url: https://groww.in/blog
+- type: OpenAPI
+  url: openapi/groww-trade-api-openapi.yml
+- type: Authentication
+  url: authentication/groww-authentication.yml
+- type: OAuthScopes
+  url: scopes/groww-scopes.yml
+- type: Conventions
+  url: conventions/groww-conventions.yml
+- type: Idempotency
+  url: conventions/groww-conventions.yml
+- type: RateLimits
+  url: rate-limits/groww-rate-limits.yml
+- type: ErrorCatalog
+  url: errors/groww-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/groww-lifecycle.yml
+- type: Deprecation
+  url: lifecycle/groww-lifecycle.yml
+- type: Conformance
+  url: conformance/groww-conformance.yml
+- type: DataModel
+  url: data-model/groww-data-model.yml
+- type: DomainSecurity
+  url: security/groww-domain-security.yml
+- type: AgenticAccess
+  url: agentic-access/groww-agentic-access.yml
+- type: WellKnown
+  url: well-known/groww-well-known.yml
+- type: Packages
+  url: packages/groww-packages.yml
+- type: SDKs
+  url: packages/groww-packages.yml
+- type: MCPServer
+  url: mcp/groww-mcp.yml
+- type: LLMsTxt
+  url: llms/groww-llms.txt
+- type: Overlay
+  url: overlays/groww-trade-api-overlay.yaml
+- type: AgentSkill
+  url: skills/_index.yml
 - type: Website
   url: https://groww.in/
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence
