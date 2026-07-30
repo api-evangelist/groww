@@ -138,6 +138,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/groww/overview
 - type: DeveloperPortal
   url: https://groww.in/trade-api
 - type: Documentation
