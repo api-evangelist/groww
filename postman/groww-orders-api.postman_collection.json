@@ -1,0 +1,1564 @@
+{
+  "info": {
+    "_postman_id": "fd7ee7b9-b469-4c33-ba3c-e73291b09c9b",
+    "name": "Groww Trading Authentication Orders API",
+    "description": "The Groww Trading API is the official programmatic interface to the Groww investing and trading platform, enabling algorithmic trading, order management, portfolio and position tracking, margin calculation, live market data (LTP, quote, OHLC, option chain, greeks) and historical candle data across the CASH (equity) and FNO (derivatives) segments on Indian exchanges. Requests are authenticated with a daily access token (or an OAuth2 / API-key + secret / TOTP flow) and versioned with the X-API-VERSION header.\n\nContact Support:\n Name: Groww Trading API Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:52:12.000Z",
+    "updatedAt": "2026-07-28T01:52:12.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-fd7ee7b9-b469-4c33-ba3c-e73291b09c9b"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "order",
+          "item": [
+            {
+              "name": "create",
+              "item": [
+                {
+                  "name": "Place a new order",
+                  "id": "2805f0fd-b733-4ae6-80eb-be1e94ec9c0e",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"trading_symbol\": \"<string>\",\n  \"quantity\": \"<integer>\",\n  \"exchange\": \"BSE\",\n  \"segment\": \"FNO\",\n  \"product\": \"CNC\",\n  \"order_type\": \"LIMIT\",\n  \"transaction_type\": \"SELL\",\n  \"price\": \"<number>\",\n  \"trigger_price\": \"<number>\",\n  \"validity\": \"IOC\",\n  \"order_reference_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/order/create",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "order",
+                        "create"
+                      ]
+                    },
+                    "description": "Place a new buy or sell order in the CASH or FNO segment."
+                  },
+                  "response": [
+                    {
+                      "id": "b0894073-0c4e-41c8-9c87-2e32eb53f583",
+                      "name": "Order placed",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"trading_symbol\": \"<string>\",\n  \"quantity\": \"<integer>\",\n  \"exchange\": \"BSE\",\n  \"segment\": \"FNO\",\n  \"product\": \"CNC\",\n  \"order_type\": \"LIMIT\",\n  \"transaction_type\": \"SELL\",\n  \"price\": \"<number>\",\n  \"trigger_price\": \"<number>\",\n  \"validity\": \"IOC\",\n  \"order_reference_id\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/order/create",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "order",
+                            "create"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\",\n  \"groww_order_id\": \"<string>\",\n  \"order_status\": \"<string>\",\n  \"order_reference_id\": \"<string>\",\n  \"remark\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T01:52:12.000Z",
+                      "updatedAt": "2026-07-28T01:52:12.000Z",
+                      "uid": "35240-b0894073-0c4e-41c8-9c87-2e32eb53f583"
+                    },
+                    {
+                      "id": "69e50a55-ab35-4306-9d01-9f543815bfc4",
+                      "name": "Bad request",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"trading_symbol\": \"<string>\",\n  \"quantity\": \"<integer>\",\n  \"exchange\": \"BSE\",\n  \"segment\": \"FNO\",\n  \"product\": \"CNC\",\n  \"order_type\": \"LIMIT\",\n  \"transaction_type\": \"SELL\",\n  \"price\": \"<number>\",\n  \"trigger_price\": \"<number>\",\n  \"validity\": \"IOC\",\n  \"order_reference_id\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/order/create",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "order",
+                            "create"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"SUCCESS\",\n  \"payload\": {},\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"metadata\": {}\n  }\n}",
+                      "createdAt": "2026-07-28T01:52:12.000Z",
+                      "updatedAt": "2026-07-28T01:52:12.000Z",
+                      "uid": "35240-69e50a55-ab35-4306-9d01-9f543815bfc4"
+                    },
+                    {
+                      "id": "47b2418d-2c46-42e7-a9e3-b3e80a3438cf",
+                      "name": "User not authorised to perform this operation",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"trading_symbol\": \"<string>\",\n  \"quantity\": \"<integer>\",\n  \"exchange\": \"BSE\",\n  \"segment\": \"FNO\",\n  \"product\": \"CNC\",\n  \"order_type\": \"LIMIT\",\n  \"transaction_type\": \"SELL\",\n  \"price\": \"<number>\",\n  \"trigger_price\": \"<number>\",\n  \"validity\": \"IOC\",\n  \"order_reference_id\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/order/create",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "order",
+                            "create"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"SUCCESS\",\n  \"payload\": {},\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"metadata\": {}\n  }\n}",
+                      "createdAt": "2026-07-28T01:52:12.000Z",
+                      "updatedAt": "2026-07-28T01:52:12.000Z",
+                      "uid": "35240-47b2418d-2c46-42e7-a9e3-b3e80a3438cf"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:52:12.000Z",
+                  "updatedAt": "2026-07-28T01:52:12.000Z",
+                  "uid": "35240-2805f0fd-b733-4ae6-80eb-be1e94ec9c0e"
+                }
+              ],
+              "id": "534cdcf2-13f7-4546-a75c-eefec2c4bbe2",
+              "createdAt": "2026-07-28T01:52:12.000Z",
+              "updatedAt": "2026-07-28T01:52:12.000Z",
+              "uid": "35240-534cdcf2-13f7-4546-a75c-eefec2c4bbe2"
+            },
+            {
+              "name": "modify",
+              "item": [
+                {
+                  "name": "Modify an order",
+                  "id": "51a87b43-12b4-4792-b1ac-d67409fe17a9",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"groww_order_id\": \"<string>\",\n  \"segment\": \"FNO\",\n  \"quantity\": \"<integer>\",\n  \"price\": \"<number>\",\n  \"trigger_price\": \"<number>\",\n  \"order_type\": \"LIMIT\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/order/modify",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "order",
+                        "modify"
+                      ]
+                    },
+                    "description": "Modify quantity, price, trigger price or order type of a pending or open order."
+                  },
+                  "response": [
+                    {
+                      "id": "df7f293c-0e89-422d-aa58-d7f59e7a31ae",
+                      "name": "Order modified",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"groww_order_id\": \"<string>\",\n  \"segment\": \"FNO\",\n  \"quantity\": \"<integer>\",\n  \"price\": \"<number>\",\n  \"trigger_price\": \"<number>\",\n  \"order_type\": \"LIMIT\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/order/modify",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "order",
+                            "modify"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\",\n  \"groww_order_id\": \"<string>\",\n  \"order_status\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T01:52:12.000Z",
+                      "updatedAt": "2026-07-28T01:52:12.000Z",
+                      "uid": "35240-df7f293c-0e89-422d-aa58-d7f59e7a31ae"
+                    },
+                    {
+                      "id": "b3c1f994-d384-4b02-bd63-9cd490e1ed7e",
+                      "name": "Bad request",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"groww_order_id\": \"<string>\",\n  \"segment\": \"FNO\",\n  \"quantity\": \"<integer>\",\n  \"price\": \"<number>\",\n  \"trigger_price\": \"<number>\",\n  \"order_type\": \"LIMIT\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/order/modify",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "order",
+                            "modify"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"SUCCESS\",\n  \"payload\": {},\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"metadata\": {}\n  }\n}",
+                      "createdAt": "2026-07-28T01:52:12.000Z",
+                      "updatedAt": "2026-07-28T01:52:12.000Z",
+                      "uid": "35240-b3c1f994-d384-4b02-bd63-9cd490e1ed7e"
+                    },
+                    {
+                      "id": "8d86e029-8309-45d2-bba8-a42e0be87242",
+                      "name": "Requested entity does not exist",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"groww_order_id\": \"<string>\",\n  \"segment\": \"FNO\",\n  \"quantity\": \"<integer>\",\n  \"price\": \"<number>\",\n  \"trigger_price\": \"<number>\",\n  \"order_type\": \"LIMIT\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/order/modify",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "order",
+                            "modify"
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"SUCCESS\",\n  \"payload\": {},\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"metadata\": {}\n  }\n}",
+                      "createdAt": "2026-07-28T01:52:12.000Z",
+                      "updatedAt": "2026-07-28T01:52:12.000Z",
+                      "uid": "35240-8d86e029-8309-45d2-bba8-a42e0be87242"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:52:12.000Z",
+                  "updatedAt": "2026-07-28T01:52:12.000Z",
+                  "uid": "35240-51a87b43-12b4-4792-b1ac-d67409fe17a9"
+                }
+              ],
+              "id": "83c3c112-48e4-4af6-91e3-a6e26ff02ce4",
+              "createdAt": "2026-07-28T01:52:12.000Z",
+              "updatedAt": "2026-07-28T01:52:12.000Z",
+              "uid": "35240-83c3c112-48e4-4af6-91e3-a6e26ff02ce4"
+            },
+            {
+              "name": "cancel",
+              "item": [
+                {
+                  "name": "Cancel an order",
+                  "id": "b3efdaa4-c673-4b3c-9d6d-cf123d843855",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"groww_order_id\": \"<string>\",\n  \"segment\": \"CASH\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/order/cancel",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "order",
+                        "cancel"
+                      ]
+                    },
+                    "description": "Cancel a pending or open order."
+                  },
+                  "response": [
+                    {
+                      "id": "26c6804f-c44b-4b4b-be25-0837feab149b",
+                      "name": "Order cancelled",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"groww_order_id\": \"<string>\",\n  \"segment\": \"CASH\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/order/cancel",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "order",
+                            "cancel"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\",\n  \"groww_order_id\": \"<string>\",\n  \"order_status\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T01:52:12.000Z",
+                      "updatedAt": "2026-07-28T01:52:12.000Z",
+                      "uid": "35240-26c6804f-c44b-4b4b-be25-0837feab149b"
+                    },
+                    {
+                      "id": "341029d5-574e-413a-b859-1261fb4244b1",
+                      "name": "Requested entity does not exist",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"groww_order_id\": \"<string>\",\n  \"segment\": \"CASH\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/order/cancel",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "order",
+                            "cancel"
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"SUCCESS\",\n  \"payload\": {},\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"metadata\": {}\n  }\n}",
+                      "createdAt": "2026-07-28T01:52:12.000Z",
+                      "updatedAt": "2026-07-28T01:52:12.000Z",
+                      "uid": "35240-341029d5-574e-413a-b859-1261fb4244b1"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:52:12.000Z",
+                  "updatedAt": "2026-07-28T01:52:12.000Z",
+                  "uid": "35240-b3efdaa4-c673-4b3c-9d6d-cf123d843855"
+                }
+              ],
+              "id": "a7c1a18c-d654-4ace-a1bc-6c948bd14f98",
+              "createdAt": "2026-07-28T01:52:12.000Z",
+              "updatedAt": "2026-07-28T01:52:12.000Z",
+              "uid": "35240-a7c1a18c-d654-4ace-a1bc-6c948bd14f98"
+            },
+            {
+              "name": "list",
+              "item": [
+                {
+                  "name": "List today's orders",
+                  "id": "6fbe8e0d-f048-4c30-84e8-76e1715bd119",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/order/list?segment=CASH&page=<integer>&page_size=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "order",
+                        "list"
+                      ],
+                      "query": [
+                        {
+                          "key": "segment",
+                          "value": "CASH"
+                        },
+                        {
+                          "key": "page",
+                          "value": "<integer>"
+                        },
+                        {
+                          "key": "page_size",
+                          "value": "<integer>"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve the order history for the current trading day."
+                  },
+                  "response": [
+                    {
+                      "id": "6940a2cb-5d32-4239-8095-2c9e66c72da4",
+                      "name": "List of orders",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/order/list?segment=CASH&page=<integer>&page_size=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "order",
+                            "list"
+                          ],
+                          "query": [
+                            {
+                              "key": "segment",
+                              "value": "CASH"
+                            },
+                            {
+                              "key": "page",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "page_size",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\",\n  \"payload\": {\n    \"order_list\": [\n      {\n        \"groww_order_id\": \"<string>\",\n        \"order_reference_id\": \"<string>\",\n        \"trading_symbol\": \"<string>\",\n        \"quantity\": \"<integer>\",\n        \"price\": \"<number>\",\n        \"trigger_price\": \"<number>\",\n        \"order_status\": \"<string>\",\n        \"transaction_type\": \"BUY\",\n        \"order_type\": \"SL_M\",\n        \"segment\": \"FNO\",\n        \"exchange\": \"NSE\",\n        \"product\": \"MIS\"\n      },\n      {\n        \"groww_order_id\": \"<string>\",\n        \"order_reference_id\": \"<string>\",\n        \"trading_symbol\": \"<string>\",\n        \"quantity\": \"<integer>\",\n        \"price\": \"<number>\",\n        \"trigger_price\": \"<number>\",\n        \"order_status\": \"<string>\",\n        \"transaction_type\": \"SELL\",\n        \"order_type\": \"LIMIT\",\n        \"segment\": \"CASH\",\n        \"exchange\": \"BSE\",\n        \"product\": \"CNC\"\n      }\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T01:52:12.000Z",
+                      "updatedAt": "2026-07-28T01:52:12.000Z",
+                      "uid": "35240-6940a2cb-5d32-4239-8095-2c9e66c72da4"
+                    },
+                    {
+                      "id": "110e2648-1dd4-4eed-b8f5-36c689b68e8b",
+                      "name": "User not authorised to perform this operation",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/order/list?segment=CASH&page=<integer>&page_size=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "order",
+                            "list"
+                          ],
+                          "query": [
+                            {
+                              "key": "segment",
+                              "value": "CASH"
+                            },
+                            {
+                              "key": "page",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "page_size",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"SUCCESS\",\n  \"payload\": {},\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"metadata\": {}\n  }\n}",
+                      "createdAt": "2026-07-28T01:52:12.000Z",
+                      "updatedAt": "2026-07-28T01:52:12.000Z",
+                      "uid": "35240-110e2648-1dd4-4eed-b8f5-36c689b68e8b"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:52:12.000Z",
+                  "updatedAt": "2026-07-28T01:52:12.000Z",
+                  "uid": "35240-6fbe8e0d-f048-4c30-84e8-76e1715bd119"
+                }
+              ],
+              "id": "d0e7f461-c86c-40b5-900c-ff31ab8ea3d7",
+              "createdAt": "2026-07-28T01:52:12.000Z",
+              "updatedAt": "2026-07-28T01:52:12.000Z",
+              "uid": "35240-d0e7f461-c86c-40b5-900c-ff31ab8ea3d7"
+            },
+            {
+              "name": "detail",
+              "item": [
+                {
+                  "name": "{groww_order_id}",
+                  "item": [
+                    {
+                      "name": "Get order detail",
+                      "id": "defb550d-355e-43ec-9dc7-bc5bce3d1058",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/order/detail/:groww_order_id?segment=CASH",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "order",
+                            "detail",
+                            ":groww_order_id"
+                          ],
+                          "query": [
+                            {
+                              "key": "segment",
+                              "value": "CASH"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "334f271a-ad0c-4107-97b9-bac7bc435165",
+                              "key": "groww_order_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Retrieve full details for an order by its Groww order id."
+                      },
+                      "response": [
+                        {
+                          "id": "7613b589-9a18-44a9-bd1d-ed40187e8e9d",
+                          "name": "Order detail",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/order/detail/:groww_order_id?segment=CASH",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "order",
+                                "detail",
+                                ":groww_order_id"
+                              ],
+                              "query": [
+                                {
+                                  "key": "segment",
+                                  "value": "CASH"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "groww_order_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": \"<string>\",\n  \"payload\": {\n    \"groww_order_id\": \"<string>\",\n    \"order_reference_id\": \"<string>\",\n    \"trading_symbol\": \"<string>\",\n    \"quantity\": \"<integer>\",\n    \"price\": \"<number>\",\n    \"trigger_price\": \"<number>\",\n    \"order_status\": \"<string>\",\n    \"transaction_type\": \"BUY\",\n    \"order_type\": \"SL\",\n    \"segment\": \"FNO\",\n    \"exchange\": \"NSE\",\n    \"product\": \"MIS\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:52:12.000Z",
+                          "updatedAt": "2026-07-28T01:52:12.000Z",
+                          "uid": "35240-7613b589-9a18-44a9-bd1d-ed40187e8e9d"
+                        },
+                        {
+                          "id": "f93b3bd5-c4cf-4e19-acc1-5602fafd3aa3",
+                          "name": "Requested entity does not exist",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/order/detail/:groww_order_id?segment=CASH",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "order",
+                                "detail",
+                                ":groww_order_id"
+                              ],
+                              "query": [
+                                {
+                                  "key": "segment",
+                                  "value": "CASH"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "groww_order_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": \"SUCCESS\",\n  \"payload\": {},\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"metadata\": {}\n  }\n}",
+                          "createdAt": "2026-07-28T01:52:12.000Z",
+                          "updatedAt": "2026-07-28T01:52:12.000Z",
+                          "uid": "35240-f93b3bd5-c4cf-4e19-acc1-5602fafd3aa3"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:52:12.000Z",
+                      "updatedAt": "2026-07-28T01:52:12.000Z",
+                      "uid": "35240-defb550d-355e-43ec-9dc7-bc5bce3d1058"
+                    }
+                  ],
+                  "id": "0eb0f6ec-0382-4d83-8b47-97daf6099974",
+                  "createdAt": "2026-07-28T01:52:12.000Z",
+                  "updatedAt": "2026-07-28T01:52:12.000Z",
+                  "uid": "35240-0eb0f6ec-0382-4d83-8b47-97daf6099974"
+                }
+              ],
+              "id": "ad481405-8d4f-469e-999d-8bffb939c1eb",
+              "createdAt": "2026-07-28T01:52:12.000Z",
+              "updatedAt": "2026-07-28T01:52:12.000Z",
+              "uid": "35240-ad481405-8d4f-469e-999d-8bffb939c1eb"
+            },
+            {
+              "name": "status",
+              "item": [
+                {
+                  "name": "{groww_order_id}",
+                  "item": [
+                    {
+                      "name": "Get order status by Groww order id",
+                      "id": "6f97f9bd-bbbc-4a44-bcf7-837f3f6e0776",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/order/status/:groww_order_id?segment=CASH",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "order",
+                            "status",
+                            ":groww_order_id"
+                          ],
+                          "query": [
+                            {
+                              "key": "segment",
+                              "value": "CASH"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "b12cf9c0-b37e-4dcf-b7e7-7ca8abcb1f29",
+                              "key": "groww_order_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "301f0832-bb6b-4441-8211-3459c0584690",
+                          "name": "Order status",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/order/status/:groww_order_id?segment=CASH",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "order",
+                                "status",
+                                ":groww_order_id"
+                              ],
+                              "query": [
+                                {
+                                  "key": "segment",
+                                  "value": "CASH"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "groww_order_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": \"<string>\",\n  \"payload\": {\n    \"groww_order_id\": \"<string>\",\n    \"order_status\": \"<string>\",\n    \"order_reference_id\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:52:12.000Z",
+                          "updatedAt": "2026-07-28T01:52:12.000Z",
+                          "uid": "35240-301f0832-bb6b-4441-8211-3459c0584690"
+                        },
+                        {
+                          "id": "20b9a4c3-2ef2-4e0a-9bbf-448de981e329",
+                          "name": "Requested entity does not exist",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/order/status/:groww_order_id?segment=CASH",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "order",
+                                "status",
+                                ":groww_order_id"
+                              ],
+                              "query": [
+                                {
+                                  "key": "segment",
+                                  "value": "CASH"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "groww_order_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": \"SUCCESS\",\n  \"payload\": {},\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"metadata\": {}\n  }\n}",
+                          "createdAt": "2026-07-28T01:52:12.000Z",
+                          "updatedAt": "2026-07-28T01:52:12.000Z",
+                          "uid": "35240-20b9a4c3-2ef2-4e0a-9bbf-448de981e329"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:52:12.000Z",
+                      "updatedAt": "2026-07-28T01:52:12.000Z",
+                      "uid": "35240-6f97f9bd-bbbc-4a44-bcf7-837f3f6e0776"
+                    }
+                  ],
+                  "id": "e85a3fd2-4936-4a54-ab66-10edf2d6d536",
+                  "createdAt": "2026-07-28T01:52:12.000Z",
+                  "updatedAt": "2026-07-28T01:52:12.000Z",
+                  "uid": "35240-e85a3fd2-4936-4a54-ab66-10edf2d6d536"
+                },
+                {
+                  "name": "reference",
+                  "item": [
+                    {
+                      "name": "{order_reference_id}",
+                      "item": [
+                        {
+                          "name": "Get order status by client reference id",
+                          "id": "9984cecf-409f-41f8-a585-7527f540718c",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/order/status/reference/:order_reference_id?segment=CASH",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "order",
+                                "status",
+                                "reference",
+                                ":order_reference_id"
+                              ],
+                              "query": [
+                                {
+                                  "key": "segment",
+                                  "value": "CASH"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "3facaab5-9f47-4169-9c7f-6d09990e6224",
+                                  "key": "order_reference_id",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "2c866233-d87c-45f5-baa3-d6c4eea467aa",
+                              "name": "Order status",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/order/status/reference/:order_reference_id?segment=CASH",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "order",
+                                    "status",
+                                    "reference",
+                                    ":order_reference_id"
+                                  ],
+                                  "query": [
+                                    {
+                                      "key": "segment",
+                                      "value": "CASH"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "order_reference_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"status\": \"<string>\",\n  \"payload\": {\n    \"groww_order_id\": \"<string>\",\n    \"order_status\": \"<string>\",\n    \"order_reference_id\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:52:12.000Z",
+                              "updatedAt": "2026-07-28T01:52:12.000Z",
+                              "uid": "35240-2c866233-d87c-45f5-baa3-d6c4eea467aa"
+                            },
+                            {
+                              "id": "63e9c552-3a08-4cfa-8bd6-459803f214d1",
+                              "name": "Requested entity does not exist",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/order/status/reference/:order_reference_id?segment=CASH",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "order",
+                                    "status",
+                                    "reference",
+                                    ":order_reference_id"
+                                  ],
+                                  "query": [
+                                    {
+                                      "key": "segment",
+                                      "value": "CASH"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "order_reference_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"status\": \"SUCCESS\",\n  \"payload\": {},\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"metadata\": {}\n  }\n}",
+                              "createdAt": "2026-07-28T01:52:12.000Z",
+                              "updatedAt": "2026-07-28T01:52:12.000Z",
+                              "uid": "35240-63e9c552-3a08-4cfa-8bd6-459803f214d1"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:52:12.000Z",
+                          "updatedAt": "2026-07-28T01:52:12.000Z",
+                          "uid": "35240-9984cecf-409f-41f8-a585-7527f540718c"
+                        }
+                      ],
+                      "id": "1bf5878d-59d7-4280-9097-da11ab1448e0",
+                      "createdAt": "2026-07-28T01:52:12.000Z",
+                      "updatedAt": "2026-07-28T01:52:12.000Z",
+                      "uid": "35240-1bf5878d-59d7-4280-9097-da11ab1448e0"
+                    }
+                  ],
+                  "id": "2462afd3-0989-43a8-a0de-f833075e6db9",
+                  "createdAt": "2026-07-28T01:52:12.000Z",
+                  "updatedAt": "2026-07-28T01:52:12.000Z",
+                  "uid": "35240-2462afd3-0989-43a8-a0de-f833075e6db9"
+                }
+              ],
+              "id": "4d19203a-2803-48c6-825d-f837b45bdb04",
+              "createdAt": "2026-07-28T01:52:12.000Z",
+              "updatedAt": "2026-07-28T01:52:12.000Z",
+              "uid": "35240-4d19203a-2803-48c6-825d-f837b45bdb04"
+            },
+            {
+              "name": "trades",
+              "item": [
+                {
+                  "name": "{groww_order_id}",
+                  "item": [
+                    {
+                      "name": "Get trades for an order",
+                      "id": "bfa03187-22aa-4e1d-851a-90332d27c162",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/order/trades/:groww_order_id?segment=CASH",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "order",
+                            "trades",
+                            ":groww_order_id"
+                          ],
+                          "query": [
+                            {
+                              "key": "segment",
+                              "value": "CASH"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "e8aec08c-42f9-4f73-aeb8-0d5a27354dae",
+                              "key": "groww_order_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "951b8395-4299-47c5-a469-6508a54885e5",
+                          "name": "Trades for the order",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/order/trades/:groww_order_id?segment=CASH",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "order",
+                                "trades",
+                                ":groww_order_id"
+                              ],
+                              "query": [
+                                {
+                                  "key": "segment",
+                                  "value": "CASH"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "groww_order_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": \"<string>\",\n  \"payload\": {\n    \"trade_list\": [\n      {\n        \"trade_id\": \"<string>\",\n        \"groww_order_id\": \"<string>\",\n        \"quantity\": \"<integer>\",\n        \"price\": \"<number>\"\n      },\n      {\n        \"trade_id\": \"<string>\",\n        \"groww_order_id\": \"<string>\",\n        \"quantity\": \"<integer>\",\n        \"price\": \"<number>\"\n      }\n    ]\n  }\n}",
+                          "createdAt": "2026-07-28T01:52:12.000Z",
+                          "updatedAt": "2026-07-28T01:52:12.000Z",
+                          "uid": "35240-951b8395-4299-47c5-a469-6508a54885e5"
+                        },
+                        {
+                          "id": "69eb4906-454a-4562-81f8-dca07897774d",
+                          "name": "Requested entity does not exist",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/order/trades/:groww_order_id?segment=CASH",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "order",
+                                "trades",
+                                ":groww_order_id"
+                              ],
+                              "query": [
+                                {
+                                  "key": "segment",
+                                  "value": "CASH"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "groww_order_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": \"SUCCESS\",\n  \"payload\": {},\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"metadata\": {}\n  }\n}",
+                          "createdAt": "2026-07-28T01:52:12.000Z",
+                          "updatedAt": "2026-07-28T01:52:12.000Z",
+                          "uid": "35240-69eb4906-454a-4562-81f8-dca07897774d"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:52:12.000Z",
+                      "updatedAt": "2026-07-28T01:52:12.000Z",
+                      "uid": "35240-bfa03187-22aa-4e1d-851a-90332d27c162"
+                    }
+                  ],
+                  "id": "ad9c064e-5856-4b12-bcfd-d3a1f65fd4b8",
+                  "createdAt": "2026-07-28T01:52:12.000Z",
+                  "updatedAt": "2026-07-28T01:52:12.000Z",
+                  "uid": "35240-ad9c064e-5856-4b12-bcfd-d3a1f65fd4b8"
+                }
+              ],
+              "id": "820ea998-75bb-4026-98d4-a6d0644c573a",
+              "createdAt": "2026-07-28T01:52:12.000Z",
+              "updatedAt": "2026-07-28T01:52:12.000Z",
+              "uid": "35240-820ea998-75bb-4026-98d4-a6d0644c573a"
+            }
+          ],
+          "id": "3bd7ceed-8717-434f-9384-f4c85886e2ed",
+          "createdAt": "2026-07-28T01:52:12.000Z",
+          "updatedAt": "2026-07-28T01:52:12.000Z",
+          "uid": "35240-3bd7ceed-8717-434f-9384-f4c85886e2ed"
+        }
+      ],
+      "id": "8cc068cf-c757-4b34-8c36-de98442ee9ae",
+      "createdAt": "2026-07-28T01:52:12.000Z",
+      "updatedAt": "2026-07-28T01:52:12.000Z",
+      "uid": "35240-8cc068cf-c757-4b34-8c36-de98442ee9ae"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.groww.in"
+    }
+  ]
+}

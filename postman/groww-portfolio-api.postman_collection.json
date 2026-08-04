@@ -1,0 +1,479 @@
+{
+  "info": {
+    "_postman_id": "d25235a9-b1df-4a24-b2e0-8ea01a47c1f0",
+    "name": "Groww Trading Authentication Portfolio API",
+    "description": "The Groww Trading API is the official programmatic interface to the Groww investing and trading platform, enabling algorithmic trading, order management, portfolio and position tracking, margin calculation, live market data (LTP, quote, OHLC, option chain, greeks) and historical candle data across the CASH (equity) and FNO (derivatives) segments on Indian exchanges. Requests are authenticated with a daily access token (or an OAuth2 / API-key + secret / TOTP flow) and versioned with the X-API-VERSION header.\n\nContact Support:\n Name: Groww Trading API Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:52:13.000Z",
+    "updatedAt": "2026-07-28T01:52:13.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-d25235a9-b1df-4a24-b2e0-8ea01a47c1f0"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "holdings",
+          "item": [
+            {
+              "name": "user",
+              "item": [
+                {
+                  "name": "Get holdings",
+                  "id": "e622ad16-0bfb-467b-a1c9-a0674611c90b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/holdings/user",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "holdings",
+                        "user"
+                      ]
+                    },
+                    "description": "Retrieve the demat holdings for the authenticated user."
+                  },
+                  "response": [
+                    {
+                      "id": "070396b3-09ff-49b8-aacf-3ea1877e99fc",
+                      "name": "User holdings",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/holdings/user",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "holdings",
+                            "user"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\",\n  \"payload\": {\n    \"holdings\": [\n      {\n        \"isin\": \"<string>\",\n        \"trading_symbol\": \"<string>\",\n        \"quantity\": \"<integer>\",\n        \"average_price\": \"<number>\",\n        \"pledge_quantity\": \"<integer>\",\n        \"demat_locked_quantity\": \"<integer>\",\n        \"groww_locked_quantity\": \"<integer>\",\n        \"repledge_quantity\": \"<integer>\",\n        \"t1_quantity\": \"<integer>\",\n        \"demat_free_quantity\": \"<integer>\",\n        \"corporate_action_additional_quantity\": \"<integer>\",\n        \"active_demat_transfer_quantity\": \"<integer>\"\n      },\n      {\n        \"isin\": \"<string>\",\n        \"trading_symbol\": \"<string>\",\n        \"quantity\": \"<integer>\",\n        \"average_price\": \"<number>\",\n        \"pledge_quantity\": \"<integer>\",\n        \"demat_locked_quantity\": \"<integer>\",\n        \"groww_locked_quantity\": \"<integer>\",\n        \"repledge_quantity\": \"<integer>\",\n        \"t1_quantity\": \"<integer>\",\n        \"demat_free_quantity\": \"<integer>\",\n        \"corporate_action_additional_quantity\": \"<integer>\",\n        \"active_demat_transfer_quantity\": \"<integer>\"\n      }\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T01:52:13.000Z",
+                      "updatedAt": "2026-07-28T01:52:13.000Z",
+                      "uid": "35240-070396b3-09ff-49b8-aacf-3ea1877e99fc"
+                    },
+                    {
+                      "id": "3e3eab40-d012-404b-91c2-322e18a2c55c",
+                      "name": "User not authorised to perform this operation",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/holdings/user",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "holdings",
+                            "user"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"SUCCESS\",\n  \"payload\": {},\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"metadata\": {}\n  }\n}",
+                      "createdAt": "2026-07-28T01:52:13.000Z",
+                      "updatedAt": "2026-07-28T01:52:13.000Z",
+                      "uid": "35240-3e3eab40-d012-404b-91c2-322e18a2c55c"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:52:13.000Z",
+                  "updatedAt": "2026-07-28T01:52:13.000Z",
+                  "uid": "35240-e622ad16-0bfb-467b-a1c9-a0674611c90b"
+                }
+              ],
+              "id": "68f09863-32eb-413d-810e-8122fb7c5564",
+              "createdAt": "2026-07-28T01:52:13.000Z",
+              "updatedAt": "2026-07-28T01:52:13.000Z",
+              "uid": "35240-68f09863-32eb-413d-810e-8122fb7c5564"
+            }
+          ],
+          "id": "d3b0ff71-7491-402f-97e9-d28b3206c450",
+          "createdAt": "2026-07-28T01:52:13.000Z",
+          "updatedAt": "2026-07-28T01:52:13.000Z",
+          "uid": "35240-d3b0ff71-7491-402f-97e9-d28b3206c450"
+        },
+        {
+          "name": "positions",
+          "item": [
+            {
+              "name": "user",
+              "item": [
+                {
+                  "name": "Get positions for user",
+                  "id": "b1052fa3-a29e-42ed-a927-e419c870ee71",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/positions/user",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "positions",
+                        "user"
+                      ]
+                    },
+                    "description": "Retrieve all open positions for the authenticated user."
+                  },
+                  "response": [
+                    {
+                      "id": "2abcd5a4-add1-4c38-b429-498ad7d889ac",
+                      "name": "User positions",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/positions/user",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "positions",
+                            "user"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\",\n  \"payload\": {\n    \"positions\": [\n      {\n        \"trading_symbol\": \"<string>\",\n        \"credit_quantity\": \"<integer>\",\n        \"credit_price\": \"<number>\",\n        \"debit_quantity\": \"<integer>\",\n        \"debit_price\": \"<number>\",\n        \"carry_forward_credit_quantity\": \"<integer>\",\n        \"carry_forward_credit_price\": \"<number>\",\n        \"carry_forward_debit_quantity\": \"<integer>\",\n        \"carry_forward_debit_price\": \"<number>\",\n        \"exchange\": \"BSE\",\n        \"symbol_isin\": \"<string>\",\n        \"quantity\": \"<integer>\",\n        \"product\": \"MIS\",\n        \"net_carry_forward_quantity\": \"<integer>\",\n        \"net_price\": \"<number>\",\n        \"net_carry_forward_price\": \"<number>\",\n        \"realised_pnl\": \"<number>\"\n      },\n      {\n        \"trading_symbol\": \"<string>\",\n        \"credit_quantity\": \"<integer>\",\n        \"credit_price\": \"<number>\",\n        \"debit_quantity\": \"<integer>\",\n        \"debit_price\": \"<number>\",\n        \"carry_forward_credit_quantity\": \"<integer>\",\n        \"carry_forward_credit_price\": \"<number>\",\n        \"carry_forward_debit_quantity\": \"<integer>\",\n        \"carry_forward_debit_price\": \"<number>\",\n        \"exchange\": \"BSE\",\n        \"symbol_isin\": \"<string>\",\n        \"quantity\": \"<integer>\",\n        \"product\": \"NRML\",\n        \"net_carry_forward_quantity\": \"<integer>\",\n        \"net_price\": \"<number>\",\n        \"net_carry_forward_price\": \"<number>\",\n        \"realised_pnl\": \"<number>\"\n      }\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T01:52:13.000Z",
+                      "updatedAt": "2026-07-28T01:52:13.000Z",
+                      "uid": "35240-2abcd5a4-add1-4c38-b429-498ad7d889ac"
+                    },
+                    {
+                      "id": "6741283c-6fc3-459b-8515-def437a3cd36",
+                      "name": "User not authorised to perform this operation",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/positions/user",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "positions",
+                            "user"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"SUCCESS\",\n  \"payload\": {},\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"metadata\": {}\n  }\n}",
+                      "createdAt": "2026-07-28T01:52:13.000Z",
+                      "updatedAt": "2026-07-28T01:52:13.000Z",
+                      "uid": "35240-6741283c-6fc3-459b-8515-def437a3cd36"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:52:13.000Z",
+                  "updatedAt": "2026-07-28T01:52:13.000Z",
+                  "uid": "35240-b1052fa3-a29e-42ed-a927-e419c870ee71"
+                }
+              ],
+              "id": "c3c066cb-0aed-4625-bd38-47250ebf9dfc",
+              "createdAt": "2026-07-28T01:52:13.000Z",
+              "updatedAt": "2026-07-28T01:52:13.000Z",
+              "uid": "35240-c3c066cb-0aed-4625-bd38-47250ebf9dfc"
+            },
+            {
+              "name": "trading-symbol",
+              "item": [
+                {
+                  "name": "Get position for a trading symbol",
+                  "id": "5d306540-d24e-4322-a358-90d181b8f667",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/positions/trading-symbol?trading_symbol=<string>&segment=FNO",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "positions",
+                        "trading-symbol"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) ",
+                          "key": "trading_symbol",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "segment",
+                          "value": "FNO"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "c946d5a8-f408-494e-ab19-9c5a83ad3787",
+                      "name": "Position for the trading symbol",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/positions/trading-symbol?trading_symbol=<string>&segment=FNO",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "positions",
+                            "trading-symbol"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) ",
+                              "key": "trading_symbol",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "segment",
+                              "value": "FNO"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\",\n  \"payload\": {\n    \"positions\": [\n      {\n        \"trading_symbol\": \"<string>\",\n        \"credit_quantity\": \"<integer>\",\n        \"credit_price\": \"<number>\",\n        \"debit_quantity\": \"<integer>\",\n        \"debit_price\": \"<number>\",\n        \"carry_forward_credit_quantity\": \"<integer>\",\n        \"carry_forward_credit_price\": \"<number>\",\n        \"carry_forward_debit_quantity\": \"<integer>\",\n        \"carry_forward_debit_price\": \"<number>\",\n        \"exchange\": \"BSE\",\n        \"symbol_isin\": \"<string>\",\n        \"quantity\": \"<integer>\",\n        \"product\": \"MIS\",\n        \"net_carry_forward_quantity\": \"<integer>\",\n        \"net_price\": \"<number>\",\n        \"net_carry_forward_price\": \"<number>\",\n        \"realised_pnl\": \"<number>\"\n      },\n      {\n        \"trading_symbol\": \"<string>\",\n        \"credit_quantity\": \"<integer>\",\n        \"credit_price\": \"<number>\",\n        \"debit_quantity\": \"<integer>\",\n        \"debit_price\": \"<number>\",\n        \"carry_forward_credit_quantity\": \"<integer>\",\n        \"carry_forward_credit_price\": \"<number>\",\n        \"carry_forward_debit_quantity\": \"<integer>\",\n        \"carry_forward_debit_price\": \"<number>\",\n        \"exchange\": \"BSE\",\n        \"symbol_isin\": \"<string>\",\n        \"quantity\": \"<integer>\",\n        \"product\": \"NRML\",\n        \"net_carry_forward_quantity\": \"<integer>\",\n        \"net_price\": \"<number>\",\n        \"net_carry_forward_price\": \"<number>\",\n        \"realised_pnl\": \"<number>\"\n      }\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T01:52:13.000Z",
+                      "updatedAt": "2026-07-28T01:52:13.000Z",
+                      "uid": "35240-c946d5a8-f408-494e-ab19-9c5a83ad3787"
+                    },
+                    {
+                      "id": "970cef03-6a6f-47e9-85a8-5245226a4bf2",
+                      "name": "Requested entity does not exist",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/positions/trading-symbol?trading_symbol=<string>&segment=FNO",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "positions",
+                            "trading-symbol"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) ",
+                              "key": "trading_symbol",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "segment",
+                              "value": "FNO"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"SUCCESS\",\n  \"payload\": {},\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"metadata\": {}\n  }\n}",
+                      "createdAt": "2026-07-28T01:52:13.000Z",
+                      "updatedAt": "2026-07-28T01:52:13.000Z",
+                      "uid": "35240-970cef03-6a6f-47e9-85a8-5245226a4bf2"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:52:13.000Z",
+                  "updatedAt": "2026-07-28T01:52:13.000Z",
+                  "uid": "35240-5d306540-d24e-4322-a358-90d181b8f667"
+                }
+              ],
+              "id": "ac5fa527-c12c-48e1-bd33-f6ebc59ed3b3",
+              "createdAt": "2026-07-28T01:52:13.000Z",
+              "updatedAt": "2026-07-28T01:52:13.000Z",
+              "uid": "35240-ac5fa527-c12c-48e1-bd33-f6ebc59ed3b3"
+            }
+          ],
+          "id": "ca48456c-7b7d-4c76-9439-416db8a7d04f",
+          "createdAt": "2026-07-28T01:52:13.000Z",
+          "updatedAt": "2026-07-28T01:52:13.000Z",
+          "uid": "35240-ca48456c-7b7d-4c76-9439-416db8a7d04f"
+        }
+      ],
+      "id": "02c2ca11-2029-42f9-8a9f-06f1de1741d4",
+      "createdAt": "2026-07-28T01:52:13.000Z",
+      "updatedAt": "2026-07-28T01:52:13.000Z",
+      "uid": "35240-02c2ca11-2029-42f9-8a9f-06f1de1741d4"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.groww.in"
+    }
+  ]
+}

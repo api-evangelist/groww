@@ -1,0 +1,283 @@
+{
+  "info": {
+    "_postman_id": "0678d283-7d38-4a3d-b6ac-83646410adcf",
+    "name": "Groww Trading Authentication Historical Data API",
+    "description": "The Groww Trading API is the official programmatic interface to the Groww investing and trading platform, enabling algorithmic trading, order management, portfolio and position tracking, margin calculation, live market data (LTP, quote, OHLC, option chain, greeks) and historical candle data across the CASH (equity) and FNO (derivatives) segments on Indian exchanges. Requests are authenticated with a daily access token (or an OAuth2 / API-key + secret / TOTP flow) and versioned with the X-API-VERSION header.\n\nContact Support:\n Name: Groww Trading API Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:52:09.000Z",
+    "updatedAt": "2026-07-28T01:52:09.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-0678d283-7d38-4a3d-b6ac-83646410adcf"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "historical",
+          "item": [
+            {
+              "name": "candle",
+              "item": [
+                {
+                  "name": "range",
+                  "item": [
+                    {
+                      "name": "Get historical candle data",
+                      "id": "60bb2e2a-a22b-4b1a-aaff-9ed39e909a64",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/historical/candle/range?exchange=BSE&segment=CASH&trading_symbol=<string>&start_time=<string>&end_time=<string>&interval_in_minutes=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "historical",
+                            "candle",
+                            "range"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) ",
+                              "key": "exchange",
+                              "value": "BSE"
+                            },
+                            {
+                              "description": "(Required) ",
+                              "key": "segment",
+                              "value": "CASH"
+                            },
+                            {
+                              "description": "(Required) ",
+                              "key": "trading_symbol",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) ",
+                              "key": "start_time",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) ",
+                              "key": "end_time",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "interval_in_minutes",
+                              "value": "<integer>"
+                            }
+                          ]
+                        },
+                        "description": "Retrieve historical OHLC candles for a symbol over a time range. Deprecated in favour of the backtesting historical candle endpoint."
+                      },
+                      "response": [
+                        {
+                          "id": "fd18c0d0-b496-4259-9eb9-d461872b1c98",
+                          "name": "Historical candles",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/historical/candle/range?exchange=BSE&segment=CASH&trading_symbol=<string>&start_time=<string>&end_time=<string>&interval_in_minutes=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "historical",
+                                "candle",
+                                "range"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) ",
+                                  "key": "exchange",
+                                  "value": "BSE"
+                                },
+                                {
+                                  "description": "(Required) ",
+                                  "key": "segment",
+                                  "value": "CASH"
+                                },
+                                {
+                                  "description": "(Required) ",
+                                  "key": "trading_symbol",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "(Required) ",
+                                  "key": "start_time",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "(Required) ",
+                                  "key": "end_time",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "interval_in_minutes",
+                                  "value": "<integer>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": \"<string>\",\n  \"payload\": {\n    \"candles\": [\n      [\n        \"<number>\",\n        \"<number>\"\n      ],\n      [\n        \"<number>\",\n        \"<number>\"\n      ]\n    ]\n  }\n}",
+                          "createdAt": "2026-07-28T01:52:10.000Z",
+                          "updatedAt": "2026-07-28T01:52:10.000Z",
+                          "uid": "35240-fd18c0d0-b496-4259-9eb9-d461872b1c98"
+                        },
+                        {
+                          "id": "6027f7d1-31ad-4f8d-a124-1b91e9a9c484",
+                          "name": "Bad request",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/historical/candle/range?exchange=BSE&segment=CASH&trading_symbol=<string>&start_time=<string>&end_time=<string>&interval_in_minutes=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "historical",
+                                "candle",
+                                "range"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) ",
+                                  "key": "exchange",
+                                  "value": "BSE"
+                                },
+                                {
+                                  "description": "(Required) ",
+                                  "key": "segment",
+                                  "value": "CASH"
+                                },
+                                {
+                                  "description": "(Required) ",
+                                  "key": "trading_symbol",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "(Required) ",
+                                  "key": "start_time",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "(Required) ",
+                                  "key": "end_time",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "interval_in_minutes",
+                                  "value": "<integer>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": \"FAILURE\",\n  \"payload\": {},\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"metadata\": {}\n  }\n}",
+                          "createdAt": "2026-07-28T01:52:10.000Z",
+                          "updatedAt": "2026-07-28T01:52:10.000Z",
+                          "uid": "35240-6027f7d1-31ad-4f8d-a124-1b91e9a9c484"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:52:10.000Z",
+                      "updatedAt": "2026-07-28T01:52:10.000Z",
+                      "uid": "35240-60bb2e2a-a22b-4b1a-aaff-9ed39e909a64"
+                    }
+                  ],
+                  "id": "08e3c011-aacb-4d27-8b76-5aa9523fd1d7",
+                  "createdAt": "2026-07-28T01:52:10.000Z",
+                  "updatedAt": "2026-07-28T01:52:10.000Z",
+                  "uid": "35240-08e3c011-aacb-4d27-8b76-5aa9523fd1d7"
+                }
+              ],
+              "id": "a377500b-a75f-4246-816b-1af9fb3a7c3a",
+              "createdAt": "2026-07-28T01:52:10.000Z",
+              "updatedAt": "2026-07-28T01:52:10.000Z",
+              "uid": "35240-a377500b-a75f-4246-816b-1af9fb3a7c3a"
+            }
+          ],
+          "id": "e45a5e5d-316a-4cdc-9acb-7ac4beeeade0",
+          "createdAt": "2026-07-28T01:52:10.000Z",
+          "updatedAt": "2026-07-28T01:52:10.000Z",
+          "uid": "35240-e45a5e5d-316a-4cdc-9acb-7ac4beeeade0"
+        }
+      ],
+      "id": "6521fd63-3a1c-4e62-8105-f9159517f55f",
+      "createdAt": "2026-07-28T01:52:10.000Z",
+      "updatedAt": "2026-07-28T01:52:10.000Z",
+      "uid": "35240-6521fd63-3a1c-4e62-8105-f9159517f55f"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.groww.in"
+    }
+  ]
+}

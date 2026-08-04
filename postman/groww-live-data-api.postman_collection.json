@@ -1,0 +1,1059 @@
+{
+  "info": {
+    "_postman_id": "bce23319-0b65-424e-bd8e-ecd666c7ca4c",
+    "name": "Groww Trading Authentication Live Data API",
+    "description": "The Groww Trading API is the official programmatic interface to the Groww investing and trading platform, enabling algorithmic trading, order management, portfolio and position tracking, margin calculation, live market data (LTP, quote, OHLC, option chain, greeks) and historical candle data across the CASH (equity) and FNO (derivatives) segments on Indian exchanges. Requests are authenticated with a daily access token (or an OAuth2 / API-key + secret / TOTP flow) and versioned with the X-API-VERSION header.\n\nContact Support:\n Name: Groww Trading API Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:52:10.000Z",
+    "updatedAt": "2026-07-28T01:52:10.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-bce23319-0b65-424e-bd8e-ecd666c7ca4c"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "live-data",
+          "item": [
+            {
+              "name": "quote",
+              "item": [
+                {
+                  "name": "Get full market quote",
+                  "id": "3b6f6047-888f-434e-9189-75e0080d798b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/live-data/quote?exchange=BSE&segment=FNO&trading_symbol=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "live-data",
+                        "quote"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) ",
+                          "key": "exchange",
+                          "value": "BSE"
+                        },
+                        {
+                          "description": "(Required) ",
+                          "key": "segment",
+                          "value": "FNO"
+                        },
+                        {
+                          "description": "(Required) ",
+                          "key": "trading_symbol",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "9190e562-7410-424c-bddb-9417a0b2d644",
+                      "name": "Full quote",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/live-data/quote?exchange=BSE&segment=FNO&trading_symbol=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "live-data",
+                            "quote"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) ",
+                              "key": "exchange",
+                              "value": "BSE"
+                            },
+                            {
+                              "description": "(Required) ",
+                              "key": "segment",
+                              "value": "FNO"
+                            },
+                            {
+                              "description": "(Required) ",
+                              "key": "trading_symbol",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\",\n  \"payload\": {\n    \"last_price\": \"<number>\",\n    \"volume\": \"<integer>\",\n    \"open\": \"<number>\",\n    \"high\": \"<number>\",\n    \"low\": \"<number>\",\n    \"close\": \"<number>\",\n    \"bid_quantity\": \"<integer>\",\n    \"offer_quantity\": \"<integer>\"\n  }\n}",
+                      "createdAt": "2026-07-28T01:52:11.000Z",
+                      "updatedAt": "2026-07-28T01:52:11.000Z",
+                      "uid": "35240-9190e562-7410-424c-bddb-9417a0b2d644"
+                    },
+                    {
+                      "id": "8958c9b7-4d1a-4f25-a63d-7cf0d0427132",
+                      "name": "Bad request",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/live-data/quote?exchange=BSE&segment=FNO&trading_symbol=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "live-data",
+                            "quote"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) ",
+                              "key": "exchange",
+                              "value": "BSE"
+                            },
+                            {
+                              "description": "(Required) ",
+                              "key": "segment",
+                              "value": "FNO"
+                            },
+                            {
+                              "description": "(Required) ",
+                              "key": "trading_symbol",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"SUCCESS\",\n  \"payload\": {},\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"metadata\": {}\n  }\n}",
+                      "createdAt": "2026-07-28T01:52:11.000Z",
+                      "updatedAt": "2026-07-28T01:52:11.000Z",
+                      "uid": "35240-8958c9b7-4d1a-4f25-a63d-7cf0d0427132"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:52:11.000Z",
+                  "updatedAt": "2026-07-28T01:52:11.000Z",
+                  "uid": "35240-3b6f6047-888f-434e-9189-75e0080d798b"
+                }
+              ],
+              "id": "bcbc9b21-8bdf-4ebd-886d-141af156a292",
+              "createdAt": "2026-07-28T01:52:11.000Z",
+              "updatedAt": "2026-07-28T01:52:11.000Z",
+              "uid": "35240-bcbc9b21-8bdf-4ebd-886d-141af156a292"
+            },
+            {
+              "name": "ltp",
+              "item": [
+                {
+                  "name": "Get last traded price",
+                  "id": "aa501e84-b299-45b6-ae93-a00311f774af",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/live-data/ltp?segment=FNO&exchange_symbols=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "live-data",
+                        "ltp"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) ",
+                          "key": "segment",
+                          "value": "FNO"
+                        },
+                        {
+                          "description": "(Required) Comma-separated list of EXCHANGE_SYMBOL tokens.",
+                          "key": "exchange_symbols",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "f859a85d-ef03-4530-bd92-6fe12d099efc",
+                      "name": "LTP map",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/live-data/ltp?segment=FNO&exchange_symbols=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "live-data",
+                            "ltp"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) ",
+                              "key": "segment",
+                              "value": "FNO"
+                            },
+                            {
+                              "description": "(Required) Comma-separated list of EXCHANGE_SYMBOL tokens.",
+                              "key": "exchange_symbols",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\",\n  \"payload\": {\n    \"uta_d\": \"<number>\",\n    \"velita\": \"<number>\"\n  }\n}",
+                      "createdAt": "2026-07-28T01:52:11.000Z",
+                      "updatedAt": "2026-07-28T01:52:11.000Z",
+                      "uid": "35240-f859a85d-ef03-4530-bd92-6fe12d099efc"
+                    },
+                    {
+                      "id": "a9ffae7b-c673-482f-acfd-53de20845215",
+                      "name": "Bad request",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/live-data/ltp?segment=FNO&exchange_symbols=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "live-data",
+                            "ltp"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) ",
+                              "key": "segment",
+                              "value": "FNO"
+                            },
+                            {
+                              "description": "(Required) Comma-separated list of EXCHANGE_SYMBOL tokens.",
+                              "key": "exchange_symbols",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"SUCCESS\",\n  \"payload\": {},\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"metadata\": {}\n  }\n}",
+                      "createdAt": "2026-07-28T01:52:11.000Z",
+                      "updatedAt": "2026-07-28T01:52:11.000Z",
+                      "uid": "35240-a9ffae7b-c673-482f-acfd-53de20845215"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:52:11.000Z",
+                  "updatedAt": "2026-07-28T01:52:11.000Z",
+                  "uid": "35240-aa501e84-b299-45b6-ae93-a00311f774af"
+                }
+              ],
+              "id": "4eef0100-d3bd-49c7-b6f4-9c6120af3d1e",
+              "createdAt": "2026-07-28T01:52:11.000Z",
+              "updatedAt": "2026-07-28T01:52:11.000Z",
+              "uid": "35240-4eef0100-d3bd-49c7-b6f4-9c6120af3d1e"
+            },
+            {
+              "name": "ohlc",
+              "item": [
+                {
+                  "name": "Get OHLC",
+                  "id": "978cdb62-45cf-4822-91cd-a480f221fc56",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/live-data/ohlc?segment=FNO&exchange_symbols=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "live-data",
+                        "ohlc"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) ",
+                          "key": "segment",
+                          "value": "FNO"
+                        },
+                        {
+                          "description": "(Required) Comma-separated list of EXCHANGE_SYMBOL tokens.",
+                          "key": "exchange_symbols",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "0197f674-656a-4536-9bbd-91d1009ba2c4",
+                      "name": "OHLC map",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/live-data/ohlc?segment=FNO&exchange_symbols=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "live-data",
+                            "ohlc"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) ",
+                              "key": "segment",
+                              "value": "FNO"
+                            },
+                            {
+                              "description": "(Required) Comma-separated list of EXCHANGE_SYMBOL tokens.",
+                              "key": "exchange_symbols",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\",\n  \"payload\": {\n    \"dolore_bf\": {\n      \"open\": \"<number>\",\n      \"high\": \"<number>\",\n      \"low\": \"<number>\",\n      \"close\": \"<number>\"\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T01:52:11.000Z",
+                      "updatedAt": "2026-07-28T01:52:11.000Z",
+                      "uid": "35240-0197f674-656a-4536-9bbd-91d1009ba2c4"
+                    },
+                    {
+                      "id": "e10a8961-acb9-46aa-badd-5822e52013dc",
+                      "name": "Bad request",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/live-data/ohlc?segment=FNO&exchange_symbols=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "live-data",
+                            "ohlc"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) ",
+                              "key": "segment",
+                              "value": "FNO"
+                            },
+                            {
+                              "description": "(Required) Comma-separated list of EXCHANGE_SYMBOL tokens.",
+                              "key": "exchange_symbols",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"SUCCESS\",\n  \"payload\": {},\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"metadata\": {}\n  }\n}",
+                      "createdAt": "2026-07-28T01:52:11.000Z",
+                      "updatedAt": "2026-07-28T01:52:11.000Z",
+                      "uid": "35240-e10a8961-acb9-46aa-badd-5822e52013dc"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:52:11.000Z",
+                  "updatedAt": "2026-07-28T01:52:11.000Z",
+                  "uid": "35240-978cdb62-45cf-4822-91cd-a480f221fc56"
+                }
+              ],
+              "id": "6f7c3457-2c8e-4f4d-b8ce-f2fc0e44c89a",
+              "createdAt": "2026-07-28T01:52:11.000Z",
+              "updatedAt": "2026-07-28T01:52:11.000Z",
+              "uid": "35240-6f7c3457-2c8e-4f4d-b8ce-f2fc0e44c89a"
+            },
+            {
+              "name": "greeks",
+              "item": [
+                {
+                  "name": "exchange",
+                  "item": [
+                    {
+                      "name": "{exchange}",
+                      "item": [
+                        {
+                          "name": "underlying",
+                          "item": [
+                            {
+                              "name": "{underlying}",
+                              "item": [
+                                {
+                                  "name": "trading_symbol",
+                                  "item": [
+                                    {
+                                      "name": "{trading_symbol}",
+                                      "item": [
+                                        {
+                                          "name": "expiry",
+                                          "item": [
+                                            {
+                                              "name": "{expiry}",
+                                              "item": [
+                                                {
+                                                  "name": "Get option greeks",
+                                                  "id": "f76700af-1c03-45d3-90ff-a5627a7b4014",
+                                                  "protocolProfileBehavior": {
+                                                    "disableBodyPruning": true
+                                                  },
+                                                  "request": {
+                                                    "method": "GET",
+                                                    "header": [
+                                                      {
+                                                        "key": "Accept",
+                                                        "value": "application/json"
+                                                      }
+                                                    ],
+                                                    "url": {
+                                                      "raw": "{{baseUrl}}/v1/live-data/greeks/exchange/:exchange/underlying/:underlying/trading_symbol/:trading_symbol/expiry/:expiry",
+                                                      "host": [
+                                                        "{{baseUrl}}"
+                                                      ],
+                                                      "path": [
+                                                        "v1",
+                                                        "live-data",
+                                                        "greeks",
+                                                        "exchange",
+                                                        ":exchange",
+                                                        "underlying",
+                                                        ":underlying",
+                                                        "trading_symbol",
+                                                        ":trading_symbol",
+                                                        "expiry",
+                                                        ":expiry"
+                                                      ],
+                                                      "variable": [
+                                                        {
+                                                          "id": "e0529c30-e954-4d52-8da0-a13d524485fb",
+                                                          "key": "exchange",
+                                                          "value": "BSE",
+                                                          "description": "(Required) "
+                                                        },
+                                                        {
+                                                          "id": "57116af1-26d4-4282-bac7-588fd55421c7",
+                                                          "key": "underlying",
+                                                          "value": "<string>",
+                                                          "description": "(Required) "
+                                                        },
+                                                        {
+                                                          "id": "eeb4e8ab-c873-4c80-aa18-6262bac27fad",
+                                                          "key": "trading_symbol",
+                                                          "value": "<string>",
+                                                          "description": "(Required) "
+                                                        },
+                                                        {
+                                                          "id": "70c06418-2f5e-41b6-b87b-026e9a1e77c2",
+                                                          "key": "expiry",
+                                                          "value": "<date>",
+                                                          "description": "(Required) "
+                                                        }
+                                                      ]
+                                                    }
+                                                  },
+                                                  "response": [
+                                                    {
+                                                      "id": "c3c2441b-0876-44e5-87c3-28193246587d",
+                                                      "name": "Option greeks",
+                                                      "originalRequest": {
+                                                        "method": "GET",
+                                                        "header": [
+                                                          {
+                                                            "key": "Accept",
+                                                            "value": "application/json"
+                                                          },
+                                                          {
+                                                            "description": "Added as a part of security scheme: bearer",
+                                                            "key": "Authorization",
+                                                            "value": "Bearer <token>"
+                                                          }
+                                                        ],
+                                                        "url": {
+                                                          "raw": "{{baseUrl}}/v1/live-data/greeks/exchange/:exchange/underlying/:underlying/trading_symbol/:trading_symbol/expiry/:expiry",
+                                                          "host": [
+                                                            "{{baseUrl}}"
+                                                          ],
+                                                          "path": [
+                                                            "v1",
+                                                            "live-data",
+                                                            "greeks",
+                                                            "exchange",
+                                                            ":exchange",
+                                                            "underlying",
+                                                            ":underlying",
+                                                            "trading_symbol",
+                                                            ":trading_symbol",
+                                                            "expiry",
+                                                            ":expiry"
+                                                          ],
+                                                          "variable": [
+                                                            {
+                                                              "key": "exchange"
+                                                            },
+                                                            {
+                                                              "key": "underlying"
+                                                            },
+                                                            {
+                                                              "key": "trading_symbol"
+                                                            },
+                                                            {
+                                                              "key": "expiry"
+                                                            }
+                                                          ]
+                                                        }
+                                                      },
+                                                      "status": "OK",
+                                                      "code": 200,
+                                                      "_postman_previewlanguage": "json",
+                                                      "header": [
+                                                        {
+                                                          "key": "Content-Type",
+                                                          "value": "application/json"
+                                                        }
+                                                      ],
+                                                      "cookie": [],
+                                                      "responseTime": null,
+                                                      "body": "{\n  \"status\": \"<string>\",\n  \"payload\": {}\n}",
+                                                      "createdAt": "2026-07-28T01:52:11.000Z",
+                                                      "updatedAt": "2026-07-28T01:52:11.000Z",
+                                                      "uid": "35240-c3c2441b-0876-44e5-87c3-28193246587d"
+                                                    },
+                                                    {
+                                                      "id": "ad7bc356-e693-4aa1-a9b3-7f14f87805eb",
+                                                      "name": "Requested entity does not exist",
+                                                      "originalRequest": {
+                                                        "method": "GET",
+                                                        "header": [
+                                                          {
+                                                            "key": "Accept",
+                                                            "value": "application/json"
+                                                          },
+                                                          {
+                                                            "description": "Added as a part of security scheme: bearer",
+                                                            "key": "Authorization",
+                                                            "value": "Bearer <token>"
+                                                          }
+                                                        ],
+                                                        "url": {
+                                                          "raw": "{{baseUrl}}/v1/live-data/greeks/exchange/:exchange/underlying/:underlying/trading_symbol/:trading_symbol/expiry/:expiry",
+                                                          "host": [
+                                                            "{{baseUrl}}"
+                                                          ],
+                                                          "path": [
+                                                            "v1",
+                                                            "live-data",
+                                                            "greeks",
+                                                            "exchange",
+                                                            ":exchange",
+                                                            "underlying",
+                                                            ":underlying",
+                                                            "trading_symbol",
+                                                            ":trading_symbol",
+                                                            "expiry",
+                                                            ":expiry"
+                                                          ],
+                                                          "variable": [
+                                                            {
+                                                              "key": "exchange"
+                                                            },
+                                                            {
+                                                              "key": "underlying"
+                                                            },
+                                                            {
+                                                              "key": "trading_symbol"
+                                                            },
+                                                            {
+                                                              "key": "expiry"
+                                                            }
+                                                          ]
+                                                        }
+                                                      },
+                                                      "status": "Not Found",
+                                                      "code": 404,
+                                                      "_postman_previewlanguage": "json",
+                                                      "header": [
+                                                        {
+                                                          "key": "Content-Type",
+                                                          "value": "application/json"
+                                                        }
+                                                      ],
+                                                      "cookie": [],
+                                                      "responseTime": null,
+                                                      "body": "{\n  \"status\": \"SUCCESS\",\n  \"payload\": {},\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"metadata\": {}\n  }\n}",
+                                                      "createdAt": "2026-07-28T01:52:11.000Z",
+                                                      "updatedAt": "2026-07-28T01:52:11.000Z",
+                                                      "uid": "35240-ad7bc356-e693-4aa1-a9b3-7f14f87805eb"
+                                                    }
+                                                  ],
+                                                  "createdAt": "2026-07-28T01:52:11.000Z",
+                                                  "updatedAt": "2026-07-28T01:52:11.000Z",
+                                                  "uid": "35240-f76700af-1c03-45d3-90ff-a5627a7b4014"
+                                                }
+                                              ],
+                                              "id": "ca4a11f4-9125-4283-a402-581a306af1cd",
+                                              "createdAt": "2026-07-28T01:52:11.000Z",
+                                              "updatedAt": "2026-07-28T01:52:11.000Z",
+                                              "uid": "35240-ca4a11f4-9125-4283-a402-581a306af1cd"
+                                            }
+                                          ],
+                                          "id": "126f5802-c614-4e0e-9fe2-4f66363b5aa2",
+                                          "createdAt": "2026-07-28T01:52:11.000Z",
+                                          "updatedAt": "2026-07-28T01:52:11.000Z",
+                                          "uid": "35240-126f5802-c614-4e0e-9fe2-4f66363b5aa2"
+                                        }
+                                      ],
+                                      "id": "00ca5116-d07a-4c6a-acbc-839fc58692d9",
+                                      "createdAt": "2026-07-28T01:52:11.000Z",
+                                      "updatedAt": "2026-07-28T01:52:11.000Z",
+                                      "uid": "35240-00ca5116-d07a-4c6a-acbc-839fc58692d9"
+                                    }
+                                  ],
+                                  "id": "9eac55c1-41a7-422a-b8c9-62bdbec3882d",
+                                  "createdAt": "2026-07-28T01:52:11.000Z",
+                                  "updatedAt": "2026-07-28T01:52:11.000Z",
+                                  "uid": "35240-9eac55c1-41a7-422a-b8c9-62bdbec3882d"
+                                }
+                              ],
+                              "id": "2541d605-6ed4-4577-a26c-94170b085bce",
+                              "createdAt": "2026-07-28T01:52:11.000Z",
+                              "updatedAt": "2026-07-28T01:52:11.000Z",
+                              "uid": "35240-2541d605-6ed4-4577-a26c-94170b085bce"
+                            }
+                          ],
+                          "id": "7cda6394-67f9-413c-9382-aa98b1b51b9a",
+                          "createdAt": "2026-07-28T01:52:11.000Z",
+                          "updatedAt": "2026-07-28T01:52:11.000Z",
+                          "uid": "35240-7cda6394-67f9-413c-9382-aa98b1b51b9a"
+                        }
+                      ],
+                      "id": "45782286-e054-43c4-864c-742c59917b73",
+                      "createdAt": "2026-07-28T01:52:11.000Z",
+                      "updatedAt": "2026-07-28T01:52:11.000Z",
+                      "uid": "35240-45782286-e054-43c4-864c-742c59917b73"
+                    }
+                  ],
+                  "id": "f1b3a142-78ed-4df7-8b1b-d03e41f793b9",
+                  "createdAt": "2026-07-28T01:52:11.000Z",
+                  "updatedAt": "2026-07-28T01:52:11.000Z",
+                  "uid": "35240-f1b3a142-78ed-4df7-8b1b-d03e41f793b9"
+                }
+              ],
+              "id": "8f8f0847-036a-49c2-907a-a795a5018191",
+              "createdAt": "2026-07-28T01:52:11.000Z",
+              "updatedAt": "2026-07-28T01:52:11.000Z",
+              "uid": "35240-8f8f0847-036a-49c2-907a-a795a5018191"
+            }
+          ],
+          "id": "96ea16fe-dafd-4458-a66f-1168837f3119",
+          "createdAt": "2026-07-28T01:52:11.000Z",
+          "updatedAt": "2026-07-28T01:52:11.000Z",
+          "uid": "35240-96ea16fe-dafd-4458-a66f-1168837f3119"
+        },
+        {
+          "name": "option-chain",
+          "item": [
+            {
+              "name": "exchange",
+              "item": [
+                {
+                  "name": "{exchange}",
+                  "item": [
+                    {
+                      "name": "underlying",
+                      "item": [
+                        {
+                          "name": "{underlying}",
+                          "item": [
+                            {
+                              "name": "Get option chain",
+                              "id": "195d6f4a-d412-419a-ace8-621bb278818b",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/option-chain/exchange/:exchange/underlying/:underlying?expiry_date=<date>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "option-chain",
+                                    "exchange",
+                                    ":exchange",
+                                    "underlying",
+                                    ":underlying"
+                                  ],
+                                  "query": [
+                                    {
+                                      "key": "expiry_date",
+                                      "value": "<date>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "cab5af59-9890-4565-ae82-dbc073231538",
+                                      "key": "exchange",
+                                      "value": "BSE",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "1dcc3840-6290-42c4-86bc-9454f0e49dac",
+                                      "key": "underlying",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "91a4f80e-e1ad-4b2f-8641-c26e1a8ebf73",
+                                  "name": "Option chain",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/option-chain/exchange/:exchange/underlying/:underlying?expiry_date=<date>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "option-chain",
+                                        "exchange",
+                                        ":exchange",
+                                        "underlying",
+                                        ":underlying"
+                                      ],
+                                      "query": [
+                                        {
+                                          "key": "expiry_date",
+                                          "value": "<date>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "exchange"
+                                        },
+                                        {
+                                          "key": "underlying"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"status\": \"<string>\",\n  \"payload\": {}\n}",
+                                  "createdAt": "2026-07-28T01:52:11.000Z",
+                                  "updatedAt": "2026-07-28T01:52:11.000Z",
+                                  "uid": "35240-91a4f80e-e1ad-4b2f-8641-c26e1a8ebf73"
+                                },
+                                {
+                                  "id": "7390d75d-6580-40f3-a4ec-ca8c1a1c56ea",
+                                  "name": "Requested entity does not exist",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/option-chain/exchange/:exchange/underlying/:underlying?expiry_date=<date>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "option-chain",
+                                        "exchange",
+                                        ":exchange",
+                                        "underlying",
+                                        ":underlying"
+                                      ],
+                                      "query": [
+                                        {
+                                          "key": "expiry_date",
+                                          "value": "<date>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "exchange"
+                                        },
+                                        {
+                                          "key": "underlying"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"status\": \"SUCCESS\",\n  \"payload\": {},\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"metadata\": {}\n  }\n}",
+                                  "createdAt": "2026-07-28T01:52:11.000Z",
+                                  "updatedAt": "2026-07-28T01:52:11.000Z",
+                                  "uid": "35240-7390d75d-6580-40f3-a4ec-ca8c1a1c56ea"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T01:52:11.000Z",
+                              "updatedAt": "2026-07-28T01:52:11.000Z",
+                              "uid": "35240-195d6f4a-d412-419a-ace8-621bb278818b"
+                            }
+                          ],
+                          "id": "7cb833a9-1782-4331-a3ef-37624e570665",
+                          "createdAt": "2026-07-28T01:52:11.000Z",
+                          "updatedAt": "2026-07-28T01:52:11.000Z",
+                          "uid": "35240-7cb833a9-1782-4331-a3ef-37624e570665"
+                        }
+                      ],
+                      "id": "9f7df77f-3dd6-436e-a595-13f4718123ca",
+                      "createdAt": "2026-07-28T01:52:11.000Z",
+                      "updatedAt": "2026-07-28T01:52:11.000Z",
+                      "uid": "35240-9f7df77f-3dd6-436e-a595-13f4718123ca"
+                    }
+                  ],
+                  "id": "e46f63f2-cf30-4163-9ee7-0b4b78cd7f8e",
+                  "createdAt": "2026-07-28T01:52:11.000Z",
+                  "updatedAt": "2026-07-28T01:52:11.000Z",
+                  "uid": "35240-e46f63f2-cf30-4163-9ee7-0b4b78cd7f8e"
+                }
+              ],
+              "id": "34840e83-b34b-47ad-be37-62175eb546d2",
+              "createdAt": "2026-07-28T01:52:11.000Z",
+              "updatedAt": "2026-07-28T01:52:11.000Z",
+              "uid": "35240-34840e83-b34b-47ad-be37-62175eb546d2"
+            }
+          ],
+          "id": "13c3bd82-4b14-486a-bb20-c86452880a6d",
+          "createdAt": "2026-07-28T01:52:11.000Z",
+          "updatedAt": "2026-07-28T01:52:11.000Z",
+          "uid": "35240-13c3bd82-4b14-486a-bb20-c86452880a6d"
+        }
+      ],
+      "id": "b4bcb172-29b0-4ca8-8692-537b44eed778",
+      "createdAt": "2026-07-28T01:52:11.000Z",
+      "updatedAt": "2026-07-28T01:52:11.000Z",
+      "uid": "35240-b4bcb172-29b0-4ca8-8692-537b44eed778"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.groww.in"
+    }
+  ]
+}

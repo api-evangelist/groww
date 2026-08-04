@@ -1,0 +1,301 @@
+{
+  "info": {
+    "_postman_id": "727d9387-1aef-49c7-980f-a667529066dd",
+    "name": "Groww Trading Authentication API",
+    "description": "The Groww Trading API is the official programmatic interface to the Groww investing and trading platform, enabling algorithmic trading, order management, portfolio and position tracking, margin calculation, live market data (LTP, quote, OHLC, option chain, greeks) and historical candle data across the CASH (equity) and FNO (derivatives) segments on Indian exchanges. Requests are authenticated with a daily access token (or an OAuth2 / API-key + secret / TOTP flow) and versioned with the X-API-VERSION header.\n\nContact Support:\n Name: Groww Trading API Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:52:08.000Z",
+    "updatedAt": "2026-07-28T01:52:09.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-727d9387-1aef-49c7-980f-a667529066dd"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "token",
+          "item": [
+            {
+              "name": "api",
+              "item": [
+                {
+                  "name": "access",
+                  "item": [
+                    {
+                      "name": "Generate an access token",
+                      "id": "ced1b3f6-6777-447c-92ad-a21480960994",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"key_type\": \"totp\",\n  \"checksum\": \"<string>\",\n  \"timestamp\": \"<string>\",\n  \"totp\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/token/api/access",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "token",
+                            "api",
+                            "access"
+                          ]
+                        },
+                        "description": "Exchange an API key (sent as the bearer credential) plus either an approval checksum or a TOTP code for a short-lived access token used on all subsequent requests. Access tokens expire daily at 06:00 AM IST."
+                      },
+                      "response": [
+                        {
+                          "id": "ec2dee56-4e6f-46e8-9297-8b8ddc2f180d",
+                          "name": "Access token issued",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"key_type\": \"totp\",\n  \"checksum\": \"<string>\",\n  \"timestamp\": \"<string>\",\n  \"totp\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/token/api/access",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "token",
+                                "api",
+                                "access"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": \"<string>\",\n  \"payload\": {\n    \"token\": \"<string>\",\n    \"tokenRefId\": \"<string>\",\n    \"sessionName\": \"<string>\",\n    \"expiry\": \"<string>\",\n    \"isActive\": \"<boolean>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:52:09.000Z",
+                          "updatedAt": "2026-07-28T01:52:09.000Z",
+                          "uid": "35240-ec2dee56-4e6f-46e8-9297-8b8ddc2f180d"
+                        },
+                        {
+                          "id": "002518e6-0a4a-4c93-a48f-47744d2ca81f",
+                          "name": "Bad request",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"key_type\": \"totp\",\n  \"checksum\": \"<string>\",\n  \"timestamp\": \"<string>\",\n  \"totp\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/token/api/access",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "token",
+                                "api",
+                                "access"
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": \"SUCCESS\",\n  \"payload\": {},\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"metadata\": {}\n  }\n}",
+                          "createdAt": "2026-07-28T01:52:09.000Z",
+                          "updatedAt": "2026-07-28T01:52:09.000Z",
+                          "uid": "35240-002518e6-0a4a-4c93-a48f-47744d2ca81f"
+                        },
+                        {
+                          "id": "24471787-386a-4ead-b431-62a5a0db5345",
+                          "name": "User not authorised to perform this operation",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"key_type\": \"totp\",\n  \"checksum\": \"<string>\",\n  \"timestamp\": \"<string>\",\n  \"totp\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/token/api/access",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "token",
+                                "api",
+                                "access"
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": \"SUCCESS\",\n  \"payload\": {},\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"metadata\": {}\n  }\n}",
+                          "createdAt": "2026-07-28T01:52:09.000Z",
+                          "updatedAt": "2026-07-28T01:52:09.000Z",
+                          "uid": "35240-24471787-386a-4ead-b431-62a5a0db5345"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:52:09.000Z",
+                      "updatedAt": "2026-07-28T01:52:09.000Z",
+                      "uid": "35240-ced1b3f6-6777-447c-92ad-a21480960994"
+                    }
+                  ],
+                  "id": "15832de2-21c9-45dd-9408-f0cdb0aca6c6",
+                  "createdAt": "2026-07-28T01:52:09.000Z",
+                  "updatedAt": "2026-07-28T01:52:09.000Z",
+                  "uid": "35240-15832de2-21c9-45dd-9408-f0cdb0aca6c6"
+                }
+              ],
+              "id": "8ca73111-f679-4316-89a9-0dea22f801dd",
+              "createdAt": "2026-07-28T01:52:09.000Z",
+              "updatedAt": "2026-07-28T01:52:09.000Z",
+              "uid": "35240-8ca73111-f679-4316-89a9-0dea22f801dd"
+            }
+          ],
+          "id": "4edc86b2-f5ba-43b0-801c-288418076db9",
+          "createdAt": "2026-07-28T01:52:09.000Z",
+          "updatedAt": "2026-07-28T01:52:09.000Z",
+          "uid": "35240-4edc86b2-f5ba-43b0-801c-288418076db9"
+        }
+      ],
+      "id": "308834f5-4d81-4d90-8662-d753c0bd69e8",
+      "createdAt": "2026-07-28T01:52:09.000Z",
+      "updatedAt": "2026-07-28T01:52:09.000Z",
+      "uid": "35240-308834f5-4d81-4d90-8662-d753c0bd69e8"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.groww.in"
+    }
+  ]
+}
