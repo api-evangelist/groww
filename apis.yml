@@ -161,7 +161,7 @@ common:
 - type: Blog
   url: https://groww.in/blog
 - type: OpenAPI
-  url: openapi/groww-trade-api-openapi.yml
+  url: openapi/_original/groww-trade-api-openapi.yml
 - type: Authentication
   url: authentication/groww-authentication.yml
 - type: OAuthScopes
