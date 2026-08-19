@@ -1,0 +1,257 @@
+{
+  "item": [
+    {
+      "id": "43a3bded-d5bd-48c2-89bf-fff0479f66bd",
+      "name": "Historical Data",
+      "description": {
+        "content": "Historical candle data.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "df44ef16-5e63-4bd3-8785-15674ff5fd3c",
+          "name": "Get historical candle data",
+          "request": {
+            "name": "Get historical candle data",
+            "description": {
+              "content": "Retrieve historical OHLC candles for a symbol over a time range. Deprecated in favour of the backtesting historical candle endpoint.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "historical",
+                "candle",
+                "range"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "exchange",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "segment",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "trading_symbol",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "start_time",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "end_time",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "interval_in_minutes",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5277cd82-41ca-49f6-b313-7f120260efad",
+              "name": "Historical candles",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "historical",
+                    "candle",
+                    "range"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "exchange",
+                      "value": "BSE"
+                    },
+                    {
+                      "key": "segment",
+                      "value": "FNO"
+                    },
+                    {
+                      "key": "trading_symbol",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "interval_in_minutes",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"payload\": {\n    \"candles\": [\n      [\n        4033.147833766758,\n        5008.364736611231\n      ],\n      [\n        3885.9151583071284,\n        1891.873765325992\n      ]\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8cd0c5f7-6d2f-4361-b218-9828c30b22aa",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "historical",
+                    "candle",
+                    "range"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "exchange",
+                      "value": "BSE"
+                    },
+                    {
+                      "key": "segment",
+                      "value": "FNO"
+                    },
+                    {
+                      "key": "trading_symbol",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "interval_in_minutes",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"FAILURE\",\n  \"payload\": {},\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"metadata\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.groww.in",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b2e3dfd7-ec45-4f3b-b184-afbb7525290f",
+    "name": "Groww Trading Authentication Historical Data API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Groww Trading API is the official programmatic interface to the Groww investing and trading platform, enabling algorithmic trading, order management, portfolio and position tracking, margin calculation, live market data (LTP, quote, OHLC, option chain, greeks) and historical candle data across the CASH (equity) and FNO (derivatives) segments on Indian exchanges. Requests are authenticated with a daily access token (or an OAuth2 / API-key + secret / TOTP flow) and versioned with the X-API-VERSION header.\n\nContact Support:\n Name: Groww Trading API Support",
+      "type": "text/plain"
+    }
+  }
+}

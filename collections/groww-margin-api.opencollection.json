@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Groww Trading Authentication Margin API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Margin",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get available user margin",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.groww.in/v1/margins/detail/user"
+          },
+          "docs": "Get available user margin"
+        },
+        {
+          "info": {
+            "name": "Get required margin for an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.groww.in/v1/margins/detail/orders",
+            "params": [
+              {
+                "name": "segment",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get required margin for an order"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

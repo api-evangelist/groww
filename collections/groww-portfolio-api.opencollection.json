@@ -1,0 +1,69 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Groww Trading Authentication Portfolio API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Portfolio",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get holdings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.groww.in/v1/holdings/user"
+          },
+          "docs": "Retrieve the demat holdings for the authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get positions for user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.groww.in/v1/positions/user"
+          },
+          "docs": "Retrieve all open positions for the authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get position for a trading symbol",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.groww.in/v1/positions/trading-symbol",
+            "params": [
+              {
+                "name": "trading_symbol",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "segment",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get position for a trading symbol"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

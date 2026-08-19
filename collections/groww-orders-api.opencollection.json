@@ -1,0 +1,189 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Groww Trading Authentication Orders API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Place a new order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.groww.in/v1/order/create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Place a new buy or sell order in the CASH or FNO segment."
+        },
+        {
+          "info": {
+            "name": "Modify an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.groww.in/v1/order/modify",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modify quantity, price, trigger price or order type of a pending or open order."
+        },
+        {
+          "info": {
+            "name": "Cancel an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.groww.in/v1/order/cancel",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancel a pending or open order."
+        },
+        {
+          "info": {
+            "name": "List today's orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.groww.in/v1/order/list",
+            "params": [
+              {
+                "name": "segment",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve the order history for the current trading day."
+        },
+        {
+          "info": {
+            "name": "Get order detail",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.groww.in/v1/order/detail/:groww_order_id",
+            "params": [
+              {
+                "name": "groww_order_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "segment",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve full details for an order by its Groww order id."
+        },
+        {
+          "info": {
+            "name": "Get order status by Groww order id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.groww.in/v1/order/status/:groww_order_id",
+            "params": [
+              {
+                "name": "groww_order_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "segment",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get order status by Groww order id"
+        },
+        {
+          "info": {
+            "name": "Get order status by client reference id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.groww.in/v1/order/status/reference/:order_reference_id",
+            "params": [
+              {
+                "name": "order_reference_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "segment",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get order status by client reference id"
+        },
+        {
+          "info": {
+            "name": "Get trades for an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.groww.in/v1/order/trades/:groww_order_id",
+            "params": [
+              {
+                "name": "groww_order_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "segment",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get trades for an order"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

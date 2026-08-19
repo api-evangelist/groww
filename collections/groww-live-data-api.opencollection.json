@@ -1,0 +1,161 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Groww Trading Authentication Live Data API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Live Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get full market quote",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.groww.in/v1/live-data/quote",
+            "params": [
+              {
+                "name": "exchange",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "segment",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "trading_symbol",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get full market quote"
+        },
+        {
+          "info": {
+            "name": "Get last traded price",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.groww.in/v1/live-data/ltp",
+            "params": [
+              {
+                "name": "segment",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "exchange_symbols",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of EXCHANGE_SYMBOL tokens."
+              }
+            ]
+          },
+          "docs": "Get last traded price"
+        },
+        {
+          "info": {
+            "name": "Get OHLC",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.groww.in/v1/live-data/ohlc",
+            "params": [
+              {
+                "name": "segment",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "exchange_symbols",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of EXCHANGE_SYMBOL tokens."
+              }
+            ]
+          },
+          "docs": "Get OHLC"
+        },
+        {
+          "info": {
+            "name": "Get option chain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.groww.in/v1/option-chain/exchange/:exchange/underlying/:underlying",
+            "params": [
+              {
+                "name": "exchange",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "underlying",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "expiry_date",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get option chain"
+        },
+        {
+          "info": {
+            "name": "Get option greeks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.groww.in/v1/live-data/greeks/exchange/:exchange/underlying/:underlying/trading_symbol/:trading_symbol/expiry/:expiry",
+            "params": [
+              {
+                "name": "exchange",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "underlying",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "trading_symbol",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "expiry",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get option greeks"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

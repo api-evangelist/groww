@@ -1,0 +1,449 @@
+{
+  "item": [
+    {
+      "id": "789b810d-80a0-4d6c-bf79-a2ac11e4756e",
+      "name": "Portfolio",
+      "description": {
+        "content": "Holdings and positions.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4fe93900-193f-490a-b2ea-6017144f0516",
+          "name": "Get holdings",
+          "request": {
+            "name": "Get holdings",
+            "description": {
+              "content": "Retrieve the demat holdings for the authenticated user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "holdings",
+                "user"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "196760f7-1891-45e8-813d-4b43e29e0350",
+              "name": "User holdings",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "holdings",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"payload\": {\n    \"holdings\": [\n      {\n        \"isin\": \"string\",\n        \"trading_symbol\": \"string\",\n        \"quantity\": 857,\n        \"average_price\": 6173.755678541478,\n        \"pledge_quantity\": 9907,\n        \"demat_locked_quantity\": 4058,\n        \"groww_locked_quantity\": 3818,\n        \"repledge_quantity\": 4811,\n        \"t1_quantity\": 3041,\n        \"demat_free_quantity\": 6283,\n        \"corporate_action_additional_quantity\": 8722,\n        \"active_demat_transfer_quantity\": 1260\n      },\n      {\n        \"isin\": \"string\",\n        \"trading_symbol\": \"string\",\n        \"quantity\": 4706,\n        \"average_price\": 2223.5364243410327,\n        \"pledge_quantity\": 3416,\n        \"demat_locked_quantity\": 9325,\n        \"groww_locked_quantity\": 2146,\n        \"repledge_quantity\": 7127,\n        \"t1_quantity\": 7391,\n        \"demat_free_quantity\": 409,\n        \"corporate_action_additional_quantity\": 5362,\n        \"active_demat_transfer_quantity\": 6255\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7961ed6-7b78-4f55-ba4f-0f20980bcdee",
+              "name": "User not authorised to perform this operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "holdings",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"FAILURE\",\n  \"payload\": {},\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"metadata\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b223041e-3005-455a-984f-91e60897c5bc",
+          "name": "Get positions for user",
+          "request": {
+            "name": "Get positions for user",
+            "description": {
+              "content": "Retrieve all open positions for the authenticated user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "positions",
+                "user"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "52b25aaf-1f94-476f-bb46-95409c07ba2b",
+              "name": "User positions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "positions",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"payload\": {\n    \"positions\": [\n      {\n        \"trading_symbol\": \"string\",\n        \"credit_quantity\": 6831,\n        \"credit_price\": 679.5614926652315,\n        \"debit_quantity\": 2277,\n        \"debit_price\": 814.7419271375844,\n        \"carry_forward_credit_quantity\": 1374,\n        \"carry_forward_credit_price\": 3326.639828777873,\n        \"carry_forward_debit_quantity\": 8112,\n        \"carry_forward_debit_price\": 8228.76895048039,\n        \"exchange\": \"NSE\",\n        \"symbol_isin\": \"string\",\n        \"quantity\": 669,\n        \"product\": \"MIS\",\n        \"net_carry_forward_quantity\": 720,\n        \"net_price\": 4698.681059567548,\n        \"net_carry_forward_price\": 3220.02005621838,\n        \"realised_pnl\": 5141.75028286532\n      },\n      {\n        \"trading_symbol\": \"string\",\n        \"credit_quantity\": 3029,\n        \"credit_price\": 949.6201954427453,\n        \"debit_quantity\": 5756,\n        \"debit_price\": 1517.2119105331428,\n        \"carry_forward_credit_quantity\": 1389,\n        \"carry_forward_credit_price\": 5047.175316039542,\n        \"carry_forward_debit_quantity\": 7758,\n        \"carry_forward_debit_price\": 5274.2134163168885,\n        \"exchange\": \"NSE\",\n        \"symbol_isin\": \"string\",\n        \"quantity\": 7216,\n        \"product\": \"CNC\",\n        \"net_carry_forward_quantity\": 4394,\n        \"net_price\": 503.89027056538026,\n        \"net_carry_forward_price\": 5802.996327320332,\n        \"realised_pnl\": 9716.405844049814\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b4f5e43d-f925-4544-841e-3abff4870c1c",
+              "name": "User not authorised to perform this operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "positions",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"FAILURE\",\n  \"payload\": {},\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"metadata\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1e73634a-4166-474f-8bad-fa2410d9e01b",
+          "name": "Get position for a trading symbol",
+          "request": {
+            "name": "Get position for a trading symbol",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "positions",
+                "trading-symbol"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "trading_symbol",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "segment",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "36a6f18f-53e3-4409-9d4b-d843f774b4b2",
+              "name": "Position for the trading symbol",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "positions",
+                    "trading-symbol"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "trading_symbol",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "segment",
+                      "value": "CASH"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"payload\": {\n    \"positions\": [\n      {\n        \"trading_symbol\": \"string\",\n        \"credit_quantity\": 6831,\n        \"credit_price\": 679.5614926652315,\n        \"debit_quantity\": 2277,\n        \"debit_price\": 814.7419271375844,\n        \"carry_forward_credit_quantity\": 1374,\n        \"carry_forward_credit_price\": 3326.639828777873,\n        \"carry_forward_debit_quantity\": 8112,\n        \"carry_forward_debit_price\": 8228.76895048039,\n        \"exchange\": \"NSE\",\n        \"symbol_isin\": \"string\",\n        \"quantity\": 669,\n        \"product\": \"MIS\",\n        \"net_carry_forward_quantity\": 720,\n        \"net_price\": 4698.681059567548,\n        \"net_carry_forward_price\": 3220.02005621838,\n        \"realised_pnl\": 5141.75028286532\n      },\n      {\n        \"trading_symbol\": \"string\",\n        \"credit_quantity\": 3029,\n        \"credit_price\": 949.6201954427453,\n        \"debit_quantity\": 5756,\n        \"debit_price\": 1517.2119105331428,\n        \"carry_forward_credit_quantity\": 1389,\n        \"carry_forward_credit_price\": 5047.175316039542,\n        \"carry_forward_debit_quantity\": 7758,\n        \"carry_forward_debit_price\": 5274.2134163168885,\n        \"exchange\": \"NSE\",\n        \"symbol_isin\": \"string\",\n        \"quantity\": 7216,\n        \"product\": \"CNC\",\n        \"net_carry_forward_quantity\": 4394,\n        \"net_price\": 503.89027056538026,\n        \"net_carry_forward_price\": 5802.996327320332,\n        \"realised_pnl\": 9716.405844049814\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "534800a9-b552-4a68-baed-adefc66510e4",
+              "name": "Requested entity does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "positions",
+                    "trading-symbol"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "trading_symbol",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "segment",
+                      "value": "CASH"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"FAILURE\",\n  \"payload\": {},\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"metadata\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.groww.in",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d95159bf-bef6-466a-8565-7242751f5cbf",
+    "name": "Groww Trading Authentication Portfolio API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Groww Trading API is the official programmatic interface to the Groww investing and trading platform, enabling algorithmic trading, order management, portfolio and position tracking, margin calculation, live market data (LTP, quote, OHLC, option chain, greeks) and historical candle data across the CASH (equity) and FNO (derivatives) segments on Indian exchanges. Requests are authenticated with a daily access token (or an OAuth2 / API-key + secret / TOTP flow) and versioned with the X-API-VERSION header.\n\nContact Support:\n Name: Groww Trading API Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,341 @@
+{
+  "item": [
+    {
+      "id": "8d135c8a-7b5b-4e60-a07b-a4f4688ae0b2",
+      "name": "Margin",
+      "description": {
+        "content": "Available margin and per-order margin requirements.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4f6b4aec-8f6b-454c-a897-4ee55b0b8033",
+          "name": "Get available user margin",
+          "request": {
+            "name": "Get available user margin",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "margins",
+                "detail",
+                "user"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "61e923e3-61d5-433c-be35-2311491a2793",
+              "name": "Available margin",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "margins",
+                    "detail",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"payload\": {\n    \"clear_cash\": 4168.020352737244,\n    \"net_margin_used\": 7621.817034620243,\n    \"collateral_available\": 2495.566196298513\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "206c87f6-97da-4a31-90db-4578670cc6a8",
+              "name": "User not authorised to perform this operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "margins",
+                    "detail",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"SUCCESS\",\n  \"payload\": {},\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"metadata\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "25aa25f4-e42d-4bd8-b410-edf955de264b",
+          "name": "Get required margin for an order",
+          "request": {
+            "name": "Get required margin for an order",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "margins",
+                "detail",
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "segment",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"trading_symbol\": \"<string>\",\n  \"transaction_type\": \"<string>\",\n  \"quantity\": \"<integer>\",\n  \"order_type\": \"<string>\",\n  \"product\": \"<string>\",\n  \"exchange\": \"<string>\",\n  \"price\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "70b3a4e3-8251-43fa-a336-69284e0985c2",
+              "name": "Required margin",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "margins",
+                    "detail",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "segment",
+                      "value": "CASH"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"trading_symbol\": \"<string>\",\n  \"transaction_type\": \"BUY\",\n  \"quantity\": \"<integer>\",\n  \"order_type\": \"MARKET\",\n  \"product\": \"NRML\",\n  \"exchange\": \"NSE\",\n  \"price\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"payload\": {\n    \"total_requirement\": 5779.438335641865,\n    \"span_margin_required\": 9853.59991699231,\n    \"exposure_margin_required\": 5259.339641118236\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ceb072d0-8b1b-4cd8-a7db-36e907742c25",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "margins",
+                    "detail",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "segment",
+                      "value": "CASH"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"trading_symbol\": \"<string>\",\n  \"transaction_type\": \"BUY\",\n  \"quantity\": \"<integer>\",\n  \"order_type\": \"MARKET\",\n  \"product\": \"NRML\",\n  \"exchange\": \"NSE\",\n  \"price\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"SUCCESS\",\n  \"payload\": {},\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"metadata\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.groww.in",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f22f578f-0f35-4710-8b77-2c1c77858791",
+    "name": "Groww Trading Authentication Margin API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Groww Trading API is the official programmatic interface to the Groww investing and trading platform, enabling algorithmic trading, order management, portfolio and position tracking, margin calculation, live market data (LTP, quote, OHLC, option chain, greeks) and historical candle data across the CASH (equity) and FNO (derivatives) segments on Indian exchanges. Requests are authenticated with a daily access token (or an OAuth2 / API-key + secret / TOTP flow) and versioned with the X-API-VERSION header.\n\nContact Support:\n Name: Groww Trading API Support",
+      "type": "text/plain"
+    }
+  }
+}

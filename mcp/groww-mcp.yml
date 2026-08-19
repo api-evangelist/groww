@@ -2,59 +2,64 @@ generated: '2026-07-19'
 method: derived
 status: candidate
 source: openapi/groww-trade-api-openapi.yml
-description: >-
-  No official Groww MCP server was found. This is a CANDIDATE tool list derived
-  one-to-one from the Groww Trading API OpenAPI operations, as a starting point
-  for an MCP server that wraps the trading platform.
+description: No official Groww MCP server was found. This is a CANDIDATE tool list derived one-to-one
+  from the Groww Trading API OpenAPI operations, as a starting point for an MCP server that wraps the
+  trading platform.
 server:
   name: groww
   transport: http
 tools:
-  - name: create_access_token
-    description: Generate an access token from API key + secret or TOTP.
-    source_operation: openapi/groww-trade-api-openapi.yml#createAccessToken
-  - name: create_order
-    description: Place a new order.
-    source_operation: openapi/groww-trade-api-openapi.yml#createOrder
-  - name: modify_order
-    description: Modify a pending or open order.
-    source_operation: openapi/groww-trade-api-openapi.yml#modifyOrder
-  - name: cancel_order
-    description: Cancel a pending or open order.
-    source_operation: openapi/groww-trade-api-openapi.yml#cancelOrder
-  - name: list_orders
-    description: List today's orders.
-    source_operation: openapi/groww-trade-api-openapi.yml#listOrders
-  - name: get_order_detail
-    description: Get full detail for an order.
-    source_operation: openapi/groww-trade-api-openapi.yml#getOrderDetail
-  - name: get_order_status
-    description: Get order status by Groww order id.
-    source_operation: openapi/groww-trade-api-openapi.yml#getOrderStatus
-  - name: get_order_trades
-    description: Get trades for an order.
-    source_operation: openapi/groww-trade-api-openapi.yml#getOrderTrades
-  - name: get_holdings
-    description: Get demat holdings.
-    source_operation: openapi/groww-trade-api-openapi.yml#getHoldings
-  - name: get_positions
-    description: Get open positions.
-    source_operation: openapi/groww-trade-api-openapi.yml#getPositions
-  - name: get_user_margin
-    description: Get available margin.
-    source_operation: openapi/groww-trade-api-openapi.yml#getUserMargin
-  - name: get_order_margin
-    description: Get required margin for an order.
-    source_operation: openapi/groww-trade-api-openapi.yml#getOrderMargin
-  - name: get_quote
-    description: Get full market quote.
-    source_operation: openapi/groww-trade-api-openapi.yml#getQuote
-  - name: get_ltp
-    description: Get last traded price.
-    source_operation: openapi/groww-trade-api-openapi.yml#getLtp
-  - name: get_ohlc
-    description: Get OHLC.
-    source_operation: openapi/groww-trade-api-openapi.yml#getOhlc
-  - name: get_historical_candles
-    description: Get historical candle data (deprecated).
-    source_operation: openapi/groww-trade-api-openapi.yml#getHistoricalCandles
+- name: create_access_token
+  description: Generate an access token from API key + secret or TOTP.
+  source_operation: openapi/groww-trade-api-openapi.yml#createAccessToken
+- name: create_order
+  description: Place a new order.
+  source_operation: openapi/groww-trade-api-openapi.yml#createOrder
+- name: modify_order
+  description: Modify a pending or open order.
+  source_operation: openapi/groww-trade-api-openapi.yml#modifyOrder
+- name: cancel_order
+  description: Cancel a pending or open order.
+  source_operation: openapi/groww-trade-api-openapi.yml#cancelOrder
+- name: list_orders
+  description: List today's orders.
+  source_operation: openapi/groww-trade-api-openapi.yml#listOrders
+- name: get_order_detail
+  description: Get full detail for an order.
+  source_operation: openapi/groww-trade-api-openapi.yml#getOrderDetail
+- name: get_order_status
+  description: Get order status by Groww order id.
+  source_operation: openapi/groww-trade-api-openapi.yml#getOrderStatus
+- name: get_order_trades
+  description: Get trades for an order.
+  source_operation: openapi/groww-trade-api-openapi.yml#getOrderTrades
+- name: get_holdings
+  description: Get demat holdings.
+  source_operation: openapi/groww-trade-api-openapi.yml#getHoldings
+- name: get_positions
+  description: Get open positions.
+  source_operation: openapi/groww-trade-api-openapi.yml#getPositions
+- name: get_user_margin
+  description: Get available margin.
+  source_operation: openapi/groww-trade-api-openapi.yml#getUserMargin
+- name: get_order_margin
+  description: Get required margin for an order.
+  source_operation: openapi/groww-trade-api-openapi.yml#getOrderMargin
+- name: get_quote
+  description: Get full market quote.
+  source_operation: openapi/groww-trade-api-openapi.yml#getQuote
+- name: get_ltp
+  description: Get last traded price.
+  source_operation: openapi/groww-trade-api-openapi.yml#getLtp
+- name: get_ohlc
+  description: Get OHLC.
+  source_operation: openapi/groww-trade-api-openapi.yml#getOhlc
+- name: get_historical_candles
+  description: Get historical candle data (deprecated).
+  source_operation: openapi/groww-trade-api-openapi.yml#getHistoricalCandles
+deployment:
+  mode: none
+  verified: derived
+  tools: 16
+  checked: '2026-08-12'
+  source: catalog MCP census
