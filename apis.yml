@@ -110,6 +110,8 @@ apis:
   humanURL: https://groww.in/trade-api
   baseURL: https://api.groww.in
   tags:
+  - Order
+  tags_raw:
   - Orders
   properties:
   - type: OpenAPI
