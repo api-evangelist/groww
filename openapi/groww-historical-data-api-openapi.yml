@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Groww Trading Authentication Historical Data API
-  description: The Groww Trading API is the official programmatic interface to the Groww investing and trading platform, enabling algorithmic trading, order management, portfolio and position tracking, margin calculation, live market data (LTP, quote, OHLC, option chain, greeks) and historical candle data across the CASH (equity) and FNO (derivatives) segments on Indian exchanges. Requests are authenticated with a daily access token (or an OAuth2 / API-key + secret / TOTP flow) and versioned with the X-API-VERSION header.
+  title: Groww Trading Historical Data API
+  description: The Groww Trading API is the official programmatic interface to the Groww investing and trading platform, enabling algorithmic trading, order management, portfolio and position tracking, margin calculation, live market data (LTP, quote, OHLC, option chain, greeks) and historical candle data across the CASH (equity) and FNO (derivatives) segments on Indian exchanges.
   version: '1.0'
   contact:
     name: Groww Trading API Support
@@ -68,30 +68,6 @@ paths:
           $ref: '#/components/responses/BadRequest'
 components:
   schemas:
-    Segment:
-      type: string
-      enum:
-      - CASH
-      - FNO
-      description: Trading segment. MCX (commodities) is not supported.
-    Exchange:
-      type: string
-      enum:
-      - NSE
-      - BSE
-    ErrorEnvelope:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - SUCCESS
-          - FAILURE
-        payload:
-          type: object
-          nullable: true
-        error:
-          $ref: '#/components/schemas/Error'
     CandleResponse:
       type: object
       properties:
@@ -106,6 +82,17 @@ components:
                 type: array
                 items:
                   type: number
+    Exchange:
+      type: string
+      enum:
+      - NSE
+      - BSE
+    Segment:
+      type: string
+      enum:
+      - CASH
+      - FNO
+      description: Trading segment. MCX (commodities) is not supported.
     Error:
       type: object
       properties:
@@ -117,6 +104,19 @@ components:
         metadata:
           type: object
           nullable: true
+    ErrorEnvelope:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - SUCCESS
+          - FAILURE
+        payload:
+          type: object
+          nullable: true
+        error:
+          $ref: '#/components/schemas/Error'
   responses:
     BadRequest:
       description: Bad request

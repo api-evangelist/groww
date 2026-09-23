@@ -1,12 +1,7 @@
 {
   "provider": "groww",
   "sources": [
-    "groww-authentication-api-openapi.yml",
-    "groww-historical-data-api-openapi.yml",
-    "groww-live-data-api-openapi.yml",
-    "groww-margin-api-openapi.yml",
-    "groww-orders-api-openapi.yml",
-    "groww-portfolio-api-openapi.yml"
+    "_original/groww-trade-api-openapi.yml"
   ],
   "outputs": [
     "groww-authentication-api-openapi.yml",
@@ -19,6 +14,17 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "groww-trade-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "groww-authentication-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "groww-historical-data-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "groww-live-data-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "groww-margin-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "groww-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "groww-portfolio-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

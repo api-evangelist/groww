@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Groww Trading Authentication Portfolio API
-  description: The Groww Trading API is the official programmatic interface to the Groww investing and trading platform, enabling algorithmic trading, order management, portfolio and position tracking, margin calculation, live market data (LTP, quote, OHLC, option chain, greeks) and historical candle data across the CASH (equity) and FNO (derivatives) segments on Indian exchanges. Requests are authenticated with a daily access token (or an OAuth2 / API-key + secret / TOTP flow) and versioned with the X-API-VERSION header.
+  title: Groww Trading Portfolio API
+  description: The Groww Trading API is the official programmatic interface to the Groww investing and trading platform, enabling algorithmic trading, order management, portfolio and position tracking, margin calculation, live market data (LTP, quote, OHLC, option chain, greeks) and historical candle data across the CASH (equity) and FNO (derivatives) segments on Indian exchanges.
   version: '1.0'
   contact:
     name: Groww Trading API Support
@@ -78,44 +78,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    Exchange:
-      type: string
-      enum:
-      - NSE
-      - BSE
-    Holding:
-      type: object
-      properties:
-        isin:
-          type: string
-        trading_symbol:
-          type: string
-        quantity:
-          type: integer
-        average_price:
-          type: number
-        pledge_quantity:
-          type: integer
-        demat_locked_quantity:
-          type: integer
-        groww_locked_quantity:
-          type: integer
-        repledge_quantity:
-          type: integer
-        t1_quantity:
-          type: integer
-        demat_free_quantity:
-          type: integer
-        corporate_action_additional_quantity:
-          type: integer
-        active_demat_transfer_quantity:
-          type: integer
-    Segment:
-      type: string
-      enum:
-      - CASH
-      - FNO
-      description: Trading segment. MCX (commodities) is not supported.
     HoldingsResponse:
       type: object
       properties:
@@ -128,6 +90,46 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Holding'
+    PositionsResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        payload:
+          type: object
+          properties:
+            positions:
+              type: array
+              items:
+                $ref: '#/components/schemas/Position'
+    Product:
+      type: string
+      enum:
+      - CNC
+      - MIS
+      - NRML
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Groww error code (e.g. GA004).
+        message:
+          type: string
+        metadata:
+          type: object
+          nullable: true
+    Exchange:
+      type: string
+      enum:
+      - NSE
+      - BSE
+    Segment:
+      type: string
+      enum:
+      - CASH
+      - FNO
+      description: Trading segment. MCX (commodities) is not supported.
     Position:
       type: object
       properties:
@@ -165,6 +167,33 @@ components:
           type: number
         realised_pnl:
           type: number
+    Holding:
+      type: object
+      properties:
+        isin:
+          type: string
+        trading_symbol:
+          type: string
+        quantity:
+          type: integer
+        average_price:
+          type: number
+        pledge_quantity:
+          type: integer
+        demat_locked_quantity:
+          type: integer
+        groww_locked_quantity:
+          type: integer
+        repledge_quantity:
+          type: integer
+        t1_quantity:
+          type: integer
+        demat_free_quantity:
+          type: integer
+        corporate_action_additional_quantity:
+          type: integer
+        active_demat_transfer_quantity:
+          type: integer
     ErrorEnvelope:
       type: object
       properties:
@@ -178,44 +207,15 @@ components:
           nullable: true
         error:
           $ref: '#/components/schemas/Error'
-    Product:
-      type: string
-      enum:
-      - CNC
-      - MIS
-      - NRML
-    PositionsResponse:
-      type: object
-      properties:
-        status:
-          type: string
-        payload:
-          type: object
-          properties:
-            positions:
-              type: array
-              items:
-                $ref: '#/components/schemas/Position'
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Groww error code (e.g. GA004).
-        message:
-          type: string
-        metadata:
-          type: object
-          nullable: true
   responses:
-    NotFound:
-      description: Requested entity does not exist
+    Unauthorized:
+      description: User not authorised to perform this operation
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorEnvelope'
-    Unauthorized:
-      description: User not authorised to perform this operation
+    NotFound:
+      description: Requested entity does not exist
       content:
         application/json:
           schema:

@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Groww Trading Authentication Live Data API
-  description: The Groww Trading API is the official programmatic interface to the Groww investing and trading platform, enabling algorithmic trading, order management, portfolio and position tracking, margin calculation, live market data (LTP, quote, OHLC, option chain, greeks) and historical candle data across the CASH (equity) and FNO (derivatives) segments on Indian exchanges. Requests are authenticated with a daily access token (or an OAuth2 / API-key + secret / TOTP flow) and versioned with the X-API-VERSION header.
+  title: Groww Trading Live Data API
+  description: The Groww Trading API is the official programmatic interface to the Groww investing and trading platform, enabling algorithmic trading, order management, portfolio and position tracking, margin calculation, live market data (LTP, quote, OHLC, option chain, greeks) and historical candle data across the CASH (equity) and FNO (derivatives) segments on Indian exchanges.
   version: '1.0'
   contact:
     name: Groww Trading API Support
@@ -174,17 +174,37 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    Exchange:
+      type: string
+      enum:
+      - NSE
+      - BSE
     Segment:
       type: string
       enum:
       - CASH
       - FNO
       description: Trading segment. MCX (commodities) is not supported.
-    Exchange:
-      type: string
-      enum:
-      - NSE
-      - BSE
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Groww error code (e.g. GA004).
+        message:
+          type: string
+        metadata:
+          type: object
+          nullable: true
+    PriceMapResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        payload:
+          type: object
+          additionalProperties:
+            type: number
     OhlcResponse:
       type: object
       properties:
@@ -203,6 +223,13 @@ components:
                 type: number
               close:
                 type: number
+    EnvelopeObject:
+      type: object
+      properties:
+        status:
+          type: string
+        payload:
+          type: object
     ErrorEnvelope:
       type: object
       properties:
@@ -216,22 +243,6 @@ components:
           nullable: true
         error:
           $ref: '#/components/schemas/Error'
-    EnvelopeObject:
-      type: object
-      properties:
-        status:
-          type: string
-        payload:
-          type: object
-    PriceMapResponse:
-      type: object
-      properties:
-        status:
-          type: string
-        payload:
-          type: object
-          additionalProperties:
-            type: number
     QuoteResponse:
       type: object
       properties:
@@ -256,17 +267,6 @@ components:
               type: integer
             offer_quantity:
               type: integer
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Groww error code (e.g. GA004).
-        message:
-          type: string
-        metadata:
-          type: object
-          nullable: true
   responses:
     NotFound:
       description: Requested entity does not exist

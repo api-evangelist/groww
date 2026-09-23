@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Groww Trading Authentication API
-  description: The Groww Trading API is the official programmatic interface to the Groww investing and trading platform, enabling algorithmic trading, order management, portfolio and position tracking, margin calculation, live market data (LTP, quote, OHLC, option chain, greeks) and historical candle data across the CASH (equity) and FNO (derivatives) segments on Indian exchanges. Requests are authenticated with a daily access token (or an OAuth2 / API-key + secret / TOTP flow) and versioned with the X-API-VERSION header.
+  description: The Groww Trading API is the official programmatic interface to the Groww investing and trading platform, enabling algorithmic trading, order management, portfolio and position tracking, margin calculation, live market data (LTP, quote, OHLC, option chain, greeks) and historical candle data across the CASH (equity) and FNO (derivatives) segments on Indian exchanges.
   version: '1.0'
   contact:
     name: Groww Trading API Support
@@ -45,33 +45,18 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: User not authorised to perform this operation
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
-    BadRequest:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
   schemas:
-    ErrorEnvelope:
+    Error:
       type: object
       properties:
-        status:
+        code:
           type: string
-          enum:
-          - SUCCESS
-          - FAILURE
-        payload:
+          description: Groww error code (e.g. GA004).
+        message:
+          type: string
+        metadata:
           type: object
           nullable: true
-        error:
-          $ref: '#/components/schemas/Error'
     AccessTokenRequest:
       type: object
       required:
@@ -109,17 +94,32 @@ components:
               type: string
             isActive:
               type: boolean
-    Error:
+    ErrorEnvelope:
       type: object
       properties:
-        code:
+        status:
           type: string
-          description: Groww error code (e.g. GA004).
-        message:
-          type: string
-        metadata:
+          enum:
+          - SUCCESS
+          - FAILURE
+        payload:
           type: object
           nullable: true
+        error:
+          $ref: '#/components/schemas/Error'
+  responses:
+    Unauthorized:
+      description: User not authorised to perform this operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
   securitySchemes:
     bearerAuth:
       type: http
