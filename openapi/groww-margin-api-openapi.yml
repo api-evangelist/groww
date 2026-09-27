@@ -62,22 +62,6 @@ paths:
           $ref: '#/components/responses/BadRequest'
 components:
   schemas:
-    TransactionType:
-      type: string
-      enum:
-      - BUY
-      - SELL
-    Exchange:
-      type: string
-      enum:
-      - NSE
-      - BSE
-    Product:
-      type: string
-      enum:
-      - CNC
-      - MIS
-      - NRML
     Error:
       type: object
       properties:
@@ -89,6 +73,42 @@ components:
         metadata:
           type: object
           nullable: true
+    Product:
+      type: string
+      enum:
+      - CNC
+      - MIS
+      - NRML
+    OrderMarginResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        payload:
+          type: object
+          properties:
+            total_requirement:
+              type: number
+            span_margin_required:
+              type: number
+            exposure_margin_required:
+              type: number
+    Exchange:
+      type: string
+      enum:
+      - NSE
+      - BSE
+    TransactionType:
+      type: string
+      enum:
+      - BUY
+      - SELL
+    Segment:
+      type: string
+      enum:
+      - CASH
+      - FNO
+      description: Trading segment. MCX (commodities) is not supported.
     OrderMarginRequest:
       type: object
       required:
@@ -113,12 +133,13 @@ components:
           $ref: '#/components/schemas/Product'
         exchange:
           $ref: '#/components/schemas/Exchange'
-    Segment:
+    OrderType:
       type: string
       enum:
-      - CASH
-      - FNO
-      description: Trading segment. MCX (commodities) is not supported.
+      - MARKET
+      - LIMIT
+      - SL
+      - SL_M
     UserMarginResponse:
       type: object
       properties:
@@ -133,13 +154,6 @@ components:
               type: number
             collateral_available:
               type: number
-    OrderType:
-      type: string
-      enum:
-      - MARKET
-      - LIMIT
-      - SL
-      - SL_M
     ErrorEnvelope:
       type: object
       properties:
@@ -153,20 +167,6 @@ components:
           nullable: true
         error:
           $ref: '#/components/schemas/Error'
-    OrderMarginResponse:
-      type: object
-      properties:
-        status:
-          type: string
-        payload:
-          type: object
-          properties:
-            total_requirement:
-              type: number
-            span_margin_required:
-              type: number
-            exposure_margin_required:
-              type: number
   responses:
     Unauthorized:
       description: User not authorised to perform this operation

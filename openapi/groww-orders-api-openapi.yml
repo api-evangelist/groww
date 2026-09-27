@@ -215,6 +215,52 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    ModifyOrderRequest:
+      type: object
+      required:
+      - groww_order_id
+      - segment
+      properties:
+        groww_order_id:
+          type: string
+        quantity:
+          type: integer
+        price:
+          type: number
+        trigger_price:
+          type: number
+        order_type:
+          $ref: '#/components/schemas/OrderType'
+        segment:
+          $ref: '#/components/schemas/Segment'
+    OrderDetailResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        payload:
+          $ref: '#/components/schemas/Order'
+    OrderListResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        payload:
+          type: object
+          properties:
+            order_list:
+              type: array
+              items:
+                $ref: '#/components/schemas/Order'
+    ModifyOrderResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        groww_order_id:
+          type: string
+        order_status:
+          type: string
     Order:
       type: object
       properties:
@@ -242,28 +288,22 @@ components:
           $ref: '#/components/schemas/Exchange'
         product:
           $ref: '#/components/schemas/Product'
-    CancelOrderResponse:
+    Segment:
+      type: string
+      enum:
+      - CASH
+      - FNO
+      description: Trading segment. MCX (commodities) is not supported.
+    CancelOrderRequest:
       type: object
+      required:
+      - groww_order_id
+      - segment
       properties:
-        status:
-          type: string
         groww_order_id:
           type: string
-        order_status:
-          type: string
-    PlaceOrderResponse:
-      type: object
-      properties:
-        status:
-          type: string
-        groww_order_id:
-          type: string
-        order_status:
-          type: string
-        order_reference_id:
-          type: string
-        remark:
-          type: string
+        segment:
+          $ref: '#/components/schemas/Segment'
     TradeListResponse:
       type: object
       properties:
@@ -285,41 +325,17 @@ components:
                     type: integer
                   price:
                     type: number
-    OrderDetailResponse:
+    Error:
       type: object
       properties:
-        status:
+        code:
           type: string
-        payload:
-          $ref: '#/components/schemas/Order'
-    ErrorEnvelope:
-      type: object
-      properties:
-        status:
+          description: Groww error code (e.g. GA004).
+        message:
           type: string
-          enum:
-          - SUCCESS
-          - FAILURE
-        payload:
+        metadata:
           type: object
           nullable: true
-        error:
-          $ref: '#/components/schemas/Error'
-    Validity:
-      type: string
-      enum:
-      - DAY
-      - IOC
-    CancelOrderRequest:
-      type: object
-      required:
-      - groww_order_id
-      - segment
-      properties:
-        groww_order_id:
-          type: string
-        segment:
-          $ref: '#/components/schemas/Segment'
     PlaceOrderRequest:
       type: object
       required:
@@ -354,7 +370,7 @@ components:
         order_reference_id:
           type: string
           description: Client-supplied idempotency/reference id for the order.
-    ModifyOrderResponse:
+    CancelOrderResponse:
       type: object
       properties:
         status:
@@ -363,39 +379,6 @@ components:
           type: string
         order_status:
           type: string
-    TransactionType:
-      type: string
-      enum:
-      - BUY
-      - SELL
-    Segment:
-      type: string
-      enum:
-      - CASH
-      - FNO
-      description: Trading segment. MCX (commodities) is not supported.
-    Product:
-      type: string
-      enum:
-      - CNC
-      - MIS
-      - NRML
-    Exchange:
-      type: string
-      enum:
-      - NSE
-      - BSE
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Groww error code (e.g. GA004).
-        message:
-          type: string
-        metadata:
-          type: object
-          nullable: true
     OrderStatusResponse:
       type: object
       properties:
@@ -410,24 +393,42 @@ components:
               type: string
             order_reference_id:
               type: string
-    ModifyOrderRequest:
+    ErrorEnvelope:
       type: object
-      required:
-      - groww_order_id
-      - segment
       properties:
+        status:
+          type: string
+          enum:
+          - SUCCESS
+          - FAILURE
+        payload:
+          type: object
+          nullable: true
+        error:
+          $ref: '#/components/schemas/Error'
+    Exchange:
+      type: string
+      enum:
+      - NSE
+      - BSE
+    PlaceOrderResponse:
+      type: object
+      properties:
+        status:
+          type: string
         groww_order_id:
           type: string
-        quantity:
-          type: integer
-        price:
-          type: number
-        trigger_price:
-          type: number
-        order_type:
-          $ref: '#/components/schemas/OrderType'
-        segment:
-          $ref: '#/components/schemas/Segment'
+        order_status:
+          type: string
+        order_reference_id:
+          type: string
+        remark:
+          type: string
+    TransactionType:
+      type: string
+      enum:
+      - BUY
+      - SELL
     OrderType:
       type: string
       enum:
@@ -435,21 +436,20 @@ components:
       - LIMIT
       - SL
       - SL_M
-    OrderListResponse:
-      type: object
-      properties:
-        status:
-          type: string
-        payload:
-          type: object
-          properties:
-            order_list:
-              type: array
-              items:
-                $ref: '#/components/schemas/Order'
+    Product:
+      type: string
+      enum:
+      - CNC
+      - MIS
+      - NRML
+    Validity:
+      type: string
+      enum:
+      - DAY
+      - IOC
   responses:
-    BadRequest:
-      description: Bad request
+    NotFound:
+      description: Requested entity does not exist
       content:
         application/json:
           schema:
@@ -460,8 +460,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorEnvelope'
-    NotFound:
-      description: Requested entity does not exist
+    BadRequest:
+      description: Bad request
       content:
         application/json:
           schema:

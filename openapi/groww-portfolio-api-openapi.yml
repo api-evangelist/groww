@@ -78,36 +78,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    HoldingsResponse:
-      type: object
-      properties:
-        status:
-          type: string
-        payload:
-          type: object
-          properties:
-            holdings:
-              type: array
-              items:
-                $ref: '#/components/schemas/Holding'
-    PositionsResponse:
-      type: object
-      properties:
-        status:
-          type: string
-        payload:
-          type: object
-          properties:
-            positions:
-              type: array
-              items:
-                $ref: '#/components/schemas/Position'
-    Product:
-      type: string
-      enum:
-      - CNC
-      - MIS
-      - NRML
     Error:
       type: object
       properties:
@@ -124,12 +94,6 @@ components:
       enum:
       - NSE
       - BSE
-    Segment:
-      type: string
-      enum:
-      - CASH
-      - FNO
-      description: Trading segment. MCX (commodities) is not supported.
     Position:
       type: object
       properties:
@@ -167,6 +131,30 @@ components:
           type: number
         realised_pnl:
           type: number
+    Segment:
+      type: string
+      enum:
+      - CASH
+      - FNO
+      description: Trading segment. MCX (commodities) is not supported.
+    HoldingsResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        payload:
+          type: object
+          properties:
+            holdings:
+              type: array
+              items:
+                $ref: '#/components/schemas/Holding'
+    Product:
+      type: string
+      enum:
+      - CNC
+      - MIS
+      - NRML
     Holding:
       type: object
       properties:
@@ -194,6 +182,18 @@ components:
           type: integer
         active_demat_transfer_quantity:
           type: integer
+    PositionsResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        payload:
+          type: object
+          properties:
+            positions:
+              type: array
+              items:
+                $ref: '#/components/schemas/Position'
     ErrorEnvelope:
       type: object
       properties:
@@ -208,14 +208,14 @@ components:
         error:
           $ref: '#/components/schemas/Error'
   responses:
-    Unauthorized:
-      description: User not authorised to perform this operation
+    NotFound:
+      description: Requested entity does not exist
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorEnvelope'
-    NotFound:
-      description: Requested entity does not exist
+    Unauthorized:
+      description: User not authorised to perform this operation
       content:
         application/json:
           schema:

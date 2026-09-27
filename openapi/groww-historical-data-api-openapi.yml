@@ -68,6 +68,22 @@ paths:
           $ref: '#/components/responses/BadRequest'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Groww error code (e.g. GA004).
+        message:
+          type: string
+        metadata:
+          type: object
+          nullable: true
+    Exchange:
+      type: string
+      enum:
+      - NSE
+      - BSE
     CandleResponse:
       type: object
       properties:
@@ -82,28 +98,12 @@ components:
                 type: array
                 items:
                   type: number
-    Exchange:
-      type: string
-      enum:
-      - NSE
-      - BSE
     Segment:
       type: string
       enum:
       - CASH
       - FNO
       description: Trading segment. MCX (commodities) is not supported.
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Groww error code (e.g. GA004).
-        message:
-          type: string
-        metadata:
-          type: object
-          nullable: true
     ErrorEnvelope:
       type: object
       properties:

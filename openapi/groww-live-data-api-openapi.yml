@@ -174,17 +174,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    Exchange:
-      type: string
-      enum:
-      - NSE
-      - BSE
-    Segment:
-      type: string
-      enum:
-      - CASH
-      - FNO
-      description: Trading segment. MCX (commodities) is not supported.
     Error:
       type: object
       properties:
@@ -205,6 +194,24 @@ components:
           type: object
           additionalProperties:
             type: number
+    Exchange:
+      type: string
+      enum:
+      - NSE
+      - BSE
+    Segment:
+      type: string
+      enum:
+      - CASH
+      - FNO
+      description: Trading segment. MCX (commodities) is not supported.
+    EnvelopeObject:
+      type: object
+      properties:
+        status:
+          type: string
+        payload:
+          type: object
     OhlcResponse:
       type: object
       properties:
@@ -223,26 +230,6 @@ components:
                 type: number
               close:
                 type: number
-    EnvelopeObject:
-      type: object
-      properties:
-        status:
-          type: string
-        payload:
-          type: object
-    ErrorEnvelope:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - SUCCESS
-          - FAILURE
-        payload:
-          type: object
-          nullable: true
-        error:
-          $ref: '#/components/schemas/Error'
     QuoteResponse:
       type: object
       properties:
@@ -267,6 +254,19 @@ components:
               type: integer
             offer_quantity:
               type: integer
+    ErrorEnvelope:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - SUCCESS
+          - FAILURE
+        payload:
+          type: object
+          nullable: true
+        error:
+          $ref: '#/components/schemas/Error'
   responses:
     NotFound:
       description: Requested entity does not exist
