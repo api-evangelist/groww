@@ -173,18 +173,38 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    NotFound:
+      description: Requested entity does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
   schemas:
-    Error:
+    Exchange:
+      type: string
+      enum:
+      - NSE
+      - BSE
+    ErrorEnvelope:
       type: object
       properties:
-        code:
+        status:
           type: string
-          description: Groww error code (e.g. GA004).
-        message:
-          type: string
-        metadata:
+          enum:
+          - SUCCESS
+          - FAILURE
+        payload:
           type: object
           nullable: true
+        error:
+          $ref: '#/components/schemas/Error'
     PriceMapResponse:
       type: object
       properties:
@@ -194,42 +214,6 @@ components:
           type: object
           additionalProperties:
             type: number
-    Exchange:
-      type: string
-      enum:
-      - NSE
-      - BSE
-    Segment:
-      type: string
-      enum:
-      - CASH
-      - FNO
-      description: Trading segment. MCX (commodities) is not supported.
-    EnvelopeObject:
-      type: object
-      properties:
-        status:
-          type: string
-        payload:
-          type: object
-    OhlcResponse:
-      type: object
-      properties:
-        status:
-          type: string
-        payload:
-          type: object
-          additionalProperties:
-            type: object
-            properties:
-              open:
-                type: number
-              high:
-                type: number
-              low:
-                type: number
-              close:
-                type: number
     QuoteResponse:
       type: object
       properties:
@@ -254,32 +238,48 @@ components:
               type: integer
             offer_quantity:
               type: integer
-    ErrorEnvelope:
+    Segment:
+      type: string
+      enum:
+      - CASH
+      - FNO
+      description: Trading segment. MCX (commodities) is not supported.
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Groww error code (e.g. GA004).
+        message:
+          type: string
+        metadata:
+          type: object
+          nullable: true
+    OhlcResponse:
       type: object
       properties:
         status:
           type: string
-          enum:
-          - SUCCESS
-          - FAILURE
         payload:
           type: object
-          nullable: true
-        error:
-          $ref: '#/components/schemas/Error'
-  responses:
-    NotFound:
-      description: Requested entity does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
-    BadRequest:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
+          additionalProperties:
+            type: object
+            properties:
+              open:
+                type: number
+              high:
+                type: number
+              low:
+                type: number
+              close:
+                type: number
+    EnvelopeObject:
+      type: object
+      properties:
+        status:
+          type: string
+        payload:
+          type: object
   securitySchemes:
     bearerAuth:
       type: http

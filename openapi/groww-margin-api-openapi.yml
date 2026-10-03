@@ -61,24 +61,50 @@ paths:
         '400':
           $ref: '#/components/responses/BadRequest'
 components:
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    Unauthorized:
+      description: User not authorised to perform this operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
   schemas:
-    Error:
+    Exchange:
+      type: string
+      enum:
+      - NSE
+      - BSE
+    ErrorEnvelope:
       type: object
       properties:
-        code:
+        status:
           type: string
-          description: Groww error code (e.g. GA004).
-        message:
-          type: string
-        metadata:
+          enum:
+          - SUCCESS
+          - FAILURE
+        payload:
           type: object
           nullable: true
+        error:
+          $ref: '#/components/schemas/Error'
     Product:
       type: string
       enum:
       - CNC
       - MIS
       - NRML
+    Segment:
+      type: string
+      enum:
+      - CASH
+      - FNO
+      description: Trading segment. MCX (commodities) is not supported.
     OrderMarginResponse:
       type: object
       properties:
@@ -93,22 +119,43 @@ components:
               type: number
             exposure_margin_required:
               type: number
-    Exchange:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Groww error code (e.g. GA004).
+        message:
+          type: string
+        metadata:
+          type: object
+          nullable: true
+    OrderType:
       type: string
       enum:
-      - NSE
-      - BSE
+      - MARKET
+      - LIMIT
+      - SL
+      - SL_M
+    UserMarginResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        payload:
+          type: object
+          properties:
+            clear_cash:
+              type: number
+            net_margin_used:
+              type: number
+            collateral_available:
+              type: number
     TransactionType:
       type: string
       enum:
       - BUY
       - SELL
-    Segment:
-      type: string
-      enum:
-      - CASH
-      - FNO
-      description: Trading segment. MCX (commodities) is not supported.
     OrderMarginRequest:
       type: object
       required:
@@ -133,53 +180,6 @@ components:
           $ref: '#/components/schemas/Product'
         exchange:
           $ref: '#/components/schemas/Exchange'
-    OrderType:
-      type: string
-      enum:
-      - MARKET
-      - LIMIT
-      - SL
-      - SL_M
-    UserMarginResponse:
-      type: object
-      properties:
-        status:
-          type: string
-        payload:
-          type: object
-          properties:
-            clear_cash:
-              type: number
-            net_margin_used:
-              type: number
-            collateral_available:
-              type: number
-    ErrorEnvelope:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - SUCCESS
-          - FAILURE
-        payload:
-          type: object
-          nullable: true
-        error:
-          $ref: '#/components/schemas/Error'
-  responses:
-    Unauthorized:
-      description: User not authorised to perform this operation
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
-    BadRequest:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
   securitySchemes:
     bearerAuth:
       type: http

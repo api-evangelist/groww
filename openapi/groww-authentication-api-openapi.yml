@@ -45,18 +45,51 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    Unauthorized:
+      description: User not authorised to perform this operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
   schemas:
-    Error:
+    ErrorEnvelope:
       type: object
       properties:
-        code:
+        status:
           type: string
-          description: Groww error code (e.g. GA004).
-        message:
-          type: string
-        metadata:
+          enum:
+          - SUCCESS
+          - FAILURE
+        payload:
           type: object
           nullable: true
+        error:
+          $ref: '#/components/schemas/Error'
+    AccessTokenResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        payload:
+          type: object
+          properties:
+            token:
+              type: string
+            tokenRefId:
+              type: string
+            sessionName:
+              type: string
+            expiry:
+              type: string
+            isActive:
+              type: boolean
     AccessTokenRequest:
       type: object
       required:
@@ -76,50 +109,17 @@ components:
         totp:
           type: string
           description: TOTP code, required for totp flow.
-    AccessTokenResponse:
+    Error:
       type: object
       properties:
-        status:
+        code:
           type: string
-        payload:
-          type: object
-          properties:
-            token:
-              type: string
-            tokenRefId:
-              type: string
-            sessionName:
-              type: string
-            expiry:
-              type: string
-            isActive:
-              type: boolean
-    ErrorEnvelope:
-      type: object
-      properties:
-        status:
+          description: Groww error code (e.g. GA004).
+        message:
           type: string
-          enum:
-          - SUCCESS
-          - FAILURE
-        payload:
+        metadata:
           type: object
           nullable: true
-        error:
-          $ref: '#/components/schemas/Error'
-  responses:
-    Unauthorized:
-      description: User not authorised to perform this operation
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
-    BadRequest:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
   securitySchemes:
     bearerAuth:
       type: http

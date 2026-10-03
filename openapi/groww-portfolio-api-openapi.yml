@@ -78,6 +78,63 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    Exchange:
+      type: string
+      enum:
+      - NSE
+      - BSE
+    Holding:
+      type: object
+      properties:
+        isin:
+          type: string
+        trading_symbol:
+          type: string
+        quantity:
+          type: integer
+        average_price:
+          type: number
+        pledge_quantity:
+          type: integer
+        demat_locked_quantity:
+          type: integer
+        groww_locked_quantity:
+          type: integer
+        repledge_quantity:
+          type: integer
+        t1_quantity:
+          type: integer
+        demat_free_quantity:
+          type: integer
+        corporate_action_additional_quantity:
+          type: integer
+        active_demat_transfer_quantity:
+          type: integer
+    ErrorEnvelope:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - SUCCESS
+          - FAILURE
+        payload:
+          type: object
+          nullable: true
+        error:
+          $ref: '#/components/schemas/Error'
+    Product:
+      type: string
+      enum:
+      - CNC
+      - MIS
+      - NRML
+    Segment:
+      type: string
+      enum:
+      - CASH
+      - FNO
+      description: Trading segment. MCX (commodities) is not supported.
     Error:
       type: object
       properties:
@@ -89,11 +146,18 @@ components:
         metadata:
           type: object
           nullable: true
-    Exchange:
-      type: string
-      enum:
-      - NSE
-      - BSE
+    HoldingsResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        payload:
+          type: object
+          properties:
+            holdings:
+              type: array
+              items:
+                $ref: '#/components/schemas/Holding'
     Position:
       type: object
       properties:
@@ -131,57 +195,6 @@ components:
           type: number
         realised_pnl:
           type: number
-    Segment:
-      type: string
-      enum:
-      - CASH
-      - FNO
-      description: Trading segment. MCX (commodities) is not supported.
-    HoldingsResponse:
-      type: object
-      properties:
-        status:
-          type: string
-        payload:
-          type: object
-          properties:
-            holdings:
-              type: array
-              items:
-                $ref: '#/components/schemas/Holding'
-    Product:
-      type: string
-      enum:
-      - CNC
-      - MIS
-      - NRML
-    Holding:
-      type: object
-      properties:
-        isin:
-          type: string
-        trading_symbol:
-          type: string
-        quantity:
-          type: integer
-        average_price:
-          type: number
-        pledge_quantity:
-          type: integer
-        demat_locked_quantity:
-          type: integer
-        groww_locked_quantity:
-          type: integer
-        repledge_quantity:
-          type: integer
-        t1_quantity:
-          type: integer
-        demat_free_quantity:
-          type: integer
-        corporate_action_additional_quantity:
-          type: integer
-        active_demat_transfer_quantity:
-          type: integer
     PositionsResponse:
       type: object
       properties:
@@ -194,28 +207,15 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Position'
-    ErrorEnvelope:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - SUCCESS
-          - FAILURE
-        payload:
-          type: object
-          nullable: true
-        error:
-          $ref: '#/components/schemas/Error'
   responses:
-    NotFound:
-      description: Requested entity does not exist
+    Unauthorized:
+      description: User not authorised to perform this operation
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorEnvelope'
-    Unauthorized:
-      description: User not authorised to perform this operation
+    NotFound:
+      description: Requested entity does not exist
       content:
         application/json:
           schema:

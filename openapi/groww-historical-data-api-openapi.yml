@@ -67,23 +67,32 @@ paths:
         '400':
           $ref: '#/components/responses/BadRequest'
 components:
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
   schemas:
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Groww error code (e.g. GA004).
-        message:
-          type: string
-        metadata:
-          type: object
-          nullable: true
     Exchange:
       type: string
       enum:
       - NSE
       - BSE
+    ErrorEnvelope:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - SUCCESS
+          - FAILURE
+        payload:
+          type: object
+          nullable: true
+        error:
+          $ref: '#/components/schemas/Error'
     CandleResponse:
       type: object
       properties:
@@ -104,26 +113,17 @@ components:
       - CASH
       - FNO
       description: Trading segment. MCX (commodities) is not supported.
-    ErrorEnvelope:
+    Error:
       type: object
       properties:
-        status:
+        code:
           type: string
-          enum:
-          - SUCCESS
-          - FAILURE
-        payload:
+          description: Groww error code (e.g. GA004).
+        message:
+          type: string
+        metadata:
           type: object
           nullable: true
-        error:
-          $ref: '#/components/schemas/Error'
-  responses:
-    BadRequest:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
   securitySchemes:
     bearerAuth:
       type: http
