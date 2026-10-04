@@ -45,19 +45,6 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    BadRequest:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
-    Unauthorized:
-      description: User not authorised to perform this operation
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
   schemas:
     ErrorEnvelope:
       type: object
@@ -72,24 +59,6 @@ components:
           nullable: true
         error:
           $ref: '#/components/schemas/Error'
-    AccessTokenResponse:
-      type: object
-      properties:
-        status:
-          type: string
-        payload:
-          type: object
-          properties:
-            token:
-              type: string
-            tokenRefId:
-              type: string
-            sessionName:
-              type: string
-            expiry:
-              type: string
-            isActive:
-              type: boolean
     AccessTokenRequest:
       type: object
       required:
@@ -120,6 +89,37 @@ components:
         metadata:
           type: object
           nullable: true
+    AccessTokenResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        payload:
+          type: object
+          properties:
+            token:
+              type: string
+            tokenRefId:
+              type: string
+            sessionName:
+              type: string
+            expiry:
+              type: string
+            isActive:
+              type: boolean
+  responses:
+    Unauthorized:
+      description: User not authorised to perform this operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
   securitySchemes:
     bearerAuth:
       type: http

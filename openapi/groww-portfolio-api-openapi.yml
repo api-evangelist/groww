@@ -78,86 +78,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    Exchange:
-      type: string
-      enum:
-      - NSE
-      - BSE
-    Holding:
-      type: object
-      properties:
-        isin:
-          type: string
-        trading_symbol:
-          type: string
-        quantity:
-          type: integer
-        average_price:
-          type: number
-        pledge_quantity:
-          type: integer
-        demat_locked_quantity:
-          type: integer
-        groww_locked_quantity:
-          type: integer
-        repledge_quantity:
-          type: integer
-        t1_quantity:
-          type: integer
-        demat_free_quantity:
-          type: integer
-        corporate_action_additional_quantity:
-          type: integer
-        active_demat_transfer_quantity:
-          type: integer
-    ErrorEnvelope:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - SUCCESS
-          - FAILURE
-        payload:
-          type: object
-          nullable: true
-        error:
-          $ref: '#/components/schemas/Error'
-    Product:
-      type: string
-      enum:
-      - CNC
-      - MIS
-      - NRML
-    Segment:
-      type: string
-      enum:
-      - CASH
-      - FNO
-      description: Trading segment. MCX (commodities) is not supported.
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Groww error code (e.g. GA004).
-        message:
-          type: string
-        metadata:
-          type: object
-          nullable: true
-    HoldingsResponse:
-      type: object
-      properties:
-        status:
-          type: string
-        payload:
-          type: object
-          properties:
-            holdings:
-              type: array
-              items:
-                $ref: '#/components/schemas/Holding'
     Position:
       type: object
       properties:
@@ -195,6 +115,35 @@ components:
           type: number
         realised_pnl:
           type: number
+    ErrorEnvelope:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - SUCCESS
+          - FAILURE
+        payload:
+          type: object
+          nullable: true
+        error:
+          $ref: '#/components/schemas/Error'
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Groww error code (e.g. GA004).
+        message:
+          type: string
+        metadata:
+          type: object
+          nullable: true
+    Exchange:
+      type: string
+      enum:
+      - NSE
+      - BSE
     PositionsResponse:
       type: object
       properties:
@@ -207,6 +156,57 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Position'
+    Holding:
+      type: object
+      properties:
+        isin:
+          type: string
+        trading_symbol:
+          type: string
+        quantity:
+          type: integer
+        average_price:
+          type: number
+        pledge_quantity:
+          type: integer
+        demat_locked_quantity:
+          type: integer
+        groww_locked_quantity:
+          type: integer
+        repledge_quantity:
+          type: integer
+        t1_quantity:
+          type: integer
+        demat_free_quantity:
+          type: integer
+        corporate_action_additional_quantity:
+          type: integer
+        active_demat_transfer_quantity:
+          type: integer
+    Product:
+      type: string
+      enum:
+      - CNC
+      - MIS
+      - NRML
+    HoldingsResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        payload:
+          type: object
+          properties:
+            holdings:
+              type: array
+              items:
+                $ref: '#/components/schemas/Holding'
+    Segment:
+      type: string
+      enum:
+      - CASH
+      - FNO
+      description: Trading segment. MCX (commodities) is not supported.
   responses:
     Unauthorized:
       description: User not authorised to perform this operation
