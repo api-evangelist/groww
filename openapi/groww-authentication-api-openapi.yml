@@ -45,20 +45,20 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    Unauthorized:
+      description: User not authorised to perform this operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
   schemas:
-    ErrorEnvelope:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - SUCCESS
-          - FAILURE
-        payload:
-          type: object
-          nullable: true
-        error:
-          $ref: '#/components/schemas/Error'
     AccessTokenRequest:
       type: object
       required:
@@ -78,17 +78,6 @@ components:
         totp:
           type: string
           description: TOTP code, required for totp flow.
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Groww error code (e.g. GA004).
-        message:
-          type: string
-        metadata:
-          type: object
-          nullable: true
     AccessTokenResponse:
       type: object
       properties:
@@ -107,19 +96,30 @@ components:
               type: string
             isActive:
               type: boolean
-  responses:
-    Unauthorized:
-      description: User not authorised to perform this operation
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
-    BadRequest:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Groww error code (e.g. GA004).
+        message:
+          type: string
+        metadata:
+          type: object
+          nullable: true
+    ErrorEnvelope:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - SUCCESS
+          - FAILURE
+        payload:
+          type: object
+          nullable: true
+        error:
+          $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

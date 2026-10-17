@@ -173,7 +173,31 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    NotFound:
+      description: Requested entity does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Groww error code (e.g. GA004).
+        message:
+          type: string
+        metadata:
+          type: object
+          nullable: true
     PriceMapResponse:
       type: object
       properties:
@@ -196,17 +220,13 @@ components:
           nullable: true
         error:
           $ref: '#/components/schemas/Error'
-    Error:
+    EnvelopeObject:
       type: object
       properties:
-        code:
+        status:
           type: string
-          description: Groww error code (e.g. GA004).
-        message:
-          type: string
-        metadata:
+        payload:
           type: object
-          nullable: true
     QuoteResponse:
       type: object
       properties:
@@ -231,11 +251,6 @@ components:
               type: integer
             offer_quantity:
               type: integer
-    Exchange:
-      type: string
-      enum:
-      - NSE
-      - BSE
     OhlcResponse:
       type: object
       properties:
@@ -260,26 +275,11 @@ components:
       - CASH
       - FNO
       description: Trading segment. MCX (commodities) is not supported.
-    EnvelopeObject:
-      type: object
-      properties:
-        status:
-          type: string
-        payload:
-          type: object
-  responses:
-    BadRequest:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
-    NotFound:
-      description: Requested entity does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
+    Exchange:
+      type: string
+      enum:
+      - NSE
+      - BSE
   securitySchemes:
     bearerAuth:
       type: http

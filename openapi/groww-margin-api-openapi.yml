@@ -62,87 +62,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
 components:
   schemas:
-    ErrorEnvelope:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - SUCCESS
-          - FAILURE
-        payload:
-          type: object
-          nullable: true
-        error:
-          $ref: '#/components/schemas/Error'
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Groww error code (e.g. GA004).
-        message:
-          type: string
-        metadata:
-          type: object
-          nullable: true
-    Exchange:
-      type: string
-      enum:
-      - NSE
-      - BSE
-    TransactionType:
-      type: string
-      enum:
-      - BUY
-      - SELL
-    UserMarginResponse:
-      type: object
-      properties:
-        status:
-          type: string
-        payload:
-          type: object
-          properties:
-            clear_cash:
-              type: number
-            net_margin_used:
-              type: number
-            collateral_available:
-              type: number
     Product:
       type: string
       enum:
       - CNC
       - MIS
       - NRML
-    Segment:
-      type: string
-      enum:
-      - CASH
-      - FNO
-      description: Trading segment. MCX (commodities) is not supported.
-    OrderType:
-      type: string
-      enum:
-      - MARKET
-      - LIMIT
-      - SL
-      - SL_M
-    OrderMarginResponse:
-      type: object
-      properties:
-        status:
-          type: string
-        payload:
-          type: object
-          properties:
-            total_requirement:
-              type: number
-            span_margin_required:
-              type: number
-            exposure_margin_required:
-              type: number
     OrderMarginRequest:
       type: object
       required:
@@ -167,15 +92,90 @@ components:
           $ref: '#/components/schemas/Product'
         exchange:
           $ref: '#/components/schemas/Exchange'
+    TransactionType:
+      type: string
+      enum:
+      - BUY
+      - SELL
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Groww error code (e.g. GA004).
+        message:
+          type: string
+        metadata:
+          type: object
+          nullable: true
+    ErrorEnvelope:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - SUCCESS
+          - FAILURE
+        payload:
+          type: object
+          nullable: true
+        error:
+          $ref: '#/components/schemas/Error'
+    OrderType:
+      type: string
+      enum:
+      - MARKET
+      - LIMIT
+      - SL
+      - SL_M
+    Segment:
+      type: string
+      enum:
+      - CASH
+      - FNO
+      description: Trading segment. MCX (commodities) is not supported.
+    OrderMarginResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        payload:
+          type: object
+          properties:
+            total_requirement:
+              type: number
+            span_margin_required:
+              type: number
+            exposure_margin_required:
+              type: number
+    Exchange:
+      type: string
+      enum:
+      - NSE
+      - BSE
+    UserMarginResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        payload:
+          type: object
+          properties:
+            clear_cash:
+              type: number
+            net_margin_used:
+              type: number
+            collateral_available:
+              type: number
   responses:
-    Unauthorized:
-      description: User not authorised to perform this operation
+    BadRequest:
+      description: Bad request
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorEnvelope'
-    BadRequest:
-      description: Bad request
+    Unauthorized:
+      description: User not authorised to perform this operation
       content:
         application/json:
           schema:

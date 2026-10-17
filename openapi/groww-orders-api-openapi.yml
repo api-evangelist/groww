@@ -214,52 +214,44 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    Unauthorized:
+      description: User not authorised to perform this operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    NotFound:
+      description: Requested entity does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+  parameters:
+    GrowwOrderId:
+      name: groww_order_id
+      in: path
+      required: true
+      schema:
+        type: string
   schemas:
-    CancelOrderRequest:
-      type: object
-      required:
-      - groww_order_id
-      - segment
-      properties:
-        groww_order_id:
-          type: string
-        segment:
-          $ref: '#/components/schemas/Segment'
-    Exchange:
-      type: string
-      enum:
-      - NSE
-      - BSE
-    CancelOrderResponse:
+    Error:
       type: object
       properties:
-        status:
+        code:
           type: string
-        groww_order_id:
+          description: Groww error code (e.g. GA004).
+        message:
           type: string
-        order_status:
-          type: string
-    ModifyOrderResponse:
-      type: object
-      properties:
-        status:
-          type: string
-        groww_order_id:
-          type: string
-        order_status:
-          type: string
-    OrderListResponse:
-      type: object
-      properties:
-        status:
-          type: string
-        payload:
+        metadata:
           type: object
-          properties:
-            order_list:
-              type: array
-              items:
-                $ref: '#/components/schemas/Order'
+          nullable: true
     TradeListResponse:
       type: object
       properties:
@@ -281,6 +273,13 @@ components:
                     type: integer
                   price:
                     type: number
+    OrderType:
+      type: string
+      enum:
+      - MARKET
+      - LIMIT
+      - SL
+      - SL_M
     PlaceOrderResponse:
       type: object
       properties:
@@ -294,22 +293,6 @@ components:
           type: string
         remark:
           type: string
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Groww error code (e.g. GA004).
-        message:
-          type: string
-        metadata:
-          type: object
-          nullable: true
-    TransactionType:
-      type: string
-      enum:
-      - BUY
-      - SELL
     ModifyOrderRequest:
       type: object
       required:
@@ -328,21 +311,76 @@ components:
           $ref: '#/components/schemas/OrderType'
         segment:
           $ref: '#/components/schemas/Segment'
-    OrderType:
+    CancelOrderRequest:
+      type: object
+      required:
+      - groww_order_id
+      - segment
+      properties:
+        groww_order_id:
+          type: string
+        segment:
+          $ref: '#/components/schemas/Segment'
+    Product:
       type: string
       enum:
-      - MARKET
-      - LIMIT
-      - SL
-      - SL_M
-    OrderDetailResponse:
+      - CNC
+      - MIS
+      - NRML
+    ModifyOrderResponse:
       type: object
       properties:
         status:
           type: string
-        payload:
-          $ref: '#/components/schemas/Order'
-    OrderStatusResponse:
+        groww_order_id:
+          type: string
+        order_status:
+          type: string
+    Validity:
+      type: string
+      enum:
+      - DAY
+      - IOC
+    TransactionType:
+      type: string
+      enum:
+      - BUY
+      - SELL
+    PlaceOrderRequest:
+      type: object
+      required:
+      - trading_symbol
+      - quantity
+      - exchange
+      - segment
+      - product
+      - order_type
+      - transaction_type
+      properties:
+        trading_symbol:
+          type: string
+        quantity:
+          type: integer
+        price:
+          type: number
+        trigger_price:
+          type: number
+        validity:
+          $ref: '#/components/schemas/Validity'
+        exchange:
+          $ref: '#/components/schemas/Exchange'
+        segment:
+          $ref: '#/components/schemas/Segment'
+        product:
+          $ref: '#/components/schemas/Product'
+        order_type:
+          $ref: '#/components/schemas/OrderType'
+        transaction_type:
+          $ref: '#/components/schemas/TransactionType'
+        order_reference_id:
+          type: string
+          description: Client-supplied idempotency/reference id for the order.
+    OrderListResponse:
       type: object
       properties:
         status:
@@ -350,12 +388,23 @@ components:
         payload:
           type: object
           properties:
-            groww_order_id:
-              type: string
-            order_status:
-              type: string
-            order_reference_id:
-              type: string
+            order_list:
+              type: array
+              items:
+                $ref: '#/components/schemas/Order'
+    OrderDetailResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        payload:
+          $ref: '#/components/schemas/Order'
+    Segment:
+      type: string
+      enum:
+      - CASH
+      - FNO
+      description: Trading segment. MCX (commodities) is not supported.
     Order:
       type: object
       properties:
@@ -396,83 +445,34 @@ components:
           nullable: true
         error:
           $ref: '#/components/schemas/Error'
-    Product:
-      type: string
-      enum:
-      - CNC
-      - MIS
-      - NRML
-    Segment:
-      type: string
-      enum:
-      - CASH
-      - FNO
-      description: Trading segment. MCX (commodities) is not supported.
-    Validity:
-      type: string
-      enum:
-      - DAY
-      - IOC
-    PlaceOrderRequest:
+    CancelOrderResponse:
       type: object
-      required:
-      - trading_symbol
-      - quantity
-      - exchange
-      - segment
-      - product
-      - order_type
-      - transaction_type
       properties:
-        trading_symbol:
+        status:
           type: string
-        quantity:
-          type: integer
-        price:
-          type: number
-        trigger_price:
-          type: number
-        validity:
-          $ref: '#/components/schemas/Validity'
-        exchange:
-          $ref: '#/components/schemas/Exchange'
-        segment:
-          $ref: '#/components/schemas/Segment'
-        product:
-          $ref: '#/components/schemas/Product'
-        order_type:
-          $ref: '#/components/schemas/OrderType'
-        transaction_type:
-          $ref: '#/components/schemas/TransactionType'
-        order_reference_id:
+        groww_order_id:
           type: string
-          description: Client-supplied idempotency/reference id for the order.
-  parameters:
-    GrowwOrderId:
-      name: groww_order_id
-      in: path
-      required: true
-      schema:
-        type: string
-  responses:
-    BadRequest:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
-    NotFound:
-      description: Requested entity does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
-    Unauthorized:
-      description: User not authorised to perform this operation
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
+        order_status:
+          type: string
+    Exchange:
+      type: string
+      enum:
+      - NSE
+      - BSE
+    OrderStatusResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        payload:
+          type: object
+          properties:
+            groww_order_id:
+              type: string
+            order_status:
+              type: string
+            order_reference_id:
+              type: string
   securitySchemes:
     bearerAuth:
       type: http
