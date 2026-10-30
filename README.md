@@ -64,6 +64,153 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Groww is a company surfaced as a portfolio company of iconiq-capital, ribbit-capital, y-combinator and added to the API Evangelist network as a stub for enrichment. Sector: fintech. This profile is a lead awaiting the enrichment pipeline.
+Groww is an Indian fintech company offering investing and trading in stocks, futures & options, mutual funds, ETFs, IPOs and more through its consumer app and web platform. Backed by Iconiq Capital, Ribbit Capital and Y Combinator, Groww also operates the Groww Trading API — an official programmatic interface for algorithmic trading that covers order management (place/modify/cancel), portfolio holdings and positions, margin calculation, live market data (LTP, full quote, OHLC, option chain and greeks) and historical candle data across the CASH (equity) and FNO (derivatives) segments on Indian exchanges. Requests hit https://api.groww.in, are versioned with the X-API-VERSION header, and are authenticated with a daily Bearer access token generated via an API key + secret checksum, a TOTP flow, or an OAuth2 authorization-code flow.
 
-Backed by: iconiq-capital, ribbit-capital, y-combinator — https://groww.in/
+**Areas:** Company · Fintech · Trading · Investing · Stock Broking · Market Data · Algorithmic Trading · India
+
+## Groww on APIs.io
+
+Everything profiled for Groww is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/groww/](https://apis.io/providers/groww/)** — or go straight to one of the APIs or properties below.
+
+### APIs (6)
+
+- [Groww Authentication API](https://apis.io/apis/groww/groww-authentication-api/) — Access-token generation for API key + secret and TOTP flows.
+- [Groww Historical Data API](https://apis.io/apis/groww/groww-historical-data-api/) — Historical candle data.
+- [Groww Live Data API](https://apis.io/apis/groww/groww-live-data-api/) — Real-time LTP, quote, OHLC, option chain and greeks.
+- [Groww Margin API](https://apis.io/apis/groww/groww-margin-api/) — Available margin and per-order margin requirements.
+- [Groww Orders API](https://apis.io/apis/groww/groww-orders-api/) — Place, modify, cancel and track orders and trades.
+- [Groww Portfolio API](https://apis.io/apis/groww/groww-portfolio-api/) — Holdings and positions.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [groww](https://apis.io/servers/groww/groww/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Groww Agentic Access](https://apis.io/agentic-access/groww/groww-agentic-access/)
+
+#### Collections (12)
+
+Postman and Open Collection request collections.
+
+- [Groww Trading Authentication API](https://apis.io/collections/groww/open-groww-authentication-api/)
+- [Groww Trading Authentication Historical Data API](https://apis.io/collections/groww/open-groww-historical-data-api/)
+- [Groww Trading Authentication Live Data API](https://apis.io/collections/groww/open-groww-live-data-api/)
+- [Groww Trading Authentication Margin API](https://apis.io/collections/groww/open-groww-margin-api/)
+- [Groww Trading Authentication Orders API](https://apis.io/collections/groww/open-groww-orders-api/)
+- [Groww Trading Authentication Portfolio API](https://apis.io/collections/groww/open-groww-portfolio-api/)
+- [Groww Trading Authentication API](https://apis.io/collections/groww/postman-groww-authentication-api/)
+- [Groww Trading Authentication Historical Data API](https://apis.io/collections/groww/postman-groww-historical-data-api/)
+- [Groww Trading Authentication Live Data API](https://apis.io/collections/groww/postman-groww-live-data-api/)
+- [Groww Trading Authentication Margin API](https://apis.io/collections/groww/postman-groww-margin-api/)
+- [Groww Trading Authentication Orders API](https://apis.io/collections/groww/postman-groww-orders-api/)
+- [Groww Trading Authentication Portfolio API](https://apis.io/collections/groww/postman-groww-portfolio-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Groww Trade Api Overlay](https://apis.io/overlays/groww/groww-trade-api-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Groww Authentication](https://apis.io/security/groww/groww-authentication/)
+- [Groww Domain Security](https://apis.io/security/groww/groww-domain-security/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Groww Scopes](https://apis.io/scopes/groww/groww-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Groww Plans](https://apis.io/plans/groww/groww-plans/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Groww Rate Limits](https://apis.io/rate-limits/groww/groww-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://groww.in/)
+- [Documentation](https://groww.in/trade-api/docs)
+- [Getting started](https://groww.in/trade-api/docs/python-sdk)
+- [API reference](https://groww.in/trade-api/docs/curl)
+- [Pricing](https://groww.in/trade-api)
+- [Sign up](https://groww.in/trade-api/api-keys)
+- [Support](https://groww.in/help)
+- [Blog](https://groww.in/blog)
+- [Terms of service](https://groww.in/terms-and-conditions)
+- [Privacy policy](https://groww.in/privacy-policy)
+
+## API Evangelist rating
+
+**Kin Score 53.5** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 48.1 |
+| Contract governance | 4.5 |
+| Operational transparency | 39.5 |
+| Developer ergonomics | 67.3 |
+| Access clarity | 65.8 |
+
+**Agent readiness 42.4** — agent-native
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | served (partial credit) |
+| Idempotency | documented (partial credit) |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 38.0** — Securities & Market Data
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/groww/](https://apis.io/providers/groww/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Groww: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/groww/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
